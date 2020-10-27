@@ -8,6 +8,84 @@ The following details the database model used in the CF - Riders website.  This 
 
 ![DB Model](/docs/images/dbModel.png)
 
+```
+Table Products {
+  id int [pk, increment]
+  name string(100)
+  mfgId_FK int
+  quantity int
+  price float(5,2)
+  description text
+  productTypeEnum enum ('Bicycles', 'Clothing', 'Accessories')
+  photoURL string(200)
+}
+Ref: Products.mfgId_FK - Mfg.id
+Table Products {
+  id int [pk, increment]
+  mfgId_FK int
+  quantity int
+  price float(5,2)
+  description text
+  productTypeEnum enum ('Bicycles', 'Clothing', 'Accessories')
+  photoURL string(200)
+}
+Ref: Products.mfgId_FK - Mfg.id
+
+
+Table Mfg {
+  id int [pk, increment]
+  name String(100)
+}
+
+
+Table BicycleDetails {
+  id int [pk, increment]
+  size int
+  weight int 
+  frame string(60)
+  productId_FK int 
+}
+Ref: BicycleDetails.id - Products.id
+
+
+Table ClothingDetails {
+  id int [pk, increment]
+  sex enum ('M', 'F')
+  size enum ('XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL')
+  productId_FK int
+}
+Ref: ClothingDetails.productId_FK - Products.id
+
+Table ReviewRating {
+  id int [pk, increment]
+  userId_FK int
+  productId_FK int
+  review text
+  reviewRating int
+}
+Ref: ReviewRating.userId_FK - Users.id
+Ref: ReviewRating.productId_FK > Products.id
+
+Table Users {
+  id int [pk, increment]
+  name String(100)
+  emailAddress String(100)
+  avatarURL String(200)
+  passwordHash String(100)
+  tokenId String(36)
+}
+
+Table Orders {
+  id int [pk, increment]
+  userId_FK int
+  productId_FK int
+  quantity int 
+}
+Ref: Orders.userId_FK > Users.id
+Ref: Orders.productId_FK > Products.id
+
+```
+
 ## BackEnd Routes
 
 To accomodate accessing the database and providing user security, the following backend routes will be needed:
