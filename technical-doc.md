@@ -7,7 +7,7 @@ The following details the database model used in the CF - Riders website.  This 
 
 ![DB Model](/docs/images/dbModel.png)
 
-##BackEnd Routes
+## BackEnd Routes
 
 To accomodate accessing the database and providing user security, the following backend routes will be needed:
 
