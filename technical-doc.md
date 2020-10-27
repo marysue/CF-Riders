@@ -5,7 +5,7 @@
 
 The following details the database model used in the CF - Riders website.  This model will accommodate for Users registering, voting, and viewing products and product detail pages.
 
-![DB Model](/docs/images/dbModels.png)
+![DB Model](/docs/images/dbModel.png)
 
 ##BackEnd Routes
 
