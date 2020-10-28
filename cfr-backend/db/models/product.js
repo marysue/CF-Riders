@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     mfgId_FK: DataTypes.INTEGER,
     name: DataTypes.STRING(100),
     quantity: DataTypes.INTEGER,
-    price: DataTypes.FLOAT(5,2),
+    price: DataTypes.DECIMAL(5,2),
     description: DataTypes.TEXT,
     productTypeEnum: DataTypes.ENUM('Bicycles','Clothing','Accessories'),
     photoURL: DataTypes.STRING(200)
