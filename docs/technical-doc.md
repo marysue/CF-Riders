@@ -6,22 +6,12 @@
 
 The following details the database model used in the CF - Riders website.  This model will accommodate for Users registering, voting, and viewing products and product detail pages.
 
-![DB Model](/docs/images/dbModel.png)
+![DB Model](/images/dbModel.png)
 
 ```
 Table Products {
   id int [pk, increment]
   name string(100)
-  mfgId_FK int
-  quantity int
-  price float(5,2)
-  description text
-  productTypeEnum enum ('Bicycles', 'Clothing', 'Accessories')
-  photoURL string(200)
-}
-Ref: Products.mfgId_FK - Mfg.id
-Table Products {
-  id int [pk, increment]
   mfgId_FK int
   quantity int
   price float(5,2)
@@ -72,7 +62,6 @@ Table Users {
   emailAddress String(100)
   avatarURL String(200)
   passwordHash String(100)
-  tokenId String(36)
 }
 
 Table Orders {
