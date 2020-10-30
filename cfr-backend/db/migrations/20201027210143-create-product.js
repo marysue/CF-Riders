@@ -9,7 +9,8 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       mfgId_FK: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {model: 'Mfgs'}
       },
       name: {
         type: Sequelize.STRING(100)

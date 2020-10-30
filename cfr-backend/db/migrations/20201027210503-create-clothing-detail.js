@@ -15,7 +15,8 @@ module.exports = {
         type: Sequelize.ENUM('XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL')
       },
       productId_FK: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: { model: 'Products'}
       },
       createdAt: {
         allowNull: false,

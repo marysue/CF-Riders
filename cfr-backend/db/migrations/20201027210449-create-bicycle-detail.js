@@ -18,7 +18,8 @@ module.exports = {
         type: Sequelize.STRING(60)
       },
       productId_FK: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {model: 'Products'}
       },
       createdAt: {
         allowNull: false,

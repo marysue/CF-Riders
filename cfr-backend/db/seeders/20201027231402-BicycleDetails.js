@@ -13,13 +13,13 @@ module.exports = {
       }], {});
     */
    return queryInterface.bulkInsert('BicycleDetails', [
-     { productId_FK: 2, size: 52, weight: 5, frame: 'carbon fiber', createdAt: new Date(), updatedAt: new Date()},
-     { productId_FK: 3, size: 50, weight: 8, frame: 'carbon fiber', createdAt: new Date(), updatedAt: new Date()},
-     { productId_FK: 4, size: 50, weight: 10, frame: 'aluminum', createdAt: new Date(), updatedAt: new Date()},
-     { productId_FK: 5, size: 55, weight: 6, frame: 'carbon fiber', createdAt: new Date(), updatedAt: new Date()},
-     { productId_FK: 6, size: 53, weight: 10, frame: 'carbon fiber', createdAt: new Date(), updatedAt: new Date()},
-     { productId_FK: 7, size: 53, weight: 8, frame: 'carbon fiber', createdAt: new Date(), updatedAt: new Date()},
-     { productId_FK: 9, size: 51, weight: 15, frame: 'aluminum', createdAt: new Date(), updatedAt: new Date()}
+     { productId_FK: 22, size: 52, weight: 5, frame: 'carbon fiber', createdAt: new Date(), updatedAt: new Date()},
+     { productId_FK: 23, size: 50, weight: 8, frame: 'carbon fiber', createdAt: new Date(), updatedAt: new Date()},
+     { productId_FK: 24, size: 50, weight: 10, frame: 'aluminum', createdAt: new Date(), updatedAt: new Date()},
+     { productId_FK: 25, size: 55, weight: 6, frame: 'carbon fiber', createdAt: new Date(), updatedAt: new Date()},
+     { productId_FK: 26, size: 53, weight: 10, frame: 'carbon fiber', createdAt: new Date(), updatedAt: new Date()},
+     { productId_FK: 27, size: 53, weight: 8, frame: 'carbon fiber', createdAt: new Date(), updatedAt: new Date()},
+     { productId_FK: 28, size: 51, weight: 15, frame: 'aluminum', createdAt: new Date(), updatedAt: new Date()}
    ])
   },
 

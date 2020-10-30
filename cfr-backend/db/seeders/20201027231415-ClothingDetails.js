@@ -13,13 +13,13 @@ module.exports = {
       }], {});
     */
    return queryInterface.bulkInsert('ClothingDetails', [
-     {productId_FK: 16, sex: 'F', size: 'L', createdAt: new Date(), updatedAt: new Date()},
-     {productId_FK: 17, sex: 'F', size: 'M', createdAt: new Date(), updatedAt: new Date()},
-     {productId_FK: 18, sex: 'M', size: 'L', createdAt: new Date(), updatedAt: new Date()},
-     {productId_FK: 19, sex: 'M', size: 'L', createdAt: new Date(), updatedAt: new Date()},
-     {productId_FK: 20, sex: 'M', size: 'M', createdAt: new Date(), updatedAt: new Date()},
-     {productId_FK: 21, sex: 'F', size: 'M', createdAt: new Date(), updatedAt: new Date()},
-     {productId_FK: 22, sex: 'F', size: 'M', createdAt: new Date(), updatedAt: new Date()},
+     {productId_FK: 36, sex: 'F', size: 'L', createdAt: new Date(), updatedAt: new Date()},
+     {productId_FK: 37, sex: 'F', size: 'M', createdAt: new Date(), updatedAt: new Date()},
+     {productId_FK: 38, sex: 'M', size: 'L', createdAt: new Date(), updatedAt: new Date()},
+     {productId_FK: 39, sex: 'M', size: 'L', createdAt: new Date(), updatedAt: new Date()},
+     {productId_FK: 40, sex: 'M', size: 'M', createdAt: new Date(), updatedAt: new Date()},
+     {productId_FK: 41, sex: 'F', size: 'M', createdAt: new Date(), updatedAt: new Date()},
+     {productId_FK: 42, sex: 'F', size: 'M', createdAt: new Date(), updatedAt: new Date()},
    ]);
   },
 
