@@ -1,1 +1,145 @@
 /* TODO Add site wide styles */
+/* Material UI styles for icons */
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;  /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    color: grey;
+
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+  }
+
+
+  .MuiSvgIcon-colorPrimary colorPrimary {
+    color: #148ECE;
+  }
+  .logoFont {
+    display: inline-block;
+    font-family: 'Fondamento', cursive;
+    font-size: 40px;
+    color: #148ECE;
+  }
+
+  .navSearchBar {
+    width: 400px;
+    height: 40px;
+    border-radius: 20px;
+    margin-top: 20px;
+    margin: 20px;
+    border-color: grey;
+    padding-left: 20px;
+  }
+
+  main {
+      margin: 20px;
+  }
+
+  a.signInLink {
+      margin-left: 20px;
+      margin-right: 20px;
+      text-decoration: none;
+      color:  #148ECE;
+  }
+  a:hover {
+      color: gray;
+      cursor: pointer;
+  }
+  .avatar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .avatar {
+    /* width: 60px;
+    height: 60px; */
+    border-radius: 40px;
+    /* opacity: 0.7; */
+    object-fit: contain;
+
+  }
+  .topBar {
+      display: flex;
+      flex-direction: row;
+      align-content: space-evenly;
+      align-items: center;
+      margin-left: 100px;
+      margin-right: 100px;
+  }
+
+  .signInButton {
+      background-color: white;
+      border-color: white;
+      margin-left: 20px;
+      margin-right: 20px;
+      border: white;
+      color: #148ECE;
+  }
+  .signInButton:hover {
+      cursor: pointer;
+  }
+  img.avatar {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+  }
+
+  .avatarName {
+    font-family: 'Arial';
+    color: #148ECE;
+  }
+
+  .loginForm {
+    font-family: 'Arial';
+    color: #148ECE;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 80px;
+    width: 425px;
+    margin-right: auto;
+    margin-left: auto;
+
+  }
+
+  .loginInput {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+
+  }
+
+  .inputBox {
+    border-radius: 20px;
+    height: 30px;
+    width: 300px;
+    outline: none;
+    padding-left: 10px;
+  }
+
+  button {
+    margin-top: 40px;
+    height: 30px;
+    width: 80px;
+    background-color: #148ECE;
+    border-radius: 20px;
+    color: white;
+  }

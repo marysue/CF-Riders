@@ -1,6 +1,8 @@
 module.exports = {
+
     environment: process.env.NODE_ENV || "development",
     port: process.env.PORT || 8080,
+    corsOrigin: process.env.CORS_ORIGIN,
     db: {
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,

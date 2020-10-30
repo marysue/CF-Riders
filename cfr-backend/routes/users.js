@@ -77,10 +77,44 @@ router.post(
   })
 );
 
-router.post(
-  "/token", validateEmailAndPassword, handleValidationErrors,
+router.post (
+  "/login",
   asyncHandler(async (req, res, next) => {
     const { emailAddress, password } = req.body;
+
+    const user = await User.findOne({
+      where: {
+        emailAddress,
+      },
+    });
+    if (!user || !user.validatePassword(password)) {
+      const err = new Error("Login failed");
+      err.status = 401;
+      err.title = "Login failed";
+      err.errors = ["The provided credentials were invalid."];
+      return next(err);
+    }
+
+    // Token generation
+    const token = getUserToken(user);
+    res.cookie('accessToken', `${token}`, { httpOnly: true })
+    res.json({ token,
+      user: {
+        id: user.id,
+        emailAddress: user.emailAddress,
+        avatarURL: user.avatarURL,
+        name: user.name
+      }})
+  })
+);
+
+router.post(
+  "/token",
+  asyncHandler(async (req, res, next) => {
+    const { email: emailAddress, password } = req.body;
+
+    console.log("*****Backend /users/token route received:  ", emailAddress, " and password: ", password);
+    console.log("*********Req.body: ", req.body);
     const user = await User.findOne({
       where: {
         emailAddress,
@@ -88,13 +122,13 @@ router.post(
     });
 
     //Password validation and error handling
-    // if (!user || !user.validatePassword(password)) {
-    //   const err = new Error("Login failed");
-    //   err.status = 401;
-    //   err.title = "Login failed";
-    //   err.errors = ["The provided credentials were invalid."];
-    //   return next(err);
-    // }
+    if (!user || !user.validatePassword(password)) {
+      const err = new Error("Login failed");
+      err.status = 401;
+      err.title = "Login failed";
+      err.errors = ["The provided credentials were invalid."];
+      return next(err);
+    }
 
     // Token generation
     const token = getUserToken(user);
@@ -102,6 +136,7 @@ router.post(
     res.json({ token, user: { id: user.id } });
   })
 );
+
 
 router.post('/logout', (req, res) => {
   res.clearCookie('accessToken')
