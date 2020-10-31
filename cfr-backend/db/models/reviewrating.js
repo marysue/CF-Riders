@@ -8,8 +8,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   ReviewRating.associate = function(models) {
     // associations can be defined here
-    ReviewRating.hasOne(models.User, { foreignKey: "userId_FK" });
-    ReviewRating.hasMany(models.Product, { foreignKey: "productId_FK" });
+    ReviewRating.belongsTo(models.User, { foreignKey: "userId_FK" });
+    ReviewRating.belongsTo(models.Product, { foreignKey: "productId_FK" });
   };
   return ReviewRating;
 };

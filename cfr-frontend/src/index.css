@@ -56,6 +56,7 @@
       margin-right: 20px;
       text-decoration: none;
       color:  #148ECE;
+      outline: none;
   }
   a:hover {
       color: gray;
@@ -94,6 +95,8 @@
   .signInButton:hover {
       cursor: pointer;
   }
+
+
   img.avatar {
       width: 60px;
       height: 60px;
@@ -142,4 +145,58 @@
     background-color: #148ECE;
     border-radius: 20px;
     color: white;
+  }
+
+  .homeIcon:hover {
+    cursor: pointer;
+  }
+
+  .productBanner {
+    display: flex;
+    background-color: #148ECE;
+    height: 200px;
+    width: 100%;
+    align-content: space-between;
+    justify-content: center;
+  }
+
+  .photoSpread {
+    display: flex;
+    width: 80%;
+    justify-content: space-between;
+    margin: auto;
+    align-content: space-between;
+  }
+  .productPhoto {
+    border-radius: 80px;
+    height: 150px;
+    width: 150px;
+    background-color: white;
+  }
+
+  .productItem {
+   background-color: rgba(255,255,255, 0.8);
+   border: 1px solid rgba(0, 0, 0, 0.8);
+   padding: 20px;
+   font-size: 30px;
+   text-align: center;
+   width: 200px;
+   height: 200px;
+  }
+
+  img.productItem {
+    width: 100%;
+    height: 100%;
+  }
+  .productGrid {
+    display: inline-grid;
+    grid-template-columns: auto auto auto auto auto;
+    background-color: #2196F3;
+    padding: 10px;
+  }
+
+  img {
+    object-fit: contain;
+    height: 100%;
+    width: 100%;
   }

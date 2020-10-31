@@ -2,24 +2,24 @@ const express = require('express');
 const db = require('../db/models');
 const { Op } = require("sequelize");
 const { asyncHandler } = require('../utils');
-const { Product, BicycleDetail } = db;
+const { Product, ClothingDetail } = db;
 
 const router = express.Router();
 
 router.get(
-    "/bicyclesList",
+    "/clothingList",
     asyncHandler
     (async (req, res) => {
-        const bicyclesList = await Product.findAll(
+        const clothingList = await Product.findAll(
             { where: {
                 productTypeEnum: {
-                    [Op.eq]: "Bicycles",
+                    [Op.eq]: "Clothing",
                 }
             },
-            include: BicycleDetail
+            include: ClothingDetail
             });
         res.status(201).json({
-            bicyclesList
+            clothingList
           });
     }));
     module.exports = router;

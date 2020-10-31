@@ -2,10 +2,11 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';  //set font-size to medium or large
 import Badge from '@material-ui/core/Badge';
+import HomeIcon from '@material-ui/icons/Home';
 import Container from '@material-ui/core/Container';
-import { createMuiTheme } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/styles';
-import { purple } from '@material-ui/core/colors';
+// import { createMuiTheme } from '@material-ui/core/styles';
+// import { ThemeProvider } from '@material-ui/styles';
+// import { purple } from '@material-ui/core/colors';
 import imgSrc from './images/girl1.png';
 import { TOKEN_KEY, removeToken, removeAvatarURL, removeUserName, removeUserEmail, removeUserId } from './store/authentication';
 
@@ -55,6 +56,12 @@ const SearchBar = (props) => {
         e.preventDefault();
         console.log("Submit handled:  ", searchString);
     }
+
+    const handleHomeClick = (e) => {
+        e.preventDefault();
+        console.log("Clicked home button...");
+        window.location.href ='/';
+    }
     return (
             <Container>
                 <div className="topBar">
@@ -68,7 +75,8 @@ const SearchBar = (props) => {
                             onChange={updateSearchString}
                             placeholder="Start shopping..." />
                     </form>
-                    <Badge badgeContent={4} color="secondary">
+                    <HomeIcon className="homeIcon" onClick={handleHomeClick}style={{margin:"10px", color: "grey"}}></HomeIcon>
+                    <Badge badgeContent={4} color="secondary" >
                         <ShoppingCartIcon style={{ color: "grey" }}></ShoppingCartIcon>
                     </Badge>
                     <button className="signInButton"  onClick={handleSignIn}>{token ? "SignOut" : "SignIn"}</button>

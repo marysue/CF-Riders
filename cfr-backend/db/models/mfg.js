@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Mfg.associate = function(models) {
     // associations can be defined here
+    Mfg.hasOne(models.Product, { foreignKey: "mfgId_FK" } )
   };
   return Mfg;
 };

@@ -11,7 +11,14 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Product.associate = function(models) {
     // associations can be defined here
-    Product.hasOne(models.Mfg, { foreignKey: 'mfgId'})
+    //belongsTo goes on the table WITHOUT the foreign key
+    Product.belongsTo(models.Mfg, { foreignKey: 'mfgId_FK'})
+    //hasOne goes on the table WITH the foreign key
+    Product.hasOne(models.BicycleDetail, { foreignKey: "productId_FK"});
+    //hasMany uses the FK from the other table
+    Product.hasMany(models.ReviewRating, { foreignKey: "productId_FK" });
+    //hasOne
+    Product.hasOne(models.ClothingDetail, { foreignKey: "productId_FK" });
   };
   return Product;
 };

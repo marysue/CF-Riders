@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   ClothingDetail.associate = function(models) {
     // associations can be defined here
-    ClothingDetail.hasOne(models.Product, { foreignKey: "productId_FK" });
+   ClothingDetail.belongsTo(models.Product, { foreignKey: "productId_FK" });
   };
   return ClothingDetail;
 };

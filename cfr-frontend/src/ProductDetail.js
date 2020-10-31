@@ -5,7 +5,7 @@ const ProductDetail = (props) => {
     return (
         <div>
             <SearchBar></SearchBar>
-            <h1>Product Detail page!</h1>
+            <h4>Product Detail page!</h4>
         </div>
     )
 }

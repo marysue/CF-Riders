@@ -20,6 +20,7 @@ const PrivateRoute = ({component: Component, ...rest}) => {
 
 
 const App = () => {
+
   const token = useSelector(state => state.authentication.token);
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
