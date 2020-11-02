@@ -5,8 +5,10 @@ import SignUp from './SignUp';
 import LoginPanel from './LoginPanel';
 import OrderDetail from './OrderDetail';
 import ProductDetail from './ProductDetail';
+import ProductsPage from './ProductsPage';
 import ProductsBrowser from './ProductsBrowser';
 import { loadToken } from './store/authentication';
+import LogInOrSignUp from './LogInOrSignUp';
 
 const PrivateRoute = ({component: Component, ...rest}) => {
   return (<Route render={(props) => {
@@ -46,6 +48,12 @@ const App = () => {
             <LoginPanel {...props} />
           )}
           />
+          <Route
+            path="/users/logInOrSignUp"
+            render={ (props) => (
+              <LogInOrSignUp {...props} />
+              )}
+              />
         <Route
           path="/users/signup"
           render={(props) => (
@@ -64,6 +72,12 @@ const App = () => {
             <ProductDetail {...props} />
           )}
         />
+        <Route
+          path="/productsPage"
+          render={(props) => (
+            <ProductsPage {...props} />
+          )}
+          />
         <PrivateRoute
           path="/order"
           exact={true}

@@ -26,7 +26,9 @@
     font-feature-settings: 'liga';
   }
 
-
+  body {
+    font-family: Arial;
+  }
   .MuiSvgIcon-colorPrimary colorPrimary {
     color: #148ECE;
   }
@@ -62,6 +64,13 @@
       color: gray;
       cursor: pointer;
   }
+  .main-profile-img {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+
   .avatar-container {
     display: flex;
     flex-direction: column;
@@ -193,10 +202,99 @@
     grid-template-columns: auto auto auto auto auto;
     background-color: #2196F3;
     padding: 10px;
+    cursor: pointer;
   }
 
   img {
     object-fit: contain;
+    height: 75%;
+    width: 75%;
+  }
+
+  .productPhoto  > img  {
     height: 100%;
     width: 100%;
+    border-radius: 80px;
+    cursor: pointer;
   }
+
+  figcaption {
+    color: white;
+    text-align: center;
+    margin-bottom: 0px;
+    margin-top: 0px;
+  }
+
+  .productItem > figcaption {
+    color: black;
+    text-align: center;
+    font-size: 15px;
+    margin-top: -5px;
+  }
+
+  .loginOrSignUp {
+    display: inline-grid;
+    width: 40%;
+    grid-template-columns: auto auto;
+    padding: 10px;
+    align-items: center;
+  }
+
+  .loginOrSignUp > button {
+    margin-top: 0;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+  }
+
+  .centerDiv {
+    display: flex;
+    flex-direction: row;
+    align-content: space-evenly;
+    justify-content: space-around;
+  }
+
+  .signUpForm {
+    display: grid;
+    grid-column: auto auto;
+    grid-row: 4;
+  }
+  .inputDiv {
+    display: block;
+    padding: 10px;
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 10px;
+    grid-row-gap: 40px;
+    color: #2196F3;
+    justify-items: center;
+  }
+
+.signUpForm {
+  font-family: 'Arial';
+  color: #148ECE;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 80px;
+  width: 425px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.signUpInput {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+
+}
+
+.price {
+  font-size: small;
+  margin-top: 5px;
+}

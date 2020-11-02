@@ -61,17 +61,26 @@ const validateEmailAndPassword = [
 /* create user with hashed password */
 router.post(
   "/",
-  validateEmailAndPassword,
-  handleValidationErrors,
+  // validateEmailAndPassword,
+  // handleValidationErrors,
   asyncHandler
   (async (req, res) => {
     console.log("Made it to this route!!!", req.body);
-    const { name, emailAddress, password, avatarURL } = req.body;
+    const { name, emailAddress, password, avatarURL, confirmPassword } = req.body;
+    console.log("*******************************************");
+    console.log("name: ", name);
+    console.log("emailAddress: ", emailAddress);
+    console.log("password: ", password);
+    console.log("confirmPassword: ", confirmPassword);
+    console.log("avatarURL:  ", avatarURL);
+    console.log("*******************************************");
+    console.log("req.body:  ");
+    console.log(req.body);
     const passwordHash = await bcrypt.hash(password, 10);
     const user = await User.create({ name, emailAddress, passwordHash, avatarURL });
     const token = getUserToken(user);
     res.status(201).json({
-      user: { id: user.id },
+      user: { id: user.id, name: user.name },
       token,
     });
   })

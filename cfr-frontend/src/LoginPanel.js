@@ -47,7 +47,7 @@ const LoginPanel = (props) => {
             <SearchBar></SearchBar>
             <form className="loginForm" onSubmit={handleSubmit}>
                 <div className="loginInput">
-                    <div className="loginLabel">
+                    <div >
                         <label>Email :           </label>
                     </div>
                 <input
@@ -59,7 +59,7 @@ const LoginPanel = (props) => {
                     />
                </div>
                <div className="loginInput">
-                   <div className="loginLabel">
+                   <div >
                         <label>Password : </label>
                    </div>
                 <input
