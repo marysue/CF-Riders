@@ -33,7 +33,7 @@ app.use('/accessories', accessoriesRouter);
 //The "catchall" handler: for any request that doesn't
 //match one of the above, send back to React's index.html file.
 if (process.env.NODE_ENV === "production") {
-    app.use(express.static("react-app/build"));
+    app.use(express.static(__dirname+"/react-app/build"));
     app.get(/\/(?!api)*/, (req, res) => {
         res.sendFile(path.resolve(__dirname, "react-app", "build", "index.html"));
     });
