@@ -5,7 +5,8 @@
   "scripts": {
     "start": "nodemon -r dotenv/config ./bin/www",
     "start:development": "nodemon -r dotenv/config ./bin/www",
-    "start:production": "node ./bin/www"
+    "start:production": "node ./bin/www",
+    "heroku-postbuild": "cd react-app && npm install && npm run build"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

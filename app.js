@@ -28,4 +28,11 @@ app.use('/bicycles', bicyclesRouter);
 app.use('/clothing', clothingRouter);
 app.use('/accessories', accessoriesRouter);
 
+//For deploying to heroku
+//The "catchall" handler: for any request that doesn't
+//match one of the above, send back to React's index.html file.
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname+'/react-app/build/index.html'));
+});
+
 module.exports = app;
