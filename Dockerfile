@@ -8,7 +8,7 @@ COPY ./backend/. .
 COPY ./frontend/build/. ./public/.
 
 ENV NODE_ENV=production \
-JWT_SECRET=aaa967f1-2b08-4dde-a086-5df6bc8eff91 \
-JWT_EXPIRES_IN=604800
+JWT_SECRET=cb77cb9fa1fa800ebda04ff1b66960c7e8f43d9e0e5abc5069437859a2170830 \
+JWT_EXPIRES_IN=60012
 
 CMD [ "npm", "start" ]
