@@ -20,7 +20,8 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(cookieConfig));
-app.use(express.static(path.join(__dirname, 'public')));
+
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -31,8 +32,14 @@ app.use('/accessories', accessoriesRouter);
 //For deploying to heroku
 //The "catchall" handler: for any request that doesn't
 //match one of the above, send back to React's index.html file.
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname+'/react-app/build/index.html'));
-});
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static("react-app/build"));
+    app.get(/\/(?!api)*/, (req, res) => {
+        res.sendFile(path.resolve(__dirname, "react-app", "build", "index.html"));
+    });
+} else {
+    app.use(express.static(path.join(__dirname, 'public')));
+}
+
 
 module.exports = app;
