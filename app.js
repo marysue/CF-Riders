@@ -23,7 +23,7 @@ app.use(cookieParser(cookieConfig));
 
 
 
-app.use('/', indexRouter);
+// app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/bicycles', bicyclesRouter);
 app.use('/clothing', clothingRouter);
