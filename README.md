@@ -20,28 +20,28 @@ Navigation to specific product pages by selecting any of the icons the the banne
 
 Once the user has selected the specific product they wish to view, they will be taken to the product page as shown below:
 
-![Productpage Image](/docs/images/ProductPage.png)
+![Productpage Image](./docs/images/ProductPage.png)
 
 If the user wishes to place an order, they must be logged in first.
 
 The login page will appear as follows:
 
-![Login Page](/docs/images/LogIn.png)
+![Login Page](./docs/images/LogIn.png)
 
 If the user does not have an account, their email address will be pre-populated in the Signup page, and the user will be redirected to the sign up page.  This page will appear as follows:
 
-![SignUp page](/docs/images/SignUp.png)
+![SignUp page](./docs/images/SignUp.png)
 
 Once the user has been logged in, the user's avatar will appear in the navigation bar, and the option to sign out will be given next to the avatar.
 
 The navigation bar, when signed in will appear as follows:
 
-![Navigation Bar Signed In](/docs/images/NavigationBar-SignedIn.png)
+![Navigation Bar Signed In](./docs/images/NavigationBar-SignedIn.png)
 
 If the user wants to place an order, they are given the opportunity on the specific product detail page.  Once the order has been placed the shopping cart icon in the navigation bar will show the number of items in their cart.
 
 The user may then navigate to view their order by clicking the shopping cart icon, then finalize their order.  The user is then given the opportunity to adjust the number of items ordered, or delete any item ordered before placing their final order.
 
-![Shopping Cart](/docs/images/AddToCart.png)
+![Shopping Cart](./docs/images/AddToCart.png)
 
 Once the order has been finalized, the number of items in the cart will be cleared, and the AddToCart page will display "Order placed"

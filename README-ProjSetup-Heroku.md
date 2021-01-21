@@ -1,8 +1,8 @@
-# Flask React Project
+# Solo React/Express.js Project
 
-This is the backend for the Flask React project.
+This is the backend for the Solo React / Express project.
 
-## Getting started - Not for this project!!!
+## Getting started
 
 1. Clone this repository (only this branch)
 
@@ -11,80 +11,32 @@ This is the backend for the Flask React project.
    ```
 2. Install dependencies
 
-   ```bash
-   pipenv install --dev -r dev-requirements.txt && pipenv install -r requirements.txt
+   1. Install dependencies (`npm install`)
+   2. Create a **.env** file based on the example with proper settings for your development environment
+   3. Setup your PostgreSQL user, password and database and make sure it matches your **.env** file with CREATEDB privileges
+   4. Run
+      * `npm run db:create`
+      * `npm run db:migrate`
+      * `npm run db:seed:all`
+      * `npm start`
+
+   ## Deploy to Heroku
+
+
+   1. Create a new project
+   2. Under Resources click "Find more add-ons" and add the add on called "Heroku Postgres"
+   3. Install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-command-line)
+   4. Run `$ heroku login`
+   5. Add heroku as a remote to this git repo `$ heroku git:remote -a <project_name>`
+   6. Push the project to heroku `$ git push heroku master`
+   7. Connect to the heroku shell and prepare your database
+
+   ```shell
+       $ heroku run bash
+       $ sequelize-cli db:migrate
+       $ sequelize-cli db:seed:all
    ```
-3. Create a **.env** file based on the example with proper settings for your
-   development environment
-4. Setup your PostgreSQL user, password and database and make sure it matches your **.env** file
-5. Get into your pipenv, migrate your database, seed your database, and run your flask app
+   (You can interact with your database this way as youd like, but beware that `db:drop` should not be run in the heroku environment)
 
-   ```bash
-   pipenv shell
-   ```
-
-   ```bash
-   flask db upgrade
-   ```
-
-   ```bash
-   flask seed all
-   ```
-
-   ```bash
-   flask run
-   ```
-6. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
-
----
-
-*IMPORTANT!*
-If you add any python dependencies to your pipfiles, you'll need to regenerate your requirements.txt before deployment.
-You can do this by running:
-
-```bash
-pipenv lock -r > requirements.txt
-```
-
-*ALSO IMPORTANT!*
-psycopg2-binary MUST remain a dev dependency because you can't install it on apline-linux.
-There is a layer in the Dockerfile that will install psycopg2 (not binary) for us.
-
----
-
-## Deploy to Heroku
-
-1. Create a new project on Heroku
-2. Under Resources click "Find more add-ons" and add the add on called "Heroku Postgres"
-3. Install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-command-line)
-4. Run
-
-   ```bash
-   heroku login
-   ```
-5. Login to the heroku container registry
-
-   ```bash
-   heroku container:login
-   ```
-6. Update the `REACT_APP_BASE_URL` variable in the Dockerfile.
-   This should be the full URL of your Heroku app: i.e. "`https://cadence-appacademy-group-proj.herokuapp.com`"
-7. Push your docker container to heroku from the root directory of your project.
-   This will build the dockerfile and push the image to your heroku container registry
-
-   ```bash
-   heroku container:push web -a cadence-appacademy-group-proj
-   ```
-8. Release your docker container to heroku
-
-   ```bash
-   heroku container:release web -a cadence-appacademy-group-proj
-   ```
-9. set up your database:
-
-   ```bash
-   heroku run -a cadence-appacademy-group-proj python -m flask db upgrade
-   heroku run -a cadence-appacademy-group-proj python -m flask seed all
-   ```
-10. Under Settings find "Config Vars" and add any additional/secret .env variables.
-11. profit
+   8. Add a `REACT_APP_BASE_URL` config var. This should be the full URL of your react app: i.e. "[https://solo-react.herokuapp.com](https://solo-react.herokuapp.com/)"
+   9. profit
