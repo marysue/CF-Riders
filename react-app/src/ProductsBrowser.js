@@ -128,11 +128,11 @@ const ProductsBrowser = (props) => {
                         </div>
                     </div>
                 </div>
-                <h2>Recommended in Bicycles</h2>
+                <h2 style={{color:"white"}}>Recommended in Bicycles</h2>
             <ProductGrid category={"Bicycles"} limit={5}> </ProductGrid>
-            <h2>Recommended in Clothing</h2>
+            <h2 style={{color:"white"}}>Recommended in Clothing</h2>
             <ProductGrid category={"Clothing"} limit={5}> </ProductGrid>
-            <h2>Recommended in Accessories</h2>
+            <h2 style={{color:"white"}}>Recommended in Accessories</h2>
             <ProductGrid category={"Accessories"} limit={5}></ProductGrid>
             </>
 

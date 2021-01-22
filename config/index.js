@@ -15,3 +15,4 @@ module.exports = {
     },
     cookieConfig: process.env.COOKIE_SECRET
   };
+  

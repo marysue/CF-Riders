@@ -1,4 +1,26 @@
 /* TODO Add site wide styles */
+
+html, body {
+  height: 120vh;
+  display: flex;
+  flex-direction: column;
+
+
+  background: #148ECE;
+  border-radius: 20px;
+}
+
+#root {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  color: #648dae;
+  min-width: 1234px;
+  max-width: 1280px;
+  margin-top: 40px;
+  margin-left: auto;
+  margin-right: auto;
+}
 /* Material UI styles for icons */
 .material-icons {
     font-family: 'Material Icons';
@@ -160,27 +182,27 @@
     cursor: pointer;
   }
 
+
   .productBanner {
-    display: flex;
     background-color: #148ECE;
     height: 200px;
     width: 100%;
-    align-content: space-between;
-    justify-content: center;
+    margin-top: 60px;
+    margin-bottom: 20px;
   }
 
   .photoSpread {
     display: flex;
-    width: 80%;
-    justify-content: space-between;
-    margin: auto;
-    align-content: space-between;
+    flex-direction: row;
+    justify-content: space-around;
   }
   .productPhoto {
+
     border-radius: 80px;
     height: 150px;
     width: 150px;
     background-color: white;
+
   }
 
   .productItem {
@@ -200,7 +222,7 @@
   .productGrid {
     display: inline-grid;
     grid-template-columns: auto auto auto auto auto;
-    background-color: #2196F3;
+    background-color: #148ECE;
     padding: 10px;
     cursor: pointer;
   }

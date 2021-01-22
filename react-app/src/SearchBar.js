@@ -64,10 +64,10 @@ const SearchBar = (props) => {
     }
 
     return (
-            <Container>
+            <Container style={{display:"flex", justifyContent:"space-around"}}>
                 <div className="topBar">
 
-                    <label className="logoFont">CF Riders</label>
+                    <label className="logoFont" style={{color:"white"}}>CF Riders</label>
                     <form onSubmit={handleSubmit}>
                         <input
                             className="navSearchBar"
@@ -76,9 +76,9 @@ const SearchBar = (props) => {
                             onChange={updateSearchString}
                             placeholder="Start shopping..." />
                     </form>
-                    <HomeIcon className="homeIcon" onClick={handleHomeClick}style={{margin:"10px", color: "grey"}}></HomeIcon>
+                    <HomeIcon className="homeIcon"  onClick={handleHomeClick}style={{margin:"10px", color: "white"}}></HomeIcon>
                     <Badge badgeContent={4} color="secondary" >
-                        <ShoppingCartIcon style={{ color: "grey" }}></ShoppingCartIcon>
+                        <ShoppingCartIcon style={{ color: "white" }}></ShoppingCartIcon>
                     </Badge>
                     <button className="signInButton"  onClick={handleSignIn}>{token ? "SignOut" : "SignIn"}</button>
                     <div className="avatar-container">
