@@ -1,26 +1,29 @@
 /* TODO Add site wide styles */
 
 html, body {
-  height: 120vh;
   display: flex;
   flex-direction: column;
-
-
   background: #148ECE;
   border-radius: 20px;
+  height: 1500px;
+
 }
 
 #root {
   display:flex;
   flex-direction: column;
   align-items: center;
-  color: #648dae;
+  /* color: #648dae; */
   min-width: 1234px;
   max-width: 1280px;
   margin-top: 40px;
   margin-left: auto;
   margin-right: auto;
+  color: white;
+  height: 1500px;
+
 }
+
 /* Material UI styles for icons */
 .material-icons {
     font-family: 'Material Icons';
@@ -319,4 +322,13 @@ html, body {
 .price {
   font-size: small;
   margin-top: 5px;
+}
+
+.productDetail {
+  margin-top: 0px;
+}
+
+.productOrder {
+  margin-top: 40px;
+  margin-left: 20px;
 }
