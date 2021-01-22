@@ -9,10 +9,10 @@ const ProductDetail = (props) => {
     return (
         <div>
             <SearchBar></SearchBar>
-            <h2>{productDetail.name}</h2>
+            <h2 style={{color: "white"}}>{productDetail.name}</h2>
             <img src={productDetail.photoURL} alt="product detail"></img>
 
-            <p>{productDetail.description}</p>
+            <p style={{color:"white"}}>{productDetail.description}</p>
 
         </div>
     )
