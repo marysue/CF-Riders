@@ -12,6 +12,7 @@ module.exports = {
         isBetaMember: false
       }], {});
     */
+   console.log("Seeding ClothingDetails...");
    return queryInterface.bulkInsert('ClothingDetails', [
      {productId_FK: 1, sex: 'F', size: 'L', createdAt: new Date(), updatedAt: new Date()},
      {productId_FK: 2, sex: 'F', size: 'M', createdAt: new Date(), updatedAt: new Date()},
@@ -41,6 +42,6 @@ module.exports = {
       Example:
       return queryInterface.bulkDelete('People', null, {});
     */
-   return queryInterface.bulkDelete('ClothingDetails', null, {});
+   return queryInterface.bulkDelete('ClothingDetails', null, {truncate:true, restartIdentity: true});
   }
 };

@@ -12,6 +12,7 @@ module.exports = {
         isBetaMember: false
       }], {});
     */
+   console.log("Seeding Users ...");
    return queryInterface.bulkInsert('Users', [
      { createdAt: new Date(), updatedAt: new Date(), name: 'Jill Granier', emailAddress: 'jill@granier.com', avatarURL: 'https://robohash.org/8844d17ef9bd660eb89f564c9fe48cb3?set=set4&bgset=&size=200x200', passwordHash: '$2a$10$7DCRQgRwOWgNDVA1Qr7jtuznABhzoTWRGIVzxK5.LVMATq6v.HyBa'},
      { createdAt: new Date(), updatedAt: new Date(), name: 'Donna Frost', emailAddress: 'donna@frost.com', avatarURL: 'https://robohash.org/113f9eadcf6c3866d6f15acfcaa3492e?set=set4&bgset=&size=200x200', passwordHash: '$2a$10$3SECEM3x8mMVQQbT1U5nG.YlkbPHWDjl5yt.IcBZ9bGh95DMfD8hW'},
@@ -37,6 +38,6 @@ module.exports = {
       Example:
       return queryInterface.bulkDelete('People', null, {});
     */
-    return queryInterface.bulkDelete('Users', null, {});
+    return queryInterface.bulkDelete('Users', null, {truncate:true, restartIdentity: true});
   }
 };

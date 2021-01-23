@@ -13,6 +13,7 @@ module.exports = {
       }], {});
     */
    /* For Heroku DB, where the numbering will start at 1 */
+   console.log("Seeding BicycleDetails...");
    return queryInterface.bulkInsert('BicycleDetails', [
      { productId_FK: 1, size: 52, weight: 5, frame: 'carbon fiber', createdAt: new Date(), updatedAt: new Date()},
      { productId_FK: 2, size: 50, weight: 8, frame: 'carbon fiber', createdAt: new Date(), updatedAt: new Date()},
@@ -42,6 +43,6 @@ module.exports = {
       Example:
       return queryInterface.bulkDelete('People', null, {});
     */
-   return queryInterface.bulkDelete('BicycleDetails', null, {});
+   return queryInterface.bulkDelete('BicycleDetails', null, {truncate:true, restartIdentity: true});
   }
 };

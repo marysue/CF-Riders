@@ -12,6 +12,7 @@ module.exports = {
         isBetaMember: false
       }], {});
     */
+   console.log("Seeding Products...");
    return queryInterface.bulkInsert('Products', [
     { createdAt: new Date(), updatedAt: new Date(), mfgId_FK: 1, name: 'Fuji Sportif 1.5 Disc Endurance', quantity: 5, price: 2499.20, description: 'You don\'t have to sacrifice crucial comfort in favor of a few extra miles per hour. The designers and engineers at Fuji are all over it. The Fuji Sportif 1.3 Disc road bike was created to handle rides both big and small, with comfort-road frame geometry, easy to use and durable components, and great styling to show off on the local scene during your weekend rides. Plus, it features Avid BB7 premium disc brakes to slow you down in virtually any weather condition.', productTypeEnum: 'Bicycles', photoURL: 'https://i.imgur.com/Qn6YSyk.png'},
     { createdAt: new Date(), updatedAt: new Date(), mfgId_FK: 2, name: 'Trek Emonda ALR Road Bike - 2019, 56 cm', quantity: 15, price: 3427.99, description: 'The Trek Emonda ALR 5 has the performance of a Grand Tour climbing bike in an alloy frame. Snappy power on the climbs is paired with calm handling that lets you rail through curves on the descent. A Shimano Ultegra Groupset and a Bontrager Aeolus Pro 5 carbon wheelset up the ante on this sub-16-pound performance package. The Emonda is ready to take on a Grand Tour climb, your local Strava KOM/QOM, or anything else you can throw at it.', productTypeEnum: 'Bicycles', photoURL: 'https://i.imgur.com/l1BwnZa.png'},
@@ -45,6 +46,6 @@ module.exports = {
       Example:
       return queryInterface.bulkDelete('People', null, {});
     */
-   return queryInterface.bulkDelete('Products', null, {});
+   return queryInterface.bulkDelete('Products', null, {truncate:true, restartIdentity: true});
   }
 };

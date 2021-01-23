@@ -12,6 +12,7 @@ module.exports = {
         isBetaMember: false
       }], {});
     */
+   console.log("Seeding Mfgs ...");
    return queryInterface.bulkInsert('Mfgs', [
      { createdAt: new Date(), updatedAt: new Date(), name: 'Fuji'}, //1
      { createdAt: new Date(), updatedAt: new Date(), name: 'Trek'}, //2
@@ -41,6 +42,6 @@ module.exports = {
       Example:
       return queryInterface.bulkDelete('People', null, {});
     */
-   return queryInterface.bulkDelete('Mfgs', null, {});
+   return queryInterface.bulkDelete('Mfgs', null, {truncate:true, restartIdentity: true});
   }
 };

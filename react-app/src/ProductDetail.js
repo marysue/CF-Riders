@@ -22,7 +22,7 @@ const ProductDetail = (props) => {
                     <img src={productDetail.photoURL} style={{height: "400px"}} alt="product detail"></img>
 
                     <p style={{color:"white"}}>{productDetail.description}</p>
-                    <UserReviewHead></UserReviewHead>
+                    <UserReviewHead productId={props.id}></UserReviewHead>
                     <UserReview></UserReview>
 
                 </div>

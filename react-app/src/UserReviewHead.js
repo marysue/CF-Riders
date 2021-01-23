@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const UserReviewHead = (props) => {
+const UserReviewHead = ({prodId}) => {
+    const [productId, setProductId] = useState(prodId);
+    
     return (
         <div style={{border: "2px solid red"}}>
             <img src='./images/girl1.png' alt="Avatar" style={{height:"60px", width:"60px", borderRadius:"40px", backgroundColor:"none"}}/>

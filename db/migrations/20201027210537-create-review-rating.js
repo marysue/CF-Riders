@@ -19,7 +19,7 @@ module.exports = {
       review: {
         type: Sequelize.TEXT
       },
-      reviewRating: {
+      rating: {
         type: Sequelize.INTEGER
       },
       createdAt: {
