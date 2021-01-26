@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import SearchBar from './SearchBar';
 import { baseUrl } from './config';
-import { TOKEN_KEY, setUserName, setAvatarURL, setToken } from './store/authentication';
+import { TOKEN_KEY, setUserName, setAvatarURL, setToken, setUserId } from './store/authentication';
 
 const LoginPanel = (props) => {
     const [email, setEmail] = useState('');
@@ -20,12 +20,14 @@ const LoginPanel = (props) => {
             body: JSON.stringify({ emailAddress: email, password }),
           });
           console.log("Sent login request with user: ", email, " and password: ", password);
+          console.log("response is:  ", response);
           if (response.ok) {
-            const { token, user } = await response.json();
+              const { token, user } = await response.json();
             window.localStorage.setItem(TOKEN_KEY, token);
             dispatch(setToken(token));
-            dispatch(setUserName(user.name.split(" ")[0]));
-            dispatch(setAvatarURL(user.avatarURL));
+           dispatch(setUserName(user.name.split(" ")[0]));
+           dispatch(setAvatarURL(user.avatarURL));
+           dispatch(setUserId(user.id));
             setUserToken(token);
           }
     }

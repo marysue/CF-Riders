@@ -44,9 +44,10 @@ export const getUserInfo = (emailAddress) => async dispatch => {
     });
 
     if (response.ok) {
-        const {avatarURL, name} = await response.json();
+        const {avatarURL, name, id} = await response.json();
         dispatch(setAvatarURL(avatarURL));
         dispatch(setUserName(name.split(" ")[0]));
+        dispatch(setUserId(id));
     }
 };
 

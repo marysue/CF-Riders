@@ -90,12 +90,20 @@ router.post (
   "/login",
   asyncHandler(async (req, res, next) => {
     const { emailAddress, password } = req.body;
-
+    console.log("Backend /login route:  ", emailAddress, " : ", password);
     const user = await User.findOne({
       where: {
         emailAddress,
       },
     });
+    if (user) {
+      console.log("     found user:  ", user);
+    }
+
+    if (!user.validatePassword(password)) {
+      console.log("     could not validate the password!  ", password)
+    }
+    
     if (!user || !user.validatePassword(password)) {
       const err = new Error("Login failed");
       err.status = 401;
@@ -107,6 +115,7 @@ router.post (
     // Token generation
     const token = getUserToken(user);
     res.cookie('accessToken', `${token}`, { httpOnly: true })
+
     res.json({ token,
       user: {
         id: user.id,
