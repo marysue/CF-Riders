@@ -12,6 +12,10 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {model: 'Mfgs'}
       },
+      productType_FK: {
+        type: Sequelize.INTEGER,
+        references: {model: 'ProductTypes'},
+      },
       name: {
         type: Sequelize.STRING
       },

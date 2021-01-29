@@ -5,6 +5,7 @@ const { asyncHandler } = require('../utils');
 const { Product, BicycleDetail } = db;
 
 const router = express.Router();
+const BICYCLE_TYPE = 1
 
 router.get(
     "/bicyclesList",
@@ -12,8 +13,8 @@ router.get(
     (async (req, res) => {
         const bicyclesList = await Product.findAll(
             { where: {
-                productTypeEnum: {
-                    [Op.eq]: "Bicycles",
+                productType_FK: {
+                    [Op.eq]: BICYCLE_TYPE,
                 }
             },
             include: BicycleDetail
@@ -23,5 +24,5 @@ router.get(
           });
     }));
 
-    
+
     module.exports = router;

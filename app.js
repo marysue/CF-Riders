@@ -14,6 +14,7 @@ const clothingRouter = require('./routes/clothing');
 const reviewsRatingsRouter = require('./routes/reviewsRatings');
 const accessoriesRouter = require('./routes/accessories');
 const productsRouter = require('./routes/products');
+const inventoriesRouter = require('./routes/inventory');
 
 const app = express();
 //app.use(cors( { origin: "http://localhost:3000" }));
@@ -32,7 +33,7 @@ app.use('/clothing', clothingRouter);
 app.use('/accessories', accessoriesRouter);
 app.use('/reviewsRatings', reviewsRatingsRouter);
 app.use('/products', productsRouter);
-
+app.use('/inventory', inventoriesRouter);
 //For deploying to heroku
 //The "catchall" handler: for any request that doesn't
 //match one of the above, send back to React's index.html file.

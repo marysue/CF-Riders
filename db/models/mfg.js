@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Mfg.associate = function(models) {
     // associations can be defined here
-    Mfg.hasMany(models.Inventory, {foreignKey: 'mfgId_FK'});
+    Mfg.hasMany(models.Product, {foreignKey: 'mfgId_FK'});
   };
   return Mfg;
 };

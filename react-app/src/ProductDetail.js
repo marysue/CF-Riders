@@ -41,7 +41,6 @@ const ProductDetail = (props) => {
                      for (let i = 0; i < resp.reviews.length; i++) {
                         const dateString = resp.reviews[i].postDate;
                         const event = new Date(dateString);
-                        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
                         const newDateStr = event.toLocaleDateString(undefined, options)
                         resp.reviews[i].postDate = newDateStr;
                      }

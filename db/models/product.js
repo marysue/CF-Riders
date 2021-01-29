@@ -2,6 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Product = sequelize.define('Product', {
     mfgId_FK: DataTypes.INTEGER,
+    productType_FK: DataTypes.INTEGER,
     name: DataTypes.TEXT,
     price: DataTypes.FLOAT,
     description: DataTypes.STRING,
@@ -18,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     Product.hasMany(models.Inventory, {foreignKey: 'productId_FK'});
     Product.belongsTo(models.Mfg, {foreignKey: 'mfgId_FK'});
     Product.hasMany(models.ReviewRating, {foreignKey: 'productId_FK'});
+    Product.belongsTo(models.ProductType, {foreignKey: 'productType_FK'});
   };
   return Product;
 
