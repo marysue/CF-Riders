@@ -7,6 +7,7 @@ const AppWithContext = (props) => {
     const [token, setToken] = useState('');
 
     useEffect(() => {
+
       (async() => {
         const localToken = window.localStorage.getItem("token");
         if (localToken) {

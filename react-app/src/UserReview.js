@@ -7,7 +7,7 @@ const UserReview = ({productId, review}) => {
     useEffect ( () => {
         let myStars = [];
         for (let i = 0; i < review.rating; i++) {
-            myStars.push(<i class="fas fa-star"></i>);
+            myStars.push(<i className="fas fa-star"></i>);
         }
         setStars(myStars);
     }, []);

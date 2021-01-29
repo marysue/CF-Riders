@@ -45,7 +45,11 @@ export const getUserInfo = (emailAddress) => async dispatch => {
 
     if (response.ok) {
         const {avatarURL, name, id} = await response.json();
-        dispatch(setAvatarURL(avatarURL));
+        if (avatarURL) {
+          dispatch(setAvatarURL(avatarURL))
+        } else {
+          dispatch(setAvatarURL('https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png'));
+        }
         dispatch(setUserName(name.split(" ")[0]));
         dispatch(setUserId(id));
     }

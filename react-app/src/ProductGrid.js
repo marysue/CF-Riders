@@ -34,9 +34,12 @@ const ProductGrid = (props) => {
         case "Clothing" : {
             if (props.limit > 0 && clothingList !== undefined) {
                 listItemArr = clothingList.slice(0, props.limit);
+                console.log("First if block: ListItemArr: ", listItemArr);
             } else {
                 listItemArr = clothingList;
+                console.log("Second if block: ", listItemArr);
             }
+
             listItemType = 'clothing';
             break;
         }

@@ -14,6 +14,7 @@ module.exports = {
     */
    console.log("Seeding Users ...");
    return queryInterface.bulkInsert('Users', [
+     { createdAt: new Date(), updatedAt: new Date(), name: 'Demo User', emailAddress: 'demouser@demouser.com', avatarURL: 'https://avatars.dicebear.com/4.5/api/avataaars/ffooonasdfghjkl.svg', passwordHash: '$2a$10$3vQXIKKmXFllaYaPchWepOdfK9UKYPdVA8SHDDZ0HmX8IiGZ325Ge'},
      { createdAt: new Date(), updatedAt: new Date(), name: 'Jill Granier', emailAddress: 'jill@granier.com', avatarURL: 'https://robohash.org/8844d17ef9bd660eb89f564c9fe48cb3?set=set4&bgset=&size=200x200', passwordHash: '$2a$10$7DCRQgRwOWgNDVA1Qr7jtuznABhzoTWRGIVzxK5.LVMATq6v.HyBa'},
      { createdAt: new Date(), updatedAt: new Date(), name: 'Donna Frost', emailAddress: 'donna@frost.com', avatarURL: 'https://robohash.org/113f9eadcf6c3866d6f15acfcaa3492e?set=set4&bgset=&size=200x200', passwordHash: '$2a$10$3SECEM3x8mMVQQbT1U5nG.YlkbPHWDjl5yt.IcBZ9bGh95DMfD8hW'},
      { createdAt: new Date(), updatedAt: new Date(), name: 'Becky Donahue', emailAddress: 'becky@donahue.com', avatarURL: "https://robohash.org/4745b42def692879a38dea9ec927bd04?set=set4&bgset=&size=200x200", passwordHash: '$2a$10$.Quqk0EVZPSDWpfGOYrd6O7lT/NzqTy7JjIHwqRQNZK2gz8tWW6G2'},

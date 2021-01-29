@@ -1,22 +1,20 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('ClothingDetails', {
+    return queryInterface.createTable('OrderProducts', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      sex: {
-        type: Sequelize.ENUM('M', 'F')
-      },
-      size: {
-        type: Sequelize.ENUM('XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL')
+      orderId_FK: {
+        type: Sequelize.INTEGER,
+        references: {model: "Orders"}
       },
       productId_FK: {
         type: Sequelize.INTEGER,
-        references: { model: 'Products'}
+        references: {model: "Products"}
       },
       createdAt: {
         allowNull: false,
@@ -29,6 +27,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('ClothingDetails');
+    return queryInterface.dropTable('OrderProducts');
   }
 };

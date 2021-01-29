@@ -1,4 +1,5 @@
 'use strict';
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Products', {
@@ -8,6 +9,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      orderProduct_FK: {
+        type: Sequelize.INTEGER,
+        references: {model: 'OrderProduct'},
+      },
       mfgId_FK: {
         type: Sequelize.INTEGER,
         references: {model: 'Mfgs'}
@@ -15,17 +20,11 @@ module.exports = {
       name: {
         type: Sequelize.STRING(100)
       },
-      quantity: {
-        type: Sequelize.INTEGER
-      },
       price: {
         type: Sequelize.FLOAT(5,2)
       },
       description: {
         type: Sequelize.TEXT
-      },
-      productTypeEnum: {
-        type: Sequelize.ENUM('Bicycles', 'Clothing', 'Accessories')
       },
       photoURL: {
         type: Sequelize.STRING(200)

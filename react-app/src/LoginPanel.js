@@ -12,6 +12,28 @@ const LoginPanel = (props) => {
 
     const dispatch = useDispatch();
 
+    const loginDemo = async (e) => {
+        setEmail("demouser@demouser.com");
+        setPassword("password");
+        e.preventDefault();
+        const response = await fetch(`${baseUrl}/users/login`, {
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ emailAddress: "demouser@demouser.com", password: "password" }),
+          });
+          console.log("Sent login request with user:  demouser@demouser.com, and password:  password");
+          console.log("response is:  ", response);
+          if (response.ok) {
+              const { token, user } = await response.json();
+            window.localStorage.setItem(TOKEN_KEY, token);
+            dispatch(setToken(token));
+           dispatch(setUserName(user.name.split(" ")[0]));
+           dispatch(setAvatarURL(user.avatarURL));
+           dispatch(setUserId(user.id));
+            setUserToken(token);
+          }
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const response = await fetch(`${baseUrl}/users/login`, {
@@ -47,7 +69,7 @@ const LoginPanel = (props) => {
     return (
         <div>
             <SearchBar></SearchBar>
-            <form className="loginForm" onSubmit={handleSubmit}>
+            <form className="loginForm">
                 <div className="loginInput">
                     <div >
                         <label>Email :           </label>
@@ -73,7 +95,8 @@ const LoginPanel = (props) => {
                 />
                </div>
 
-                <button type="submit">Login</button>
+                <button onClick={handleSubmit}>Login</button>
+                <button style={{height: "60px"}} onClick={loginDemo}>Login Demo</button>
             </form>
         </div>
 

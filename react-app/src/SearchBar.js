@@ -16,15 +16,7 @@ const SearchBar = (props) => {
     const dispatch = useDispatch();
     let searchString = '';
     // const name = useSelector(state => state.authentication.name);
-    const avatarURL = useSelector(state => {
-        if (!state.authentication.avatarURL) {
-            console.log("Using default avatarURL ... state.authentication.avatarURL does not exist");
-            return "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png";//imgSrc;
-        } else {
-            console.log("Using state.authentication.avatarURL ... avatarURL is in state");
-            return state.authentication.avatarURL
-        }
-    });
+    const avatarURL = useSelector(state => state.authentication.avatarURL);
     const token = useSelector(state => state.authentication.token);
 
     const handleSignIn = (e) => {

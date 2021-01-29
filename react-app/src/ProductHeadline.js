@@ -11,7 +11,7 @@ const ProductHeadline = ({productDetail, productRating, productPrice}) => {
     useEffect ( () => {
         const starsArr = []
         for (let i = 0; i < productRating; i++) {
-            starsArr.push(<i class="fas fa-star"></i>);
+            starsArr.push(<i className="fas fa-star"></i>);
         }
         setStars(starsArr);
         console.log("Contents of stars:  ", stars);

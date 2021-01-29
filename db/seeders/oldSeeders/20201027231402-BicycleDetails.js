@@ -15,8 +15,15 @@ module.exports = {
    /* For Heroku DB, where the numbering will start at 1 */
    console.log("Seeding BicycleDetails...");
    return queryInterface.bulkInsert('BicycleDetails', [
-     { productId_FK: 1, size: 52, weight: 5, frame: 'carbon fiber', createdAt: new Date(), updatedAt: new Date()},
+     { productId_FK: 1, size: 47, weight: 5, frame: 'carbon fiber', createdAt: new Date(), updatedAt: new Date()},
+     { productId_FK: 1, size: 49, weight: 5, frame: 'carbon fiber', createdAt: new Date(), updatedAt: new Date()},
+     { productId_FK: 1, size: 51, weight: 5, frame: 'carbon fiber', createdAt: new Date(), updatedAt: new Date()},
+     { productId_FK: 1, size: 54, weight: 5, frame: 'carbon fiber', createdAt: new Date(), updatedAt: new Date()},
+     { productId_FK: 2, size: 48, weight: 8, frame: 'carbon fiber', createdAt: new Date(), updatedAt: new Date()},
      { productId_FK: 2, size: 50, weight: 8, frame: 'carbon fiber', createdAt: new Date(), updatedAt: new Date()},
+     { productId_FK: 2, size: 53, weight: 8, frame: 'carbon fiber', createdAt: new Date(), updatedAt: new Date()},
+     { productId_FK: 2, size: 55, weight: 8, frame: 'carbon fiber', createdAt: new Date(), updatedAt: new Date()},
+     { productId_FK: 2, size: 58, weight: 8, frame: 'carbon fiber', createdAt: new Date(), updatedAt: new Date()},
      { productId_FK: 3, size: 50, weight: 10, frame: 'aluminum', createdAt: new Date(), updatedAt: new Date()},
      { productId_FK: 4, size: 55, weight: 6, frame: 'carbon fiber', createdAt: new Date(), updatedAt: new Date()},
      { productId_FK: 5, size: 53, weight: 10, frame: 'carbon fiber', createdAt: new Date(), updatedAt: new Date()},

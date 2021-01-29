@@ -81,7 +81,7 @@ const ProductDetail = (props) => {
                 </div>
                 <div className="productOrder" style={{display:"inline-block",width:"30%"}}>
                     <ProductHeadline productDetail={productDetail} productRating={productRating} productPrice={productPrice}></ProductHeadline>
-                    <OrderForm></OrderForm>
+                    <OrderForm productDetail={productDetail}></OrderForm>
 
                     {/* <ProductDescription></ProductDescription> */}
                 </div>

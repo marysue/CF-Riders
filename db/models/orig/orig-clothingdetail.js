@@ -2,7 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   const ClothingDetail = sequelize.define('ClothingDetail', {
     sex: DataTypes.ENUM('M','F'),
-    size: DataTypes.ENUM('XS','S','M','L','XL','XXL','XXXL'),
+    size: DataTypes.STRING(10),
     productId_FK: DataTypes.INTEGER
   }, {});
   ClothingDetail.associate = function(models) {
