@@ -1,14 +1,18 @@
-FROM node:12.19.1-alpine3.9
+FROM node:12 AS build-stage
+WORKDIR /react-app
+COPY react-app/. .
 
-WORKDIR /api
+ENV REACT_APP_BASE_URL=https://cfriders.herokuapp.com/
 
-COPY ./wait-for .
+#Build our React App
+RUN npm install
+RUN npm run build
 
-COPY ./backend/. .
-COPY ./frontend/build/. ./public/.
-
-ENV NODE_ENV=production \
-JWT_SECRET=cb77cb9fa1fa800ebda04ff1b66960c7e8f43d9e0e5abc5069437859a2170830 \
-JWT_EXPIRES_IN=60012
-
-CMD [ "npm", "start" ]
+FROM node:12
+WORKDIR /public
+COPY . .
+COPY --from=build-stage /react-app/build /client/build/
+RUN npm install
+RUN npm install -g sequelize-cli
+EXPOSE 8080
+CMD ["npm", "start"]
