@@ -6,7 +6,7 @@ const ProductHeadline = ({productDetail, productRating, productPrice}) => {
    //const productDetail = props.location.state.props;
     //console.log("Props received in product detail page:  ", productDetail);
     const [stars, setStars] = useState([]);
-    console.log("Received product rating:  ", productRating);
+    //console.log("Received product rating:  ", productRating);
 
     useEffect ( () => {
         const starsArr = []
@@ -14,9 +14,9 @@ const ProductHeadline = ({productDetail, productRating, productPrice}) => {
             starsArr.push(<i className="fas fa-star"></i>);
         }
         setStars(starsArr);
-        console.log("Contents of stars:  ", stars);
-        console.log("productjRating:  ", productRating);
-    }, [])
+        // console.log("Contents of stars:  ", stars);
+        // console.log("productjRating:  ", productRating);
+    }, [productRating])
     return (
         <div >
             <h2 style={{color: "white"}}>{productDetail.name}</h2>

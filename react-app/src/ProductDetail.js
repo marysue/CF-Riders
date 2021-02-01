@@ -5,7 +5,6 @@ import UserReview from './UserReview';
 import ProductReviewInput from './ProductReviewInput';
 import OrderForm from './OrderForm';
 import ProductHeadline from './ProductHeadline';
-import ProductDescription from './ProductDescription';
 import ProductReviewSignup from './ProductReviewSignup';
 
 import { baseUrl } from './config';
@@ -14,14 +13,14 @@ import { baseUrl } from './config';
 const ProductDetail = (props) => {
    const [userReviews, setUserReviews] = useState([]);
    const productDetail = props.location.state.props;
-   const [productId, setProductId] = useState(productDetail.id);
+   const [productId, ] = useState(productDetail.id);
    const userId = useSelector(state => state.authentication.userId);
-   const [productHeadline, setProductHeadline] = useState();
+   const [,setProductHeadline] = useState();
    const [productPrice, setProductPrice] = useState();
-   const [productDescription, setProductDescription] = useState();
+   const [, setProductDescription] = useState();
    const [productRating, setProductRating] = useState();
 
-   console.log("Product Detail:  Received props:  ", productDetail);
+   //console.log("Product Detail:  Received props:  ", productDetail);
 
     useEffect(() => {
 
@@ -62,7 +61,7 @@ const ProductDetail = (props) => {
             })();
 
     }
-      }, [productId]);
+      }, [productId, productDetail.description, productDetail.name, productDetail.price]);
 
 
     return (
@@ -75,7 +74,7 @@ const ProductDetail = (props) => {
 
                     {/* <p style={{color:"white"}}>{productDetail.description}</p> */}
                     <p>Product Reviews:  </p>
-                    { userReviews.map( (review) => <UserReview key={props.id} productId={props.id} review={review}></UserReview>) }
+                    { userReviews.map( (review, idx) => <UserReview key={idx} productId={props.id} review={review}></UserReview>) }
 
                 </div>
                 <div className="productOrder" style={{display:"inline-block",width:"30%"}}>

@@ -35,7 +35,7 @@ const ProductsBrowser = (props) => {
                     dispatch(setAccessoryList(accessoriesList));
                     dispatch(setAccessoriesLoaded(true));
                     setAccessoryURL(accessoriesList[0].photoURL);
-                    console.log("Fetch returned Accessories with AccessoryPhotoURL:  ", accessoryURL);
+                    //console.log("Fetch returned Accessories with AccessoryPhotoURL:  ", accessoryURL);
                 } else {
                     throw response.status;
                 }
@@ -59,7 +59,7 @@ const ProductsBrowser = (props) => {
                     dispatch(setBicycleList(bicyclesList));
                     dispatch(setBicyclesLoaded(true));
                     setBicycleURL(bicyclesList[0].photoURL);
-                    console.log("Fetch returned Bicycles with BicycleURL:  ", bicycleURL);
+                    //console.log("Fetch returned Bicycles with BicycleURL:  ", bicycleURL);
                 } else {
                     throw response.status;
                 }
@@ -82,7 +82,7 @@ const ProductsBrowser = (props) => {
                     dispatch(setClothingList(clothingList));
                     dispatch(setClothingLoaded(true));
                     setClothingURL(clothingList[0].photoURL);
-                    console.log("Fetch returned Clothing with clothingURL:  ", clothingURL);
+                    //console.log("Fetch returned Clothing with clothingURL:  ", clothingURL);
                 } else {
                     throw response.status;
                 }

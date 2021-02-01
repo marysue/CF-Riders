@@ -10,17 +10,17 @@ const UserReview = ({productId, review}) => {
             myStars.push(<i className="fas fa-star"></i>);
         }
         setStars(myStars);
-    }, []);
+    }, [review.rating]);
     return (
         <>
-        <div >
-            <img src={review.avatarURL} alt="Avatar" style={{height:"60px", width:"60px", borderRadius:"40px", backgroundColor:"none"}}/>
-            <p style={{display:"inline-block"}}>{review.name},    {review.postDate}</p>
-            <p>{stars}</p>
-        </div>
-         <div style={{borderBottom: "2px solid grey"}}>
-         <p>{review.review}</p>
-     </div>
+            <div >
+                <img src={review.avatarURL} alt="Avatar" style={{height:"60px", width:"60px", borderRadius:"40px", backgroundColor:"none"}}/>
+                <p style={{display:"inline-block"}}>{review.name},    {review.postDate}</p>
+                <p>{stars}</p>
+            </div>
+            <div style={{borderBottom: "2px solid grey"}}>
+                <p>{review.review}</p>
+            </div>
      </>
     )
     }

@@ -29,7 +29,7 @@ router.get(
             if (productList[0] && productList[0].productType_FK === BICYCLE_TYPE) {
                 for (let i = 0; i < productList.length; i++) {
                     productInfo.push({
-                        productId: productList[i].productId_FK,
+                        inventoryId: productList[i].id,
                         size: productList[i].Size.size,
                         color: productList[i].Color.color,
                         frame: productList[i].Frame.type,
@@ -39,7 +39,7 @@ router.get(
                 }
             } else if (productList[0] && productList[0].productType_FK === CLOTHING_TYPE) {
                 for (let i = 0; i < productList.length; i++) {
-                    productInfo.push({productId: productList[i].productId_FK,
+                    productInfo.push({inventoryId: productList[i].id,
                         size: productList[i].Size.size,
                         gender: productList[i].Gender.gender,
                         quantity:  productList[i].quantity,
@@ -48,7 +48,7 @@ router.get(
             } else if (productList[0] && productList[0].productType_FK === ACCESSORY_TYPE) {
                 //No size, gender or color on accessories - just return quantity
                 for (let i=0; i < productList.length; i++) {
-                    productInfo.push( { productId: productList[i].productId_FK,
+                    productInfo.push( { inventoryId: productList[i].id,
                         quantity: productList[i].quantity})
                     }
             }

@@ -9,6 +9,7 @@ import ProductsPage from './ProductsPage';
 import ProductsBrowser from './ProductsBrowser';
 import { loadToken } from './store/authentication';
 import LogInOrSignUp from './LogInOrSignUp';
+import OrderConfirmation from './OrderConfirmation';
 
 const PrivateRoute = ({component: Component, ...rest}) => {
   return (<Route render={(props) => {
@@ -47,6 +48,11 @@ const App = () => {
           render={(props) => (
             <LoginPanel {...props} />
           )}
+          />
+          <Route
+            path="/orderConfirmation"
+            render= { (props) => (
+              <OrderConfirmation props={props}></OrderConfirmation>)}
           />
           <Route
             path="/users/logInOrSignUp"

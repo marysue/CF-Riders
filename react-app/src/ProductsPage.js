@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import Figure from 'react-bootstrap/Figure';
 import SearchBar from './SearchBar';
 import { Redirect } from 'react-router-dom';
-import ProductDetail from './ProductDetail';
+
 
 const ProductsPage = (props) => {
     console.log("received props:  ", props);

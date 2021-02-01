@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import ProductRating from './ProductRating';
+import SelectTest from './selectTest';
 
 const ProductReviewInput = ({productId}) => {
     const history = useHistory();
-    const [prodId, setProdId] = useState(productId);
+    const [prodId, ] = useState(productId);
     const [enterValue, setEnterValue] = useState('');
     const placeHolderMsg = 'Tell us what you like about this product ...';
 
@@ -26,7 +27,7 @@ const ProductReviewInput = ({productId}) => {
     };
     return (
         <>
-
+                <SelectTest></SelectTest>
                 <div style={{borderTop: "2px solid grey", display:"inline-block", width:"60%"}}>
                     <div style={{display: "block"}}>
                         <h2>Add your review: </h2>
@@ -44,7 +45,7 @@ const ProductReviewInput = ({productId}) => {
                         </form>
                     </div>
                 </div>
-            
+
 
             <ProductRating></ProductRating>
         </>

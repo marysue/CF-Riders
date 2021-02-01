@@ -1,8 +1,8 @@
 import React, { useState} from 'react';
 import { useSelector } from 'react-redux';
-import { Redirect, Route } from 'react-router-dom';
+import { Redirect} from 'react-router-dom';
 import Figure from 'react-bootstrap/Figure'
-import ProductDetail from './ProductDetail';
+
 
 const ProductGrid = (props) => {
     const bicycleList = useSelector(state => state.bicycles.bicycleList);
@@ -34,10 +34,10 @@ const ProductGrid = (props) => {
         case "Clothing" : {
             if (props.limit > 0 && clothingList !== undefined) {
                 listItemArr = clothingList.slice(0, props.limit);
-                console.log("First if block: ListItemArr: ", listItemArr);
+                //console.log("First if block: ListItemArr: ", listItemArr);
             } else {
                 listItemArr = clothingList;
-                console.log("Second if block: ", listItemArr);
+                //console.log("Second if block: ", listItemArr);
             }
 
             listItemType = 'clothing';
