@@ -8,9 +8,12 @@ const config = require(__dirname + '/../../config/database.js')[env];
 const db = {};
 let sequelize;
 //heroku sequelize needs ssl=true
+console.log("config.use_env_variable: ", config.use_env_variable);
 if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable] + "?ssl=true", config);
+  sequelize = new Sequelize(process.env[config.use_env_variable] + "?sslmode=require", config);
 } else {
+  console.log("config.database: ", config.database);
+  console.log("username: ", config.username, " password: ", config.password, " config: ", config);
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 fs

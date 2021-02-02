@@ -6,6 +6,7 @@
     "start": "node ./bin/www",
     "start:development": "nodemon -r dotenv/config ./bin/www",
     "start:production": "node ./bin/www",
+    "build": "react-scripts build",
     "heroku-postbuild": "cd react-app && npm install && npm run build"
   },
   "dependencies": {
