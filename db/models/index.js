@@ -11,18 +11,18 @@ let sequelize;
 if (config.use_env_variable) {
   //DATABASE_URL = config vars on heroku
   //config is the rest of the configurations, like psql, seederStorage;
-  //sequelize = new Sequelize(process.env[config.use_env_variable], config);
-  sequelize = new Sequelize('postgres://rvuikfovzzjjnr:95763ea576b7ef5569bc2f953b9901348fb14bcc3c17295fecf2531828a66277@ec2-52-54-174-5.compute-1.amazonaws.com:5432/d2ebop2ip064c1', {
-    use_env_variable: 'DATABASE_URL',
-    dialect:"postgres",
-    seederStorage: 'sequelize',
-    ssl: {
-      rejectUnauthorized: false
-    },
-    dialectOptions: {
-      'ssl':true
-    }
-  });
+  sequelize = new Sequelize(process.env[config.use_env_variable], config);
+  // sequelize = new Sequelize('postgres://rvuikfovzzjjnr:95763ea576b7ef5569bc2f953b9901348fb14bcc3c17295fecf2531828a66277@ec2-52-54-174-5.compute-1.amazonaws.com:5432/d2ebop2ip064c1', {
+  //   use_env_variable: 'DATABASE_URL',
+  //   dialect:"postgres",
+  //   seederStorage: 'sequelize',
+  //  dialectOptions: {
+  //    ssl: {
+  //      require: true,
+  //      rejectUnauthorized: false,
+  //    }
+  //   }
+  // });
 } else {
   //We are not running in production, so use the locally defined db credentials
   sequelize = new Sequelize(config.database, config.username, config.password, config );
