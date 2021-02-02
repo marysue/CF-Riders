@@ -62,7 +62,7 @@ This is the backend for the Solo React / Express project.
    The other way is through the heroku cli on your :
 
    ```heroku run -a cfriders sequelize-cli db:migrate
-    heroku run -a cfriders sequelize-cli db:migrate
-   heroku run -a cfriders sequalize-cli db:seed:all
+   heroku run -a cfriders sequelize-cli db:migrate
+   heroku run -a cfriders sequelize-cli db:seed:all
    ```
    You can interact with your database this way as you'd like, but beware that `db:drop` should not be run in the heroku environment.  You can select your database, go to settings, and destroy your database on Heroku.
