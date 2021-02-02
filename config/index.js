@@ -1,5 +1,5 @@
 //for local db calls - remove before deploying  to heroku
-//require('dotenv').config();
+require('dotenv').config();
 
 module.exports = {
 

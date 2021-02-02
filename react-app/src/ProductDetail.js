@@ -1,12 +1,24 @@
 import React, {useState, useEffect} from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import SearchBar from './SearchBar';
 import UserReview from './UserReview';
 import ProductReviewInput from './ProductReviewInput';
 import OrderForm from './OrderForm';
 import ProductHeadline from './ProductHeadline';
 import ProductReviewSignup from './ProductReviewSignup';
-
+import {
+    getSelectedProductInfo,
+    setSelectedProductType,
+    setSelectedProductId,
+    setColorsAvail,
+    setSizesAvail,
+    setFramesAvail,
+    setGendersAvail,
+    setProductName,
+    setProductPhotoURL,
+    setProductPrice,
+    setProductDescription,
+    setInventoryAvail, } from './store/selectedProduct';
 import { baseUrl } from './config';
 
 
@@ -16,10 +28,11 @@ const ProductDetail = (props) => {
    const [productId, ] = useState(productDetail.id);
    const userId = useSelector(state => state.authentication.userId);
    const [,setProductHeadline] = useState();
-   const [productPrice, setProductPrice] = useState();
+   //const [productPrice, setProductPrice] = useState();
+   const productPrice = useSelector(state => state.selectedProduct.price);
    const [, setProductDescription] = useState();
    const [productRating, setProductRating] = useState();
-
+   const dispatch = useDispatch();
    //console.log("Product Detail:  Received props:  ", productDetail);
 
     useEffect(() => {
@@ -58,6 +71,21 @@ const ProductDetail = (props) => {
                 } else {
                     console.log("ProductDetail: Errors fetching avgRating");
                 }
+            })();
+            (async() => {
+                const productInfo = await getSelectedProductInfo(1);
+
+                dispatch(setSelectedProductType(productInfo.type));
+                dispatch(setSelectedProductId(productId));
+                dispatch(setColorsAvail(productInfo.colorsAvail));
+                dispatch(setSizesAvail(productInfo.sizesAvail));
+                dispatch(setFramesAvail(productInfo.framesAvail));
+                dispatch(setGendersAvail(productInfo.gendersAvail));
+                dispatch(setProductName(productInfo.productName));
+                dispatch(setProductPhotoURL(productInfo.photoURL));
+                dispatch(setProductPrice(productInfo.price));
+                dispatch(setProductDescription(productInfo.setProductDescription));
+                dispatch(setInventoryAvail(productInfo.inventoryAvail));
             })();
 
     }

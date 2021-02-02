@@ -4,6 +4,7 @@ import authentication from './authentication';
 import accessories from './accessories';
 import bicycles from './bicycles';
 import clothing from './clothing';
+import selectedProduct from './selectedProduct'
 
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -12,7 +13,8 @@ const reducer = combineReducers({
   authentication,
   clothing,
   bicycles,
-  accessories
+  accessories,
+  selectedProduct
 });
 
 const configureStore = initialState => {

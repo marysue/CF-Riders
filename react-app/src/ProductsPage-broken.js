@@ -17,17 +17,38 @@ import {
     setProductDescription,
     setInventoryAvail, } from './store/selectedProduct';
 
+
 const ProductsPage = (props) => {
     console.log("received props:  ", props);
     const bicycleArr = useSelector(state => state.bicycles.bicycleList);
     const accessoryArr = useSelector(state => state.accessories.accessoryList);
     const clothingArr = useSelector(state => state.clothing.clothingList);
     const [productDetail, setProductDetail] = useState(undefined);
-    const [productId, setProductId] = useState(props.productSelected[0].id);
+    const [productId, setProductId] = useState();
     const dispatch = useDispatch();
     let listItemArr = undefined;
     let listItemType;
+    console.log("ProductId: ", productId);
 
+
+    useEffect( () => {
+        if (productId) {
+            console.log("Found productDetail:  ", productDetail);
+            const productInfo = getSelectedProductInfo(1);
+
+            dispatch(setSelectedProductType(productInfo.type));
+            dispatch(setSelectedProductId(productId));
+            dispatch(setColorsAvail(productInfo.colorsAvail));
+            dispatch(setSizesAvail(productInfo.sizesAvail));
+            dispatch(setFramesAvail(productInfo.framesAvail));
+            dispatch(setGendersAvail(productInfo.gendersAvail));
+            dispatch(setProductName(productInfo.productName));
+            dispatch(setProductPhotoURL(productInfo.photoURL));
+            dispatch(setProductPrice(productInfo.price));
+            dispatch(setProductDescription(productInfo.setProductDescription));
+            dispatch(setInventoryAvail(productInfo.inventoryAvail));
+        }
+    }, [productId])
     switch (props.productSelected) {
         case "Bicycles" : {
              listItemArr = bicycleArr;
@@ -51,48 +72,18 @@ const ProductsPage = (props) => {
         }
     }
 
-    useEffect( () => {
-        if (productId) {
-            console.log("Found productDetail:  ", productDetail);
-            const productInfo = getSelectedProductInfo(1);
 
-            dispatch(setSelectedProductType(productInfo.type));
-            dispatch(setSelectedProductId(productId));
-            dispatch(setColorsAvail(productInfo.colorsAvail));
-            dispatch(setSizesAvail(productInfo.sizesAvail));
-            dispatch(setFramesAvail(productInfo.framesAvail));
-            dispatch(setGendersAvail(productInfo.gendersAvail));
-            dispatch(setProductName(productInfo.productName));
-            dispatch(setProductPhotoURL(productInfo.photoURL));
-            dispatch(setProductPrice(productInfo.price));
-            dispatch(setProductDescription(productInfo.setProductDescription));
-            dispatch(setInventoryAvail(productInfo.inventoryAvail));
-        }
-    }, [productId])
-    const handleClick = async(e) => {
+    const handleClick = (e) => {
         e.preventDefault();
         const targetItem = parseInt(e.target.id);
         const prodDetail = listItemArr.filter( item => {
             const thisItem = parseInt(item.id);
             if (thisItem === targetItem) return item;
         });
-
-        //setProductId(prodDetail[0].id);
-        console.log("Found productDetail:  ", productDetail);
-        const productInfo = await getSelectedProductInfo(1);
-
-        dispatch(setSelectedProductType(productInfo.type));
-        dispatch(setSelectedProductId(productId));
-        dispatch(setColorsAvail(productInfo.colorsAvail));
-        dispatch(setSizesAvail(productInfo.sizesAvail));
-        dispatch(setFramesAvail(productInfo.framesAvail));
-        dispatch(setGendersAvail(productInfo.gendersAvail));
-        dispatch(setProductName(productInfo.productName));
-        dispatch(setProductPhotoURL(productInfo.photoURL));
-        dispatch(setProductPrice(productInfo.price));
-        dispatch(setProductDescription(productInfo.setProductDescription));
-        dispatch(setInventoryAvail(productInfo.inventoryAvail));
+        console.log("Clicked product:  ", prodDetail[0]);
         setProductDetail(prodDetail[0]);
+        //setProductId(prodDetail[0].id);
+
     }
 
 
@@ -100,7 +91,7 @@ const ProductsPage = (props) => {
         console.log("listItemArr is undefined...");
         return
     } else if (productDetail) {
-        console.log("Should be redicrecting to product detail now ...");
+        console.log("Should be redirecting to product detail now ...");
         return ( <Redirect
             to={{
                 pathname: "/productDetail",

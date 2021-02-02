@@ -2,7 +2,7 @@ const express = require('express');
 const db = require('../db/models');
 const { Op } = require("sequelize");
 const { asyncHandler } = require('../utils');
-const { Inventory } = db;
+const { Inventory, Product, ProductType } = db;
 
 const router = express.Router();
 const BICYCLE_TYPE = 1
@@ -52,8 +52,12 @@ router.get(
                         quantity: productList[i].quantity})
                     }
             }
+            const product = await Product.findByPk(req.params.id,
+            { include: ProductType
+            });
+            const productObj = { type: product.ProductType.type, photoURL: product.photoURL, name: product.name, price: product.price, description: product.description, photoURL: product.photoURL}
         res.status(201).json({
-            productInfo
+            productInfo, type: product.ProductType.type, photoURL: product.photoURL, name: product.name, price: product.price, description: product.description
           });
     }));
 
