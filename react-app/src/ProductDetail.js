@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+
 import NavBar from './NavBar';
 import UserReview from './UserReview';
 import ProductReviewInput from './ProductReviewInput';
@@ -30,8 +30,6 @@ const ProductDetail = (props) => {
     const [userReviews, setUserReviews] = useState([]);
     const [productId, ] = useState(productDetail.id);
     const userId = useSelector(state => state.authentication.userId);
-    const history = useHistory();
-    const [enterValue, setEnterValue] = useState('');
 
 
 

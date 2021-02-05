@@ -101,6 +101,7 @@ router.get(
                 const productId_FK = req.body.productId;
                 const userId_FK = req.body.userId;
                 const review = req.body.review;
+                const rating = req.body.rating;
                 const found = await ReviewRating.findAll(
                     { where: {
                         productId_FK: {
@@ -115,7 +116,7 @@ router.get(
                 if (found.length === 0) {
 
                     // console.log("InventoryId: ", inventoryId_FK, " UserId: ", userId_FK, " Quantity: ", quantity);
-                    const reviewObj = await ReviewRating.create({ userId_FK, productId_FK, review });
+                    const reviewObj = await ReviewRating.create({ userId_FK, productId_FK, review, rating });
                     res.status(201).json({status: 'ok'});
                 } else {
                     res.status(400).json({status: 'Review for this product has already been submitted by this user.'});

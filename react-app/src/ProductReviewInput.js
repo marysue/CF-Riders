@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import ProductRating from './ProductRating';
 
 const ProductReviewInput = ({productId}) => {
     const history = useHistory();
@@ -11,8 +10,6 @@ const ProductReviewInput = ({productId}) => {
     const [star3Active, setStar3Active] = useState(false);
     const [star4Active, setStar4Active] = useState(false);
     const [star5Active, setStar5Active] = useState(false);
-    const [noReview, setNoReview] = useState(true);
-
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -98,7 +95,6 @@ const handleClick = (e) => {
 
     return (
         <>
-                { noReview ?
                 <div style={{borderTop: "2px solid grey", display:"inline-block", width:"60%"}}>
                     <div style={{display: "block"}}>
                         <h2>Add your review: </h2>
@@ -132,7 +128,7 @@ const handleClick = (e) => {
                                 <a ><i id="star5" className="far fa-star"></i></a>}
                             </h2>
                             <div style={{borderTop: "2px solid grey", display:"inline-block", width:"60%"}}></div>
-                        <form >
+                        <form style={{display: "flex"}}>
                             <textarea
                             style={{width: "80%"}}
                             value={enterValue}
@@ -146,7 +142,6 @@ const handleClick = (e) => {
                         </form>
                     </div>
                 </div>
-                : null }
         </>
     )
 };
