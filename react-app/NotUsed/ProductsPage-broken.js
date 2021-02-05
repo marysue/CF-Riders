@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Figure from 'react-bootstrap/Figure';
-import SearchBar from './SearchBar';
+import NavBar from './NavBar';
 import { Redirect } from 'react-router-dom';
 import {
     getSelectedProductInfo,
@@ -34,7 +34,7 @@ const ProductsPage = (props) => {
     useEffect( () => {
         if (productId) {
             console.log("Found productDetail:  ", productDetail);
-            const productInfo = getSelectedProductInfo(1);
+            const productInfo = getSelectedProductInfo(productId);
 
             dispatch(setSelectedProductType(productInfo.type));
             dispatch(setSelectedProductId(productId));
@@ -103,7 +103,7 @@ const ProductsPage = (props) => {
         console.log("redrawing productGrid...");
     return (
         <>
-            <SearchBar></SearchBar>
+            <NavBar></NavBar>
             <div className="productGrid" onClick={handleClick}>
                 {listItemArr.map( (item, idx) => {
                     const id = item.id;

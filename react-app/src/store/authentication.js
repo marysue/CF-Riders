@@ -36,7 +36,7 @@ export const loadToken = () => async dispatch => {
 
 
 export const getUserInfo = (emailAddress) => async dispatch => {
-  console.log("getUserInfo received email:  ", emailAddress);
+  // console.log("getUserInfo received email:  ", emailAddress);
     const response = await fetch(`${baseUrl}/users/avatarInfo`, {
        method: 'post',
        headers: { 'Content-Type': 'application/json' },
@@ -101,6 +101,7 @@ export default function reducer(state = {}, action) {
 
     case REMOVE_AVATAR_URL: {
       const newState = { ...state};
+      console.log("Store: authentication: REMOVING AVATAR URL!!!");
       delete newState.avatarURL;
       return newState;
     }

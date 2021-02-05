@@ -1,23 +1,25 @@
 import React from 'react';
-import SearchBar from './SearchBar';
+import {useHistory} from 'react-router-dom';
+import NavBar from './NavBar';
 
 const LogInOrSignUp = ({props}) => {
-
+    const history = useHistory();
     const handleLogin = (e) => {
         e.preventDefault();
-        console.log("Handle login ...");
-        window.location.href = '/users/login';
+        // console.log("Handle login ...");
+        history.push({pathname: '/users/login'});
     }
 
     const handleSignUp = (e) => {
         e.preventDefault();
-        console.log("Handle signIn...");
-        window.location.href = '/users/signup';
+        // console.log("Handle signIn...");
+        history.push({pathname: '/users/signup'});
+
     }
 
     return(
         <>
-            <SearchBar></SearchBar>
+            <NavBar></NavBar>
             <div className="centerDiv" >
                 <form className="loginOrSignUp" >
                     <h3>Already have an account? </h3>

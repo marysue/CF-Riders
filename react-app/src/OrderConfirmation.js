@@ -11,20 +11,20 @@ const OrderConfirmation = () => {
     const price = location.state.price;
     const photoUrl = location.state.photoUrl;
     const name = location.state.name;
-    console.log("Location:  ", location.state);
-    console.log("Size: ", location.state.size, size);
-    console.log("Color: ", location.state.color, color);
-    console.log("Frame: ", location.state.frame, frame);
-    console.log("Type: ", location.state.type, type);
-    console.log("Gender: ", location.state.gender, gender);
-    console.log("Price: ", location.state.price, price);
-    console.log("photoUrl: ", location.state.photoUrl, photoUrl);
-    console.log("name: ", location.state.name, name);
+    // console.log("Location:  ", location.state);
+    // console.log("Size: ", location.state.size, size);
+    // console.log("Color: ", location.state.color, color);
+    // console.log("Frame: ", location.state.frame, frame);
+    // console.log("Type: ", location.state.type, type);
+    // console.log("Gender: ", location.state.gender, gender);
+    // console.log("Price: ", location.state.price, price);
+    // console.log("photoUrl: ", location.state.photoUrl, photoUrl);
+    // console.log("name: ", location.state.name, name);
     return (
         <>
             <h1>Congratulations!  Your order has been placed.</h1>
             <h2>{name}</h2>
-            <img src={photoUrl} style={{height:"20%"}} alt="product image"></img>
+            <img src={photoUrl} style={{height:"20%"}} alt="product"></img>
             <p>{price}</p>
             <div>
 

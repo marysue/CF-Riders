@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import SearchBar from './SearchBar';
+import { useHistory } from 'react-router-dom';
+import NavBar from './NavBar';
 import UserReview from './UserReview';
 import ProductReviewInput from './ProductReviewInput';
 import OrderForm from './OrderForm';
 import ProductHeadline from './ProductHeadline';
 import ProductReviewSignup from './ProductReviewSignup';
+import { setUserId } from './store/authentication';
 import {
     getSelectedProductInfo,
     setSelectedProductType,
@@ -23,22 +25,29 @@ import { baseUrl } from './config';
 
 
 const ProductDetail = (props) => {
-   const [userReviews, setUserReviews] = useState([]);
-   const productDetail = props.location.state.props;
-   const [productId, ] = useState(productDetail.id);
-   const userId = useSelector(state => state.authentication.userId);
-   const [,setProductHeadline] = useState();
-   //const [productPrice, setProductPrice] = useState();
-   const productPrice = useSelector(state => state.selectedProduct.price);
-   const [, setProductDescription] = useState();
-   const [productRating, setProductRating] = useState();
-   const dispatch = useDispatch();
-   //console.log("Product Detail:  Received props:  ", productDetail);
+    const productDetail = props.location.state.props;
+    const [,setProductHeadline] = useState();
+    const [userReviews, setUserReviews] = useState([]);
+    const [productId, ] = useState(productDetail.id);
+    const userId = useSelector(state => state.authentication.userId);
+    const history = useHistory();
+    const [enterValue, setEnterValue] = useState('');
+
+
+
+    //const [productPrice, setProductPrice] = useState();
+    const productPrice = useSelector(state => state.selectedProduct.price);
+    const [productRating, setProductRating] = useState();
+    const dispatch = useDispatch();
+    //console.log("Product Detail:  Received props:  ", productDetail);
 
     useEffect(() => {
 
+        if (!userId) {
+            dispatch(setUserId(window.localStorage.getItem("userId")));
+        }
         if (!productId) {
-            console.log("Product ID is not set ...");
+            console.log("Warning!  ProductDetail: Product ID is not set ...");
         } else {
                 setProductHeadline(productDetail.name);
                 setProductPrice(productDetail.price);
@@ -73,7 +82,7 @@ const ProductDetail = (props) => {
                 }
             })();
             (async() => {
-                const productInfo = await getSelectedProductInfo(1);
+                const productInfo = await getSelectedProductInfo(productId);
 
                 dispatch(setSelectedProductType(productInfo.type));
                 dispatch(setSelectedProductId(productId));
@@ -84,38 +93,42 @@ const ProductDetail = (props) => {
                 dispatch(setProductName(productInfo.productName));
                 dispatch(setProductPhotoURL(productInfo.photoURL));
                 dispatch(setProductPrice(productInfo.price));
-                dispatch(setProductDescription(productInfo.setProductDescription));
+                dispatch(setProductDescription(productInfo.productDescription));
                 dispatch(setInventoryAvail(productInfo.inventoryAvail));
             })();
 
     }
-      }, [productId, productDetail.description, productDetail.name, productDetail.price]);
+      }, [dispatch, userId, productId, productDetail.description, productDetail.name, productDetail.price]);
 
 
     return (
         <div>
-            <SearchBar></SearchBar>
-            <div style={{borderColor: "2px solid red", display:"flex", height: 'auto'}}>
+            <NavBar></NavBar>
+            <div style={{display:"flex", height: 'auto'}}>
                 <div className="productDetail" style={{width:"60%"}} >
                     {/* <h2 style={{color: "white"}}>{productDetail.name}</h2> */}
                     <img src={productDetail.photoURL} style={{height: "400px"}} alt="product detail"></img>
 
                     {/* <p style={{color:"white"}}>{productDetail.description}</p> */}
-                    <p>Product Reviews:  </p>
+                    <h2>Product Reviews:  </h2>
                     { userReviews.map( (review, idx) => <UserReview key={idx} productId={props.id} review={review}></UserReview>) }
 
                 </div>
                 <div className="productOrder" style={{display:"inline-block",width:"30%"}}>
                     <ProductHeadline productDetail={productDetail} productRating={productRating} productPrice={productPrice}></ProductHeadline>
-                    <OrderForm productDetail={productDetail}></OrderForm>
 
-                    {/* <ProductDescription></ProductDescription> */}
+                    { userId ?
+                    <OrderForm productDetail={productDetail}></OrderForm> : <div><b>To order a product, please log in.</b></div>}
+
+
                 </div>
 
             </div>
-            { userId ?
+            {/* { userId ?
             <ProductReviewInput productId={productId}></ProductReviewInput>
-            : <ProductReviewSignup></ProductReviewSignup>}
+            : <ProductReviewSignup></ProductReviewSignup>} */}
+            { userId ? <ProductReviewInput productId={productId}></ProductReviewInput>
+                     : <ProductReviewSignup></ProductReviewSignup> }
         </div>
     )
 }

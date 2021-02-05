@@ -51,15 +51,15 @@ const ProductGrid = (props) => {
     {
         const arrIdx = e.target.id.split("-")[1];
         setProductDetail(listItemArr[arrIdx]);
-        console.log("Clicked on e.target.id: ", e.target.id);
-        console.log("Redirect to product detail page for product:  ", productDetail); // listItemArr[arrIdx]);
+        // console.log("Clicked on e.target.id: ", e.target.id);
+        // console.log("Redirect to product detail page for product:  ", productDetail); // listItemArr[arrIdx]);
     }
 
     if (listItemArr === undefined) {
         return null
     }
     if (productDetail) {
-        console.log("Calling ProductDetail with props:  ", productDetail);
+        // console.log("Calling ProductDetail with props:  ", productDetail);
        // return <ProductDetail props={productDetail}></ProductDetail>
        return ( <Redirect
             to={{

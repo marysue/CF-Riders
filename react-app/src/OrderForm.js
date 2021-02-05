@@ -11,9 +11,9 @@ const OrderForm = ({productDetail}) => {
     const [colors, setColors] = useState([]);
     const [frames, setFrames] = useState([]);
     // const [quantity, setQuantity] = useState(0);
-    const [type, setType] = useState();
-    const [productId, setProductId] = useState(productDetail.id);
-    const [inventory, setInventory] = useState([]);
+    const [, setType] = useState();
+    const [productId, ] = useState(productDetail.id);
+    const [, setInventory] = useState([]);
     const [values, setValues] = useState( {
         gender: '',
         size: '',
@@ -24,24 +24,24 @@ const OrderForm = ({productDetail}) => {
         photoUrl: '',
     });
     const history = useHistory();
-    console.log("ProductDetails:  ", productDetail);
-    console.log("Product Id: ", productId);
+    // console.log("ProductDetails:  ", productDetail);
+    // console.log("Product Id: ", productId);
    //console.log("Inside OrderForm: productDetail: ", productDetail);
    //console.log("values: ", values);
    //console.log("values: gender: ", values.gender, " size: ", values.size, " color: ", values.color, " frame: ", values.frame);
 
     useEffect ( () => {
             (async () => {
-                console.log("Inside async...")
+                // console.log("Inside async...")
                 try {
-                    console.log("Fetching inventory for product:", productDetail.id);
+                    // console.log("Fetching inventory for product:", productDetail.id);
                     const response = await fetch(`${baseUrl}/inventory/${productDetail.id}`, {
                             method: 'get',
                             headers: { 'Content-Type': 'application/json' },
                         });
 
                     if (response.ok) {
-                        console.log("Inside response.ok:  ", response.ok)
+                        // console.log("Inside response.ok:  ", response.ok)
                         const respArr = await response.json();
                         const productInfo = respArr.productInfo;
                         let tmpSizes = [];
@@ -51,7 +51,7 @@ const OrderForm = ({productDetail}) => {
                         let tmpInventory = [];
                         if (productInfo.length > 0 && productInfo[0].frame) {
                             //we have a bicycle
-                            console.log("We have a bicycle...");
+                            // console.log("We have a bicycle...");
                             setType('Bicycle');
 
                             for (let i = 0; i < productInfo.length; i++) {
@@ -78,11 +78,11 @@ const OrderForm = ({productDetail}) => {
                         for (let i = 0; i < productInfo.length; i++) {
                             tmpInventory.push(productInfo[i]);
                         }
-                        console.log("tmpInventory:  ", tmpInventory);
-                        console.log("tmpSizes: ", tmpSizes);
-                        console.log("tmpGenders: ", tmpGenders);
-                        console.log("tmpColors: ", tmpColors);
-                        console.log("tmpFrames: ", tmpFrames);
+                        // console.log("tmpInventory:  ", tmpInventory);
+                        // console.log("tmpSizes: ", tmpSizes);
+                        // console.log("tmpGenders: ", tmpGenders);
+                        // console.log("tmpColors: ", tmpColors);
+                        // console.log("tmpFrames: ", tmpFrames);
                         setInventory(tmpInventory);
                         setSizes(tmpSizes);
                         setGenders(tmpGenders);
@@ -99,7 +99,7 @@ const OrderForm = ({productDetail}) => {
                 }
             })();
 
-    }, [])
+    }, [productDetail.id])
 
     const objInArray = (obj, arr) => {
 
@@ -114,16 +114,16 @@ const OrderForm = ({productDetail}) => {
     // }
 
     const handleChange = (prop) => (newValue) => {
-        console.log("handleChange: props: ", prop);
-       console.log("handleChange: changing: ", prop, ":",  newValue.value);
+    //     console.log("handleChange: props: ", prop);
+    //    console.log("handleChange: changing: ", prop, ":",  newValue.value);
        setValues({...values, [prop]: newValue.value });
 
     }
 
-    const handleInputChange = (inputValue, actionMeta) => {
-        console.log("handleInputChange: inputValue: ", inputValue);
-        console.log(`action: ${actionMeta.action}`);
-    }
+    // const handleInputChange = (inputValue, actionMeta) => {
+    //     console.log("handleInputChange: inputValue: ", inputValue);
+    //     console.log(`action: ${actionMeta.action}`);
+    // }
     const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -144,10 +144,10 @@ const OrderForm = ({productDetail}) => {
     }
 
     if (!productId) {
-        console.log("No product id ... not rendering!");
+        // console.log("No product id ... not rendering!");
         return null
     } else {
-        console.log("productId before render: ", productId, " and type: ", type);
+        // console.log("productId before render: ", productId, " and type: ", type);
     return (
         <form onSubmit={handleSubmit} style={{color: "black"}}>
             <div style={{marginTop: "10px"}}>

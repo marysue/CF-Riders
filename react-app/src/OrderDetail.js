@@ -1,10 +1,10 @@
 import React from 'react';
-import SearchBar from './SearchBar';
+import NavBar from './NavBar';
 
 const OrderDetail = (props) => {
     return (
         <div>
-            <SearchBar></SearchBar>
+            <NavBar></NavBar>
             <h1>OrderDetail ... should be a protected route</h1>
         </div>
     );

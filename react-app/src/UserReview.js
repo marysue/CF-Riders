@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 
-const UserReview = ({productId, review}) => {
+const UserReview = ({review}) => {
     //const [productId, setProductId] = useState(prodId);
     const [stars, setStars] = useState([]);
     useEffect ( () => {

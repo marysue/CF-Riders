@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import SearchBar from './SearchBar';
+import NavBar from './NavBar';
 import { baseUrl } from './config';
 import { TOKEN_KEY, setUserName, setAvatarURL, setToken, setUserId } from './store/authentication';
 
@@ -16,21 +16,25 @@ const LoginPanel = (props) => {
         setEmail("demouser@demouser.com");
         setPassword("password");
         e.preventDefault();
+
         const response = await fetch(`${baseUrl}/users/login`, {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ emailAddress: "demouser@demouser.com", password: "password" }),
           });
-          console.log("Sent login request with user:  demouser@demouser.com, and password:  password");
-          console.log("response is:  ", response);
+
+        //   console.log("Sent login request with user:  demouser@demouser.com, and password:  password");
+        //   console.log("response is:  ", response);
+
           if (response.ok) {
-              const { token, user } = await response.json();
-            window.localStorage.setItem(TOKEN_KEY, token);
-            dispatch(setToken(token));
-           dispatch(setUserName(user.name.split(" ")[0]));
-           dispatch(setAvatarURL(user.avatarURL));
-           dispatch(setUserId(user.id));
-            setUserToken(token);
+                const { token, user } = await response.json();
+                window.localStorage.setItem(TOKEN_KEY, token);
+                window.localStorage.setItem("userId", user.id);
+                dispatch(setToken(token));
+                dispatch(setUserName(user.name.split(" ")[0]));
+                dispatch(setAvatarURL(user.avatarURL));
+                dispatch(setUserId(user.id));
+                setUserToken(token);
           }
     }
 
@@ -44,12 +48,12 @@ const LoginPanel = (props) => {
           console.log("Sent login request with user: ", email, " and password: ", password);
           console.log("response is:  ", response);
           if (response.ok) {
-              const { token, user } = await response.json();
+            const { token, user } = await response.json();
             window.localStorage.setItem(TOKEN_KEY, token);
             dispatch(setToken(token));
-           dispatch(setUserName(user.name.split(" ")[0]));
-           dispatch(setAvatarURL(user.avatarURL));
-           dispatch(setUserId(user.id));
+            dispatch(setUserName(user.name.split(" ")[0]));
+            dispatch(setAvatarURL(user.avatarURL));
+            dispatch(setUserId(user.id));
             setUserToken(token);
           }
     }
@@ -68,7 +72,7 @@ const LoginPanel = (props) => {
 
     return (
         <div>
-            <SearchBar></SearchBar>
+            <NavBar></NavBar>
             <form className="loginForm">
                 <div className="loginInput">
                     <div >

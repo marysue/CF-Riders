@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';  //set font-size to medium or large
 import Badge from '@material-ui/core/Badge';
 import HomeIcon from '@material-ui/icons/Home';
 import Container from '@material-ui/core/Container';
 import { baseUrl } from './config';
+import { setUserId } from './store/authentication';
 
 // import { createMuiTheme } from '@material-ui/core/styles';
 // import { ThemeProvider } from '@material-ui/styles';
@@ -13,7 +15,7 @@ import { baseUrl } from './config';
 import { TOKEN_KEY, removeToken, removeAvatarURL, removeUserName, removeUserEmail, removeUserId } from './store/authentication';
 
 
-const SearchBar = (props) => {
+const NavBar = () => {
     const dispatch = useDispatch();
     let searchString = '';
     // const name = useSelector(state => state.authentication.name);
@@ -22,20 +24,11 @@ const SearchBar = (props) => {
     const userId = useSelector(state => state.authentication.userId);
     const name = useSelector(state => state.authentication.name);
     const [badgeCount, setBadgeCount] = useState(null);
-
-
-    useEffect( () => {
-        if (userId) {
-            getBadgeCount();
-        } else {
-            setBadgeCount(null);
-        }
-        console.log("Getting badge count.");
-    }, [userId] )
+    const history = useHistory();
 
     const getBadgeCount = async() => {
         if (userId) {
-            console.log("UserId:  ", userId);
+            // console.log("UserId:  ", userId);
             const response = await fetch(`${baseUrl}/carts/cartItems/${userId}`, {
                 method: 'get',
                 headers: { 'Content-Type': 'application/json' },
@@ -45,9 +38,9 @@ const SearchBar = (props) => {
 
                 const resp = await response.json();
                 const cartItems = resp.cartItems;
-                console.log("Got cartItems:  ", cartItems.cartItems);
+                // console.log("Got cartItems:  ", cartItems.cartItems);
                 if (cartItems > 0) {
-                    console.log("Badge count:  ", cartItems);
+                    // console.log("Badge count:  ", cartItems);
                     setBadgeCount(cartItems);
                     return cartItems;
                 } else {
@@ -61,24 +54,38 @@ const SearchBar = (props) => {
             return null;
         }
 };
+    useEffect( () => {
+        if (!avatarURL) {
+        }
+        if (!userId) {
+            dispatch(setUserId(window.localStorage.getItem("userId")));
+        }
+        if (userId) {
+            getBadgeCount();
+        } else {
+            setBadgeCount(null);
+        }
+        // console.log("Getting badge count.");
+        //eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [userId, avatarURL] )
+
+
 
     const handleSignIn = (e) => {
         if (!token) {
             e.preventDefault();
-            console.log("Need to redirect to signin page...");
-            //return <Redirect to='/users/login' />;
-            //we are rendering ... and rendering React expects in the
-            //main return statement.  use window.location here
-            // window.location.href ='/users/login';
-            window.location.href = '/users/logInOrSignUp';
+            history.push('/users/logInOrSignUp');
         } else {
+            alert("NavBar: Line 79:  SIGN IN IS LOGGING OFF!!!");
+            console.log("************SIGN IN IS LOGGING OFF!!!*****************");
             dispatch(removeToken());
             dispatch(removeAvatarURL());
             dispatch(removeUserName());
             dispatch(removeUserEmail());
             dispatch(removeUserId());
             window.localStorage.removeItem(TOKEN_KEY);
-
+            window.localStorage.removeItem("userId");
+            history.push('/');
         }
     }
 
@@ -95,7 +102,7 @@ const SearchBar = (props) => {
     const handleHomeClick = (e) => {
         e.preventDefault();
         console.log("Clicked home button...");
-        window.location.href ='/';
+        history.push('/');
     }
 
     return (
@@ -128,4 +135,4 @@ const SearchBar = (props) => {
     )
 }
 
-export default SearchBar;
+export default NavBar;

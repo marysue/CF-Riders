@@ -136,7 +136,7 @@ router.post(
         const inventoryId_FK = req.body.inventoryId;
         const userId_FK = req.body.userId;
         const quantity = req.body.quantity;
-        console.log("InventoryId: ", inventoryId_FK, " UserId: ", userId_FK, " Quantity: ", quantity);
+        // console.log("InventoryId: ", inventoryId_FK, " UserId: ", userId_FK, " Quantity: ", quantity);
         const cart = await Cart.create({ userId_FK, inventoryId_FK, quantity });
         res.status(201).json({status: 'ok'});
     }));

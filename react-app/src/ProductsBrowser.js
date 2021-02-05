@@ -1,129 +1,69 @@
 import React, { useState, useEffect} from 'react';
-import { useDispatch } from 'react-redux';
-import SearchBar from './SearchBar';
+import { useSelector} from 'react-redux';
+import NavBar from './NavBar';
 import ProductGrid from './ProductGrid';
-import { baseUrl } from './config';
-import { setBicycleList, setBicyclesLoaded } from './store/bicycles';
-import { setClothingList, setClothingLoaded } from './store/clothing';
-import { setAccessoryList, setAccessoriesLoaded } from './store/accessories';
 import Figure from 'react-bootstrap/Figure'
 import ProductsPage from './ProductsPage';
 
-const ProductsBrowser = (props) => {
-    const dispatch = useDispatch();
+
+
+const ProductsBrowser = () => {
+
+
+    //const {accessoriesList, clothingList, bicyclesList } = useContext(ProductListsContext);
+
 
 
     // const accessoriesLoaded = useSelector(state => state.accessories.accessoriesLoaded);
     // const bicyclesLoaded = useSelector(state=> state.bicycles.bicyclesLoaded);
     // const clothingLoaded = useSelector(state=> state.clothing.clothingLoaded);
-    const [loaded, setLoaded] = useState(false);
-    const [bicycleURL, setBicycleURL] = useState('');
-    const [accessoryURL, setAccessoryURL] = useState('');
-    const [clothingURL, setClothingURL] = useState('');
     const [productsSelected, setProductsSelected] = useState('');
+    const [featuredBicycleURL, setFeaturedBicycleURL] = useState();
+    const [featuredClothingURL, setFeaturedClothingURL] = useState();
+    const [featuredAccessoryURL, setFeaturedAccessoryURL] = useState();
 
+    const accessoriesList = useSelector(state => state.accessories.accessoryList);
+    const bicyclesList = useSelector(state => state.bicycles.bicycleList);
+    const clothingList = useSelector(state => state.clothing.clothingList);
 
-    useEffect( () => {
-        async function fetchAccessories() {
-            try {
-                const response = await fetch(`${baseUrl}/accessories/accessoriesList`, {
-                    method: 'get',
-                    headers: { 'Content-Type': 'application/json' },
-                });
-                if (response.ok) {
-                    const { accessoriesList } = await response.json();
-                    dispatch(setAccessoryList(accessoriesList));
-                    dispatch(setAccessoriesLoaded(true));
-                    setAccessoryURL(accessoriesList[0].photoURL);
-                    //console.log("Fetch returned Accessories with AccessoryPhotoURL:  ", accessoryURL);
-                } else {
-                    throw response.status;
-                }
-            } catch (e) {
-                console.log("Accessory fetch error: ", e);
-            }
-
+    // console.log("Products Browser:  ", accessoriesList);
+    useEffect ( () => {
+        if (bicyclesList) {
+            setFeaturedBicycleURL(bicyclesList[0].photoURL);
         }
-        fetchAccessories();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[]);
-    useEffect( () => {
-        async function fetchBicycles() {
-            try {
-                const response = await fetch(`${baseUrl}/bicycles/bicyclesList`, {
-                    method: 'get',
-                    headers: { 'Content-Type': 'application/json' },
-                });
-                if (response.ok) {
-                    const { bicyclesList } = await response.json();
-                    dispatch(setBicycleList(bicyclesList));
-                    dispatch(setBicyclesLoaded(true));
-                    setBicycleURL(bicyclesList[0].photoURL);
-                    //console.log("Fetch returned Bicycles with BicycleURL:  ", bicycleURL);
-                } else {
-                    throw response.status;
-                }
-            } catch (e) {
-                console.log("Bicycle fetch error: ", e);
-            }
+        if (accessoriesList) {
+            setFeaturedAccessoryURL(accessoriesList[0].photoURL);
         }
-        fetchBicycles();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[]);
-    useEffect( () => {
-        async function fetchClothing() {
-            try {
-                const response = await fetch(`${baseUrl}/clothing/clothingList`, {
-                    method: 'get',
-                    headers: { 'Content-Type': 'application/json' },
-                });
-                if (response.ok) {
-                    const { clothingList } = await response.json();
-                    dispatch(setClothingList(clothingList));
-                    dispatch(setClothingLoaded(true));
-                    setClothingURL(clothingList[0].photoURL);
-                    //console.log("Fetch returned Clothing with clothingURL:  ", clothingURL);
-                } else {
-                    throw response.status;
-                }
-            } catch (e) {
-                console.log("clothing fetch error:  ", e);
-            }
-        }
-        fetchClothing();
-        setLoaded(true);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[]);
-
-        const handleClick = (e) => {
-            console.log("Clicked on : ", e.target.id);
-            setProductsSelected(e.target.id);
+        if (clothingList) {
+            setFeaturedClothingURL(clothingList[0].photoURL);
         }
 
+    }, [bicyclesList, accessoriesList, clothingList]);
 
-    if (!loaded) {
-        return null
+    const handleClick = (e) => {
+        setProductsSelected(e.target.id);
     }
 
     if (productsSelected) {
-        console.log("Products selected:  ", productsSelected);
-        return <ProductsPage productSelected={productsSelected}></ProductsPage>
+        // console.log("Products selected:  ", productsSelected);
+        return <ProductsPage productsSelected={productsSelected}></ProductsPage>
     } else {
+        // console.log("ProductsBrowser: ", bicyclesList);
         return (
             <>
-                <SearchBar></SearchBar>
+                <NavBar></NavBar>
                 <div className="productBanner">
                     <div className="photoSpread">
                         <div className="productPhoto" onClick={handleClick} >
-                        <img id="Bicycles" src={bicycleURL} alt="Bicycle"></img>
-                        <Figure.Caption>Bicycles</Figure.Caption>
+                            <img id="Bicycles" src={featuredBicycleURL} alt="Bicycle"></img>
+                            <Figure.Caption>Bicycles</Figure.Caption>
                         </div>
                         <div className="productPhoto" onClick={handleClick}>
-                            <img id="Clothing" src={clothingURL} alt="Clothing"></img>
+                            <img id="Clothing" src={featuredClothingURL} alt="Clothing"></img>
                             <Figure.Caption>Clothing</Figure.Caption>
                         </div>
                         <div className="productPhoto" onClick={handleClick}>
-                            <img id="Accessories" src={accessoryURL} alt="Accessory"></img>
+                            <img id="Accessories" src={featuredAccessoryURL} alt="Accessory"></img>
                             <Figure.Caption>Accessories</Figure.Caption>
                         </div>
                     </div>

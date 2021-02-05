@@ -7,6 +7,30 @@ const { ReviewRating, User } = db;
 const router = express.Router();
 
 router.get(
+    "/reviews/:userId/:productId",
+    asyncHandler
+    (async (req, res) => {
+        const productId_FK = req.params.productId;
+        const userId_FK = req.params.userId;
+        console.log("Checking for productId_FK: ", productId_FK, " userId_FK: ", userId_FK);
+        const found = await ReviewRating.findAll(
+            { where: {
+                productId_FK: {
+                    [Op.eq]: productId_FK,
+                },
+                userId_FK: {
+                    [Op.eq]: userId_FK,
+
+            }
+            }});
+        console.log("Found:  ", found);
+        if (found.length === 0) {
+            res.status(201).json({status: 'ok'});
+        } else {
+            res.status(400).json({status: 'Review for this product has already been submitted by this user.'});
+    }}));
+
+router.get(
     "/rating/:id",
     asyncHandler
     (async (req, res) => {
@@ -68,4 +92,34 @@ router.get(
                 reviews: reviewArr
               });
         }));
+
+        router.post(
+            "/reviews/:productId",
+            asyncHandler
+            (async (req, res) => {
+                console.log("Received:  ", req.body.productId, " and req: ", req.body);
+                const productId_FK = req.body.productId;
+                const userId_FK = req.body.userId;
+                const review = req.body.review;
+                const found = await ReviewRating.findAll(
+                    { where: {
+                        productId_FK: {
+                            [Op.eq]: productId_FK,
+                        },
+                        userId_FK: {
+                            [Op.eq]: userId_FK,
+
+                    }
+                    }});
+                    console.log("found:  ", found);
+                if (found.length === 0) {
+
+                    // console.log("InventoryId: ", inventoryId_FK, " UserId: ", userId_FK, " Quantity: ", quantity);
+                    const reviewObj = await ReviewRating.create({ userId_FK, productId_FK, review });
+                    res.status(201).json({status: 'ok'});
+                } else {
+                    res.status(400).json({status: 'Review for this product has already been submitted by this user.'});
+            }}));
+
+
     module.exports = router;

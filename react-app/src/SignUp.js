@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
-import SearchBar from './SearchBar';
+import NavBar from './NavBar';
 import { baseUrl } from './config';
-import { TOKEN_KEY, setUserName, setAvatarURL, setToken } from './store/authentication';
+import { TOKEN_KEY, setUserName, setAvatarURL, setToken, setUserId } from './store/authentication';
 import { Redirect } from 'react-router-dom';
 
 const SignUp = (props) => {
@@ -23,13 +23,14 @@ const SignUp = (props) => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, emailAddress, password, confirmPassword, avatarURL }),
           });
-          console.log("Sent signup request with user: ", emailAddress, " and password: ", password);
+        //   console.log("Sent signup request with user: ", emailAddress, " and password: ", password);
           if (response.ok) {
             const { token, user } = await response.json();
             window.localStorage.setItem(TOKEN_KEY, token);
             dispatch(setToken(token));
-            console.log("User name:  ", user.name);
+            // console.log("User name:  ", user.name);
             dispatch(setUserName(user.name.split(" ")[0]));
+            dispatch(setUserId(user.id));
             if (avatarURL === '') {
                 dispatch(setAvatarURL(defaultAvatar));
             } else {
@@ -65,7 +66,7 @@ const SignUp = (props) => {
 
     return (
         <div>
-            <SearchBar></SearchBar>
+            <NavBar></NavBar>
             <form className="signUpForm" onSubmit={handleSubmit}>
                 <div className="signUpInput">
 	                <div className="signUpLabel">
