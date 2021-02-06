@@ -1,39 +1,69 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { baseUrl } from './config';
 
-const ProductReviewInput = ({productId}) => {
+const ProductReviewInput = ({productDetail, productId}) => {
     const history = useHistory();
-    const [enterValue, setEnterValue] = useState('');
+    const [review, setReview] = useState('');
     const placeHolderMsg = 'Tell us what you like about this product ...';
     const [star1Active, setStar1Active] = useState(false);
     const [star2Active, setStar2Active] = useState(false);
     const [star3Active, setStar3Active] = useState(false);
     const [star4Active, setStar4Active] = useState(false);
     const [star5Active, setStar5Active] = useState(false);
+    const [errors, setErrors] = useState();
+    const [rating, setRating] = useState(0);
+    const userId = useSelector(state => state.authentication.userId);
 
-    const handleSubmit = (e) => {
+    const handleSubmitReview = (e) => {
         e.preventDefault();
         console.log("Handle updateProductReview ...");
         console.log("The next state may be problematic. Not sure about the next line passing state...");
-        console.log("Entered:  ", enterValue);
-        //(async () => {
+        console.log("Entered:  ", review);
+        console.log("productId:  ", productId);
+        (async() => {
+            const response = await fetch(`${baseUrl}/reviewsRatings/reviews/${productId}`, {
+              method: 'post',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ userId, rating, review }),
+            });
+            if (response.ok) {
+                console.log("successfully posted review.")
+                setErrors('');
+                setReview('');
+                setRating(0);
+                setStar1Active(false);
+                setStar2Active(false);
+                setStar3Active(false);
+                setStar4Active(false);
+                setStar5Active(false);
+                history.push({ pathname: "/productDetail", state: {props: productDetail}});
+              } else {
+                  const res = await response.json();
+                  setErrors(res);
+                  console.log("ProductReviewInput: Failed to post review ...");
+              }
+          })();
+        //   return ( <Redirect
+        //     to={{
+        //         pathname: "/productDetail",
+        //        state: { props: productDetail}
+        //     }}
+        //     />)
 
-        // const postReview = await postReview();
-
-        // } )();
-        history.push({ pathname: "/productDetail", state: {props: productId}});
     }
 
     const updateReview = (e) => {
-        setEnterValue(e.target.value);
+        setReview(e.target.value);
     };
 
 
     // const updateReview = (e) => {
-    //     setEnterValue(e.target.value);
+    //     setReview(e.target.value);
     // };
 
-const handleClick = (e) => {
+const handleStarClick = (e) => {
       // console.log("Clicked on star: ", e.target.id);
       let rating = 0;
       switch (e.target.id) {
@@ -87,9 +117,7 @@ const handleClick = (e) => {
               }
           default :
           }
-          console.log("Rating:  ", rating);
-          (async() => {
-          })();
+          setRating(rating);
 
   };
 
@@ -100,7 +128,7 @@ const handleClick = (e) => {
                         <h2>Add your review: </h2>
 
                         <h4>Rate this product:</h4>
-                            <h2 onClick={handleClick} >
+                            <h2 onClick={handleStarClick} >
                             { star1Active ?
                                 // eslint-disable-next-line
                                 <a ><i id="star1"className="fas fa-star"></i></a> :
@@ -128,17 +156,18 @@ const handleClick = (e) => {
                                 <a ><i id="star5" className="far fa-star"></i></a>}
                             </h2>
                             <div style={{borderTop: "2px solid grey", display:"inline-block", width:"60%"}}></div>
+                        { errors ? <div style={{width:"81%", backgroundColor:"red", color:"white"}}>{errors}</div> : null }
                         <form style={{display: "flex"}}>
                             <textarea
                             style={{width: "80%"}}
-                            value={enterValue}
+                            value={review}
                             placeholder={placeHolderMsg}
                             id="review"
                             name="review"
                             rows="10"
                             onChange={updateReview}></textarea>
 
-                            <button style={{marginLeft: "20px"}}id="Submit" onClick={handleSubmit}>Submit</button>
+                            <button style={{marginLeft: "20px"}}id="Submit" onClick={handleSubmitReview}>Submit</button>
                         </form>
                     </div>
                 </div>

@@ -97,8 +97,8 @@ router.get(
             "/reviews/:productId",
             asyncHandler
             (async (req, res) => {
-                console.log("Received:  ", req.body.productId, " and req: ", req.body);
-                const productId_FK = req.body.productId;
+                console.log("Received:  ", req.params.productId, " and req: ", req.body);
+                const productId_FK = parseInt(req.params.productId);
                 const userId_FK = req.body.userId;
                 const review = req.body.review;
                 const rating = req.body.rating;
@@ -113,8 +113,15 @@ router.get(
                     }
                     }});
                     console.log("found:  ", found);
-                if (found.length === 0) {
+                if (!userId_FK || !productId_FK || !rating || !review) {
+                    let msg = '';
+                    !userId_FK ? msg += ' -userId missing ' : null;
+                    !productId_FK? msg += ' -productId missing '  : null;
+                    !rating? msg += ' -rating missing' : null;
+                    !review? msg += ' -review missing' : null;
 
+                    res.status(400).json(msg);
+                } else if (found.length === 0) {
                     // console.log("InventoryId: ", inventoryId_FK, " UserId: ", userId_FK, " Quantity: ", quantity);
                     const reviewObj = await ReviewRating.create({ userId_FK, productId_FK, review, rating });
                     res.status(201).json({status: 'ok'});

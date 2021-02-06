@@ -1,7 +1,9 @@
 import React, {useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import Select from 'react-select'
 import { baseUrl } from './config';
 import { useHistory } from 'react-router-dom';
+
 
 
 const OrderForm = ({productDetail}) => {
@@ -13,7 +15,7 @@ const OrderForm = ({productDetail}) => {
     // const [quantity, setQuantity] = useState(0);
     const [, setType] = useState();
     const [productId, ] = useState(productDetail.id);
-    const [, setInventory] = useState([]);
+    const [inventory, setInventory] = useState([]);
     const [values, setValues] = useState( {
         gender: '',
         size: '',
@@ -23,25 +25,19 @@ const OrderForm = ({productDetail}) => {
         price: '',
         photoUrl: '',
     });
+    const userId = useSelector(state => state.authentication.userId);
     const history = useHistory();
-    // console.log("ProductDetails:  ", productDetail);
-    // console.log("Product Id: ", productId);
-   //console.log("Inside OrderForm: productDetail: ", productDetail);
-   //console.log("values: ", values);
-   //console.log("values: gender: ", values.gender, " size: ", values.size, " color: ", values.color, " frame: ", values.frame);
 
     useEffect ( () => {
             (async () => {
-                // console.log("Inside async...")
+
                 try {
-                    // console.log("Fetching inventory for product:", productDetail.id);
                     const response = await fetch(`${baseUrl}/inventory/${productDetail.id}`, {
                             method: 'get',
                             headers: { 'Content-Type': 'application/json' },
                         });
 
                     if (response.ok) {
-                        // console.log("Inside response.ok:  ", response.ok)
                         const respArr = await response.json();
                         const productInfo = respArr.productInfo;
                         let tmpSizes = [];
@@ -49,48 +45,48 @@ const OrderForm = ({productDetail}) => {
                         let tmpGenders = [];
                         let tmpFrames = [];
                         let tmpInventory = [];
-                        if (productInfo.length > 0 && productInfo[0].frame) {
-                            //we have a bicycle
-                            // console.log("We have a bicycle...");
-                            setType('Bicycle');
+                        console.log("ProductInfo.length:  ", productInfo.length);
 
+                        if (productInfo.length > 0 ) {
+                            let sz, clr, fr, gdr;
                             for (let i = 0; i < productInfo.length; i++) {
-                                const sz = { value: productInfo[i].size, label: productInfo[i].size };
-                                const clr = { value: productInfo[i].color, label: productInfo[i].color };
-                                const fr = { value: productInfo[i].frame, label: productInfo[i].frame };
-                                const gdr = { value: productInfo[i].gender, label: productInfo[i].gender };
-                                if (!objInArray(sz, tmpSizes))   {tmpSizes.push(sz)}
-                                if (!objInArray(clr, tmpColors)) {tmpColors.push(clr) }
-                                if (!objInArray(fr, tmpFrames)) { tmpFrames.push(fr) }
-                                if (!objInArray(gdr, tmpGenders)) { tmpGenders.push(gdr) }
-                            }
-                        } else if (productInfo.length > 0 && productInfo[0].gender) {
-                            //we have clothing
-
-                            for (let i = 0; i < productInfo.length; i++) {
-                                const gdr = { value: productInfo[i].gender, label: productInfo[i].gender }
-                                const sz = { value: productInfo[i].size, label: productInfo[i].size }
-                                if (!objInArray(gdr,tmpGenders)) { tmpGenders.push(gdr) }
-                                if (!objInArray(sz,tmpSizes)) { tmpSizes.push(sz) }
+                                console.log("ProductInfo[", i, "]: ", productInfo[i]);
+                                if (productInfo[i].size) { sz = { value: productInfo[i].size, label: productInfo[i].size }};
+                                if (productInfo[i].color) { clr = { value: productInfo[i].color, label: productInfo[i].color }};
+                                if (productInfo[i].frame) { fr = { value: productInfo[i].frame, label: productInfo[i].frame }};
+                                if (productInfo[i].gender) { gdr = { value: productInfo[i].gender, label: productInfo[i].gender }};
+                                console.log("sz: ", sz, " clr: ", clr, " fr: ", fr, " gdr: ", gdr);
+                                if  ((productInfo[i].size) && (!objInArray(sz, tmpSizes))){tmpSizes.push(sz)}
+                                if  ((productInfo[i].color) && (!objInArray(clr, tmpColors))) {tmpColors.push(clr) }
+                                if  ((productInfo[i].frame) && (!objInArray(fr, tmpFrames))) { tmpFrames.push(fr) }
+                                if  ((productInfo[i].gender) && (!objInArray(gdr, tmpGenders))) { tmpGenders.push(gdr) }
                             }
                         }
+                        // } else if (productInfo.length > 0 && productInfo[0].gender) {
+                        //     //we have clothing
+                        //     for (let i = 0; i < productInfo.length; i++) {
+                        //         const gdr = { value: productInfo[i].gender, label: productInfo[i].gender }
+                        //         const sz = { value: productInfo[i].size, label: productInfo[i].size }
+                        //         if (!objInArray(gdr,tmpGenders)) { tmpGenders.push(gdr) }
+                        //         if (!objInArray(sz,tmpSizes)) { tmpSizes.push(sz) }
+                        //     }
+                        // }
                         //set inventory to match with chosen values
                         for (let i = 0; i < productInfo.length; i++) {
                             tmpInventory.push(productInfo[i]);
                         }
-                        // console.log("tmpInventory:  ", tmpInventory);
-                        // console.log("tmpSizes: ", tmpSizes);
-                        // console.log("tmpGenders: ", tmpGenders);
-                        // console.log("tmpColors: ", tmpColors);
-                        // console.log("tmpFrames: ", tmpFrames);
                         setInventory(tmpInventory);
-                        setSizes(tmpSizes);
-                        setGenders(tmpGenders);
-                        setColors(tmpColors);
-                        setFrames(tmpFrames);
-
+                        console.log("inventory length:  ", tmpInventory.length);
+                        console.log("product Detail Id:  ", productDetail.id);
+                        if (tmpSizes.length > 0) {setSizes(tmpSizes)} else {setSizes([])};
+                        if (tmpGenders.length > 0) {setGenders(tmpGenders)} else {setGenders([])};
+                        if (tmpColors.length > 0) {setColors(tmpColors)} else {setColors([])};
+                        if (tmpFrames.length > 0) {setFrames(tmpFrames)} else {setFrames([])};
                         //setValues({...values, gender: genders[0].value, size:sizes[0].value, color:colors[0].value, frame:frames[0].value });
-
+                        console.log("sizes:  ", tmpSizes.length);
+                        console.log("genders: ", tmpGenders.length);
+                        console.log("colors: ", tmpColors.length);
+                        console.log("frames: ", tmpFrames.length);
                     } else {
                         throw response.status;
                     }
@@ -99,8 +95,55 @@ const OrderForm = ({productDetail}) => {
                 }
             })();
 
+
     }, [productDetail.id])
 
+    const setOptions = (inv) => {
+        let tmpSizes = [];
+        let tmpGenders = [];
+        let tmpColors = [];
+        let tmpFrames = [];
+        let sz, clr, fr, gdr;
+        for (let i = 0; i < inv.length; i++) {
+            if (inv[i].size) { sz = { value: inv[i].size, label: inv[i].size }};
+            if (inv[i].color) { clr = { value: inv[i].color, label: inv[i].color }};
+            if (inv[i].frame) { fr = { value: inv[i].frame, label: inv[i].frame }};
+            if (inv[i].gender) { gdr = { value: inv[i].gender, label: inv[i].gender }};
+            if  ((inv[i].size) && (!objInArray(sz, tmpSizes))){tmpSizes.push(sz)}
+            if  ((inv[i].color) && (!objInArray(clr, tmpColors))) {tmpColors.push(clr) }
+            if  ((inv[i].frame) && (!objInArray(fr, tmpFrames))) { tmpFrames.push(fr) }
+            if  ((inv[i].gender) && (!objInArray(gdr, tmpGenders))) { tmpGenders.push(gdr) }
+        }
+        if (tmpSizes.length > 0) {setSizes(tmpSizes)} else {setSizes([])};
+        if (tmpGenders.length > 0) {setGenders(tmpGenders)} else {setGenders([])};
+        if (tmpColors.length > 0) {setColors(tmpColors)} else {setColors([])};
+        if (tmpFrames.length > 0) {setFrames(tmpFrames)} else {setFrames([])};
+
+
+    }
+
+    const setNewInventory = (inv) => {
+        let newInventory = [];
+
+        for (let i =0; i < inv.length; i++) {
+            if (inv[i].color && values.color) {
+                if (inv[i].color !== values.color) { continue; }  //don't add this one -- it doesn't match)
+            }
+            if (inv[i].size && values.size) {
+                if (inv[i].size !== values.size) { continue; } //don't add this one -- it doesn't match)
+            }
+            if (inv[i].gender && values.gender) {
+                if (inv[i].gender !== values.gender) { continue; } //don't add this one -- it doesn't match)
+            }
+            if (inv[i].frames && values.frames) {
+                if (inv[i].frames !== values.frame) { continue; } //don't add this one - it doesn't match);
+            }
+            //if we made it this far, it matches on everything we wanted it to match on. So add it to
+            //our new inventory
+            newInventory.push(inv[i]);
+        }
+        return newInventory;
+    }
     const objInArray = (obj, arr) => {
 
         for (let i = 0; i < arr.length; i++) {
@@ -110,44 +153,64 @@ const OrderForm = ({productDetail}) => {
         }
         return false;
     }
-    // const getOptions = (options) => {
-    // }
 
     const handleChange = (prop) => (newValue) => {
-    //     console.log("handleChange: props: ", prop);
-    //    console.log("handleChange: changing: ", prop, ":",  newValue.value);
        setValues({...values, [prop]: newValue.value });
-
+       const newInventory = setNewInventory(inventory);
+       setInventory(newInventory);
+       setOptions(newInventory);
     }
+    const findInventoryId = () => {
+        console.log(`Values set: size: ${values.size}, color: ${values.color}, frame: ${values.frame}, gender: ${values.gender}`);
 
-    // const handleInputChange = (inputValue, actionMeta) => {
-    //     console.log("handleInputChange: inputValue: ", inputValue);
-    //     console.log(`action: ${actionMeta.action}`);
-    // }
+        if (!inventory.size && !inventory.color && !inventory.frame && !inventory.gender) {
+            console.log("Inventory.id: ", inventory[0]);
+            return inventory[0].inventoryId;
+        }
+        for (let i=0; i < inventory.length; i++) {
+            console.log(`Inventory: size: ${inventory.size}, color: ${inventory.color}, frame: ${inventory.frame}, gender: ${inventory.gender}`);
+            if (values.size && inventory.size !== values.size) { continue; }
+            if (values.color && inventory.color !== values.color) { continue; }
+            if (values.frame && inventory.frame !== values.frame) { continue; }
+            if (values.gender && inventory.gender !== values.gender) { continue; }
+
+            //if we make it this far, we've found the appropriate inventory item.
+            return inventory[i].inventoryId;
+            }
+
+        }
+
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        //console.log(`Values are now:  Color: ${values.color.color}, Size: ${values.size}, Frame: ${values.frame}, Gender: ${values.gender}`);
-        history.push({
-            pathname: '/orderConfirmation',
-            state: {
-                size: values.size,
-                color: values.color,
-                frame: values.frame,
-                type: values.type,
-                gender: values.gender,
-                price: productDetail.price,
-                photoUrl: productDetail.photoURL,
-                name: productDetail.name
-            }
-             });
+        console.log("Inventory:  ", inventory);
+        const inventoryId = findInventoryId();
+        console.log("Inventory id:  ", inventoryId);
+        console.log("UserId: ", userId);
+        if (inventoryId && userId) {
+            (async () => {
+                const response = await fetch(`${baseUrl}/order`, {
+                    method: 'post',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        userId,
+                        inventoryId,
+                        quantity: '1' }),
+                });
+            })();
+        } else {
+            alert("Failed to submit order");
+        }
+
+        history.push({ pathname: "/productDetail", state: {props: productDetail}});
+
     }
 
     if (!productId) {
-        // console.log("No product id ... not rendering!");
         return null
+    } else if (inventory.length <=  0) {
+        return (<div>Product temporarily out of stock.</div>)
     } else {
-        // console.log("productId before render: ", productId, " and type: ", type);
     return (
         <form onSubmit={handleSubmit} style={{color: "black"}}>
             <div style={{marginTop: "10px"}}>
@@ -162,8 +225,6 @@ const OrderForm = ({productDetail}) => {
                             isSearchable={true}
                             >
                         </Select>
-
-
                     </>
                     : null
                 }
