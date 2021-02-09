@@ -5,14 +5,13 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';  //set font-size
 import Badge from '@material-ui/core/Badge';
 import HomeIcon from '@material-ui/icons/Home';
 import Container from '@material-ui/core/Container';
-import { baseUrl } from './config';
 import { setUserId } from './store/authentication';
 
 // import { createMuiTheme } from '@material-ui/core/styles';
 // import { ThemeProvider } from '@material-ui/styles';
 // import { purple } from '@material-ui/core/colors';
 // import imgSrc from './images/girl1.png';
-import { TOKEN_KEY, removeToken, removeAvatarURL, removeUserName, removeUserEmail, removeUserId } from './store/authentication';
+import { TOKEN_KEY, removeToken, removeAvatarURL, removeUserName, removeUserEmail, removeUserId, setBadgeCount, getBadgeCount } from './store/authentication';
 
 
 const NavBar = () => {
@@ -23,52 +22,45 @@ const NavBar = () => {
     const token = useSelector(state => state.authentication.token);
     const userId = useSelector(state => state.authentication.userId);
     const name = useSelector(state => state.authentication.name);
-    const [badgeCount, setBadgeCount] = useState(null);
+    const badgeCount = useSelector(state => state.authentication.badgeCount);
     const history = useHistory();
 
-    const getBadgeCount = async() => {
-        if (userId) {
-            // console.log("UserId:  ", userId);
-            const response = await fetch(`${baseUrl}/carts/cartItems/${userId}`, {
-                method: 'get',
-                headers: { 'Content-Type': 'application/json' },
-            });
+    console.log("Hit navbar...badgeCount is: ", badgeCount);
 
-            if (response.ok) {
-
-                const resp = await response.json();
-                const cartItems = resp.cartItems;
-                // console.log("Got cartItems:  ", cartItems.cartItems);
-                if (cartItems > 0) {
-                    // console.log("Badge count:  ", cartItems);
-                    setBadgeCount(cartItems);
-                    return cartItems;
-                } else {
-                    setBadgeCount(null);
-                    return null;
-                }
-            } else {
-                console.log("Failed to get badgeCount.");
-            }
-        } else {
-            return null;
-        }
-};
     useEffect( () => {
-        if (!avatarURL) {
-        }
+        console.log("userId: ", userId);
+        const uid = window.localStorage.getItem("userId");
         if (!userId) {
-            dispatch(setUserId(window.localStorage.getItem("userId")));
+            dispatch(setUserId(uid));
         }
-        if (userId) {
-            getBadgeCount();
-        } else {
-            setBadgeCount(null);
-        }
-        // console.log("Getting badge count.");
-        //eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [userId, avatarURL] )
+        if (!avatarURL) {
 
+        }
+        (async() => {
+            if (userId) {
+                //console.log("getting the badge count.");
+                let bc = await getBadgeCount(userId);
+                dispatch(setBadgeCount(bc));
+                console.log("Badge count:  ", bc);
+            }
+        })();
+
+        //eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [] )
+
+useEffect( () => {
+    console.log("Badgecount changed: ", badgeCount);
+    if (!userId) {
+        dispatch(setUserId(window.localStorage.getItem("userId")));
+    }
+    (async() => {
+        if (userId) {
+            let bc = await getBadgeCount(userId);
+            dispatch(setBadgeCount(bc));
+            console.log("New badge count is:  ", bc);
+        }
+    })();
+}, [badgeCount]);
 
 
     const handleSignIn = (e) => {
@@ -105,6 +97,7 @@ const NavBar = () => {
         history.push('/');
     }
 
+
     return (
             <Container style={{display:"flex", justifyContent:"space-around"}}>
                 <div className="topBar">
@@ -133,6 +126,8 @@ const NavBar = () => {
                 </div>
             </Container>
     )
-}
+                        }
+
+
 
 export default NavBar;

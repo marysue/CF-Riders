@@ -86,6 +86,13 @@ router.post(
   })
 );
 
+router.get(
+  "/avatarURL/:userId",
+  asyncHandler(async (req, res, next) => {
+    const user = await User.findByPk(req.params.userId);
+    res.status(201).json({avatarURL: user.avatarURL});
+  }));
+
 router.post (
   "/login",
   asyncHandler(async (req, res, next) => {
@@ -103,7 +110,7 @@ router.post (
     if (!user.validatePassword(password)) {
       console.log("     could not validate the password!  ", password)
     }
-    
+
     if (!user || !user.validatePassword(password)) {
       const err = new Error("Login failed");
       err.status = 401;

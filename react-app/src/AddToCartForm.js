@@ -1,12 +1,13 @@
 import React, {useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Select from 'react-select'
 import { baseUrl } from './config';
 import { useHistory } from 'react-router-dom';
+import { setBadgeCount } from './store/authentication';
 
 
 
-const OrderForm = ({productDetail}) => {
+const AddToCartForm = ({productDetail}) => {
     // const [value, setValue] = useState();
     const [sizes, setSizes] = useState([]);
     const [genders, setGenders] = useState([]);
@@ -27,6 +28,7 @@ const OrderForm = ({productDetail}) => {
     });
     const userId = useSelector(state => state.authentication.userId);
     const history = useHistory();
+    const dispatch = useDispatch();
 
     useEffect ( () => {
             (async () => {
@@ -183,13 +185,13 @@ const OrderForm = ({productDetail}) => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        console.log("Inventory:  ", inventory);
+        //console.log("Inventory:  ", inventory);
         const inventoryId = findInventoryId();
-        console.log("Inventory id:  ", inventoryId);
-        console.log("UserId: ", userId);
+        //console.log("Inventory id:  ", inventoryId);
+        //console.log("UserId: ", userId);
         if (inventoryId && userId) {
             (async () => {
-                const response = await fetch(`${baseUrl}/order`, {
+                const response = await fetch(`${baseUrl}/carts`, {
                     method: 'post',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -197,12 +199,16 @@ const OrderForm = ({productDetail}) => {
                         inventoryId,
                         quantity: '1' }),
                 });
+                if (response.ok) {
+                    const cartItemCount = await response.json();
+                    console.log("AddToCartForm: Setting badgeCount to:  ", cartItemCount.cartItmes);
+                    dispatch(setBadgeCount(cartItemCount.cartItems));
+                }
             })();
         } else {
-            alert("Failed to submit order");
+            alert("Failed to add to cart");
         }
-
-        history.push({ pathname: "/productDetail", state: {props: productDetail}});
+        history.push("/productsBrowser");
 
     }
 
@@ -289,4 +295,4 @@ const OrderForm = ({productDetail}) => {
 }
 }
 
-export default OrderForm;
+export default AddToCartForm;

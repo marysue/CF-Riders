@@ -40,15 +40,16 @@ const ProductsBrowser = () => {
 
     }, [bicyclesList, accessoriesList, clothingList]);
 
+
     const handleClick = (e) => {
         setProductsSelected(e.target.id);
     }
 
     if (productsSelected) {
-        // console.log("Products selected:  ", productsSelected);
+        console.log("Products selected:  ", productsSelected);
         return <ProductsPage productsSelected={productsSelected}></ProductsPage>
     } else {
-        // console.log("ProductsBrowser: ", bicyclesList);
+         console.log("ProductsBrowser: ", bicyclesList);
         return (
             <>
                 <NavBar></NavBar>

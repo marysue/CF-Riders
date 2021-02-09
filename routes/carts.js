@@ -91,43 +91,8 @@ const formatCartList = async (cartList) => {
     //console.log("fcl:  ", fcl);
     return fcl;
 }
-router.get(
-    "/:userId",
-    asyncHandler
-    (async (req, res) => {
-        const cartList = await Cart.findAll(
-            { where: {
-                userId_FK: {
-                    [Op.eq]: req.params.userId,
-                },
-            },
-           include: ["Inventory", "User"]
-            });
-
-        const formattedCartList = await formatCartList(cartList);
-        //console.log("formattedCartList: ", formattedCartList);
-        res.status(201).json({
-            formattedCartList
-          });
-    }));
-
-    router.get(
-        "/cartItems/:userId",
-        asyncHandler
-        (async (req, res) => {
-            const cartList = await Cart.findAll(
-                { where: {
-                    userId_FK: {
-                        [Op.eq]: req.params.userId,
-                    },
-                },
-                });
 
 
-            res.status(201).json({
-                cartItems: cartList.length
-              });
-        }));
 
 router.post(
     "/",
@@ -138,8 +103,53 @@ router.post(
         const quantity = req.body.quantity;
         // console.log("InventoryId: ", inventoryId_FK, " UserId: ", userId_FK, " Quantity: ", quantity);
         const cart = await Cart.create({ userId_FK, inventoryId_FK, quantity });
-        res.status(201).json({status: 'ok'});
+        const cartItems = await Cart.findAll(
+            { where : {
+                userId_FK: {
+                    [Op.eq]: userId_FK,
+                },
+            }});
+            console.log("********************cartItems:  ", cartItems.length, " userId: ", req.body.userId);
+        res.status(201).json({cartItems: cartItems.length});
     }));
 
+
+    router.get(
+        "/:userId",
+        asyncHandler
+        (async (req, res) => {
+            const cartList = await Cart.findAll(
+                { where: {
+                    userId_FK: {
+                        [Op.eq]: req.params.userId,
+                    },
+                },
+               include: ["Inventory", "User"]
+                });
+
+            const formattedCartList = await formatCartList(cartList);
+            //console.log("formattedCartList: ", formattedCartList);
+            res.status(201).json({
+                formattedCartList
+              });
+        }));
+
+        router.get(
+            "/cartItemCount/:userId",
+            asyncHandler
+            (async (req, res) => {
+                const cartList = await Cart.findAll(
+                    { where: {
+                        userId_FK: {
+                            [Op.eq]: req.params.userId,
+                        },
+                    },
+                    });
+
+
+                res.status(201).json({
+                    cartItems: cartList.length
+                  });
+            }));
 
     module.exports = router;

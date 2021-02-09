@@ -11,6 +11,8 @@ export const SET_USER_EMAIL = 'user/authentication/SET_USER_EMAIL';
 export const REMOVE_USER_EMAIL = 'user/authentication/REMOVE_USER_EMAIL';
 export const SET_USER_ID = 'user/authentication/SET_USER_ID';
 export const REMOVE_USER_ID = 'user/authentication/REMOVE_USER_ID';
+export const SET_BADGE_COUNT = 'user/authentication/SET_BADGE_COUNT';
+export const REMOVE_BADGE_COUNT = 'user/authentication/REMOVE_BADGE_COUNT';
 
 //actions
 export const removeToken = token => ({ type: REMOVE_TOKEN });
@@ -22,8 +24,9 @@ export const setUserName = name => ({ type: SET_USER_NAME, name});
 export const removeUserEmail = () => ({type: REMOVE_USER_EMAIL});
 export const setUserEmail = emailAddress => ({ type: SET_USER_EMAIL, emailAddress});
 export const removeUserId = () => ({ type: REMOVE_USER_ID });
-export const setUserId = id => ({ type: SET_USER_ID, id})
-
+export const setUserId = id => ({ type: SET_USER_ID, id});
+export const setBadgeCount = count => ({ type: SET_BADGE_COUNT, count})
+export const removeBadgeCount = ({ type: REMOVE_BADGE_COUNT});
 //thunks
 export const loadToken = () => async dispatch => {
   const token = window.localStorage.getItem(TOKEN_KEY);
@@ -31,9 +34,6 @@ export const loadToken = () => async dispatch => {
     dispatch(setToken(token));
   }
 };
-
-
-
 
 export const getUserInfo = (emailAddress) => async dispatch => {
   // console.log("getUserInfo received email:  ", emailAddress);
@@ -85,6 +85,16 @@ export default function reducer(state = {}, action) {
         ...state,
         token: action.token,
       };
+    }
+    case SET_BADGE_COUNT: {
+      const newState = {...state };
+      newState.badgeCount = action.count;
+      return newState;
+    }
+    case REMOVE_BADGE_COUNT: {
+      const newState = {...state };
+      delete newState.badgeCount;
+      return newState;
     }
 
     case REMOVE_TOKEN: {
@@ -144,4 +154,19 @@ export default function reducer(state = {}, action) {
 
     default: return state;
   }
+}
+
+export const getBadgeCount = async(userId) => {
+    const response = await fetch(`${baseUrl}/carts/cartItemCount/${userId}`, {
+        method: 'get',
+        headers: { 'Content-Type': 'application/json' },
+    });
+    if (response.ok) {
+        const cartItems = await response.json();
+        console.log("Received ", cartItems.cartItems, " cart items");
+        return cartItems.cartItems;
+    } else {
+        console.log("Failed to get badgeCount.");
+        return 0;
+    }
 }

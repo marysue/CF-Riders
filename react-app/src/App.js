@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import SignUp from './SignUp';
 import LoginPanel from './LoginPanel';
-import OrderDetail from './OrderDetail';
+import AddToCartForm from './AddToCartForm';
 import ProductDetail from './ProductDetail';
 import ProductsPage from './ProductsPage';
 import ProductsBrowser from './ProductsBrowser';
@@ -14,6 +14,7 @@ import {fetchClothingList, setClothingList} from './store/clothing';
 import useFetchProductLists from './store/useFetchProductLists';
 import LogInOrSignUp from './LogInOrSignUp';
 import OrderConfirmation from './OrderConfirmation';
+import OrderDetail from './OrderDetail';
 
 
 const PrivateRoute = ({component: Component, ...rest}) => {
@@ -63,7 +64,6 @@ const App = () => {
     return null;
   }
   //if (!accessoriesList && !bicyclesList && !clothingList) { return null }
-
   return (
     <BrowserRouter>
       <Switch>
@@ -109,6 +109,12 @@ const App = () => {
                     <ProductDetail {...props} />
                   )}
                 />
+                <PrivateRoute
+                    path="/addToCartForm"
+                    exact={true}
+                    needLogin={needLogin}
+                    component={AddToCartForm}
+                  />
               <PrivateRoute
                 path="/order"
                 exact={true}

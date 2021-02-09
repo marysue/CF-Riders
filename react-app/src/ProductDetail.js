@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import NavBar from './NavBar';
 import UserReview from './UserReview';
 import ProductReviewInput from './ProductReviewInput';
-import OrderForm from './OrderForm';
+import AddToCartForm from './AddToCartForm';
 import ProductHeadline from './ProductHeadline';
 import ProductReviewSignup from './ProductReviewSignup';
 import { setUserId } from './store/authentication';
@@ -132,7 +132,7 @@ const ProductDetail = (props) => {
                     <ProductHeadline productDetail={productDetail} productRating={productRating} productPrice={productPrice}></ProductHeadline>
 
                     { userId ?
-                    <OrderForm productDetail={productDetail}></OrderForm> : <div><b>To order a product, please log in.</b></div>}
+                    <AddToCartForm productDetail={productDetail}></AddToCartForm> : <div><b>To order a product, please log in.</b></div>}
 
 
                 </div>
