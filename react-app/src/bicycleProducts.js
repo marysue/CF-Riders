@@ -18,13 +18,13 @@ const BicycleProducts = () => {
                         const price = item.price.toFixed(2);
                         return (
 
-                            <Link className="productItem" to={`/bicycleDetail/${id}`} key={id}>
+                            <Link style={{ textDecoration: 'none' }} className="productItem" to={`/bicycleDetail/${id}`} key={id}>
                                 <img id={item.id} key={id} src={photoURL} alt={"Bicycles"}></img>
                                 <Figure.Caption>{name}</Figure.Caption>
                                 <span className="price">${price}</span>
                             </Link>
                         )
-                    })};
+                    })}
                 </div>
             </>
         );

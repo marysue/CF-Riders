@@ -3,14 +3,13 @@ import { useSelector } from 'react-redux';
 import UserReview from './UserReview';
 import ProductReviewInput from './ProductReviewInput';
 import NewAddToCartForm from './newAddToCartForm';
-import AddToCartForm from './AddToCartForm';
 import ProductHeadline from './ProductHeadline';
 import ProductReviewSignup from './ProductReviewSignup';
 
 
 const NewProductDetail = ({detail, userPosted, userReviews, productRating }) => {
     const userId = useSelector(state => state.authentication.userId)
-    console.log("NewProductDetail: userId: ", userId);
+    // console.log("NewProductDetail: userId: ", userId);
     return (
         <div>
             <div style={{display:"flex", height: 'auto'}}>

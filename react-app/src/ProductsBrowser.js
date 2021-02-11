@@ -25,7 +25,6 @@ const ProductsBrowser = () => {
     const clothingList = useSelector(state => state.clothing.clothingList);
     const productsSelected = useSelector(state => state.selectedProduct.productType);
     //console.log("Products Browser:  ", accessoriesList);
-     console.log("ProductsBrowser:  productsSelected:  ", productsSelected);
      const history = useHistory();
      const dispatch = useDispatch();
 
@@ -59,6 +58,7 @@ const ProductsBrowser = () => {
 
 
   return (
+      
             <>
                 <div className="productBanner">
                     <div className="photoSpread">

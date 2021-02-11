@@ -105,31 +105,30 @@ useEffect( () => {
 
 
     return (
-            <Container style={{display:"flex", justifyContent:"space-around"}}>
-                <div className="topBar">
-
-                    <label className="logoFont" style={{color:"white"}}>CF Riders</label>
-                    <form onSubmit={handleSubmit}>
-                        <input
+            <Container style={{display:"flex", flexlDirection: "row", justifyContent:"space-between"}}>
+                    <div style={{width:"30%"}}>
+                    <label className="logoFont" >CF Riders</label>
+                    {/* <form onSubmit={handleSubmit}> */}
+                        {/* <input
                             className="navSearchBar"
                             type="text"
                             name="search"
                             onChange={updateSearchString}
                             placeholder="Start shopping..." />
-                    </form>
-                    <HomeIcon className="homeIcon"  onClick={handleHomeClick}style={{margin:"10px", color: "white"}}></HomeIcon>
-                    <Badge badgeContent={badgeCount} color="secondary" >
-                        <ShoppingCartIcon style={{ color: "white" }}></ShoppingCartIcon>
-                    </Badge>
-                    <button className="signInButton"  onClick={handleSignIn}>{token ? "SignOut" : "SignIn"}</button>
-                    <div className="avatar-container">
-                        {/* <img className="avatar" alt="avatar" src={avatarURL}/> */}
-                        {/* <span className="avatarName" >{name}</span> */}
-                        { avatarURL ?
-                        <img src={avatarURL} className="main-profile-img avatar" alt="avatar"/> :  <img src={"https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"} className="main-profile-img avatar" alt="avatar"/> }
-                        <i className="fa"></i>{name}
+                    </form> */}
                     </div>
-                </div>
+                    <div className="homeShoppingCartIcon" >
+                        <HomeIcon className="homeIcon"  onClick={handleHomeClick}style={{margin:"10px", color: "white", fontSize:"60px"}}></HomeIcon>
+                        <Badge badgeContent={badgeCount} color="secondary" >
+                            <ShoppingCartIcon style={{ color: "white", fontSize:"60px"}}></ShoppingCartIcon>
+                        </Badge>
+                    </div>
+                    <div className="avatar-container">
+                         <button className="signInButton"  onClick={handleSignIn}>{token ? "SignOut" : "SignIn"}</button>
+                        { avatarURL ?
+                            <img src={avatarURL} className="main-profile-img avatar" alt="avatar"/> :  <img src={"https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"} className="main-profile-img avatar" alt="avatar"/> }
+                            <i className="fa"></i>{name}
+                    </div>
             </Container>
     )
                         }

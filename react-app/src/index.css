@@ -60,8 +60,8 @@ html, body {
   .logoFont {
     display: inline-block;
     font-family: 'Fondamento', cursive;
-    font-size: 40px;
-    color: #148ECE;
+    font-size: 60px;
+    color: white;
   }
 
   .navSearchBar {
@@ -95,12 +95,20 @@ html, body {
     align-items: center;
   }
 
-
+.homeShoppingCartIcon {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  color: white;
+  width: 30%;
+}
   .avatar-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
+    justify-content: center;
     color: white;
+    width: 30%;
   }
   .avatar {
     /* width: 60px;
@@ -255,7 +263,7 @@ html, body {
     color: black;
     text-align: center;
     font-size: 15px;
-    margin-top: -5px;
+    margin-top: -25px;
   }
 
   .loginOrSignUp {
@@ -323,6 +331,7 @@ html, body {
 .price {
   font-size: small;
   margin-top: 5px;
+  text-decoration: none;
 }
 
 .productDetail {
