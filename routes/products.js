@@ -22,6 +22,7 @@ router.get(
     asyncHandler
     (async (req, res) => {
         const type = req.params.type;
+        console.log("Type is:  ", type);
         const id = req.params.id;
         let detail = [];
         console.log("type:  ", type);

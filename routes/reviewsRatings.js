@@ -10,6 +10,7 @@ router.get(
     "/reviews/:userId/:productId",
     asyncHandler
     (async (req, res) => {
+        console.log("***********************REVIEWS***********************");
         const productId_FK = req.params.productId;
         const userId_FK = req.params.userId;
         console.log("Checking for productId_FK: ", productId_FK, " userId_FK: ", userId_FK);

@@ -1,7 +1,5 @@
 import React from 'react';
 import {useHistory} from 'react-router-dom';
-import NavBar from './NavBar';
-
 const LogInOrSignUp = ({props}) => {
     const history = useHistory();
     const handleLogin = (e) => {
@@ -19,7 +17,6 @@ const LogInOrSignUp = ({props}) => {
 
     return(
         <>
-            <NavBar></NavBar>
             <div className="centerDiv" >
                 <form className="loginOrSignUp" >
                     <h3>Already have an account? </h3>

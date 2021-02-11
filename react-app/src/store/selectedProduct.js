@@ -14,7 +14,7 @@ export const SET_SELECTED_PRODUCT_PRICE = 'products/selected/price';
 export const SET_SELECTED_PRODUCT_DESCRIPTION = 'products/selected/description';
 export const SET_SELECTED_PRODUCT_PHOTOURL = 'products/selected/photoURL';
 export const setSelectedProduct = selectedProduct => ({ type: SET_SELECTED_PRODUCT, selectedProduct });
-export const setSelectedProductType = selectedProductType => ({ type: SET_SELECTED_PRODUCT_TYPE, selectedProductType });
+export const setSelectedProductType = productType => ({ type: SET_SELECTED_PRODUCT_TYPE, productType });
 export const setSelectedProductId = selectedProductId => ({ type: SET_SELECTED_PRODUCT_ID, selectedProductId});
 export const setColorsAvail = colorsAvail => ({ type: SET_COLORS_AVAIL, colorsAvail });
 export const setSizesAvail = sizesAvail => ({ type: SET_SIZES_AVAIL, sizesAvail });
@@ -36,7 +36,7 @@ export default function reducer(state = {}, action) {
 
       case SET_SELECTED_PRODUCT_TYPE: {
           const newState = {...state};
-          newState.productType = action.selectedProductType;
+          newState.productType = action.productType;
           return newState;
       }
       case SET_SELECTED_PRODUCT_ID: {

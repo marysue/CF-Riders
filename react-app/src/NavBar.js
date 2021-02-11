@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';  //set font-size to medium or large
@@ -6,6 +6,7 @@ import Badge from '@material-ui/core/Badge';
 import HomeIcon from '@material-ui/icons/Home';
 import Container from '@material-ui/core/Container';
 import { setUserId } from './store/authentication';
+import { setSelectedProductType } from './store/selectedProduct';
 
 // import { createMuiTheme } from '@material-ui/core/styles';
 // import { ThemeProvider } from '@material-ui/styles';
@@ -24,6 +25,7 @@ const NavBar = () => {
     const name = useSelector(state => state.authentication.name);
     const badgeCount = useSelector(state => state.authentication.badgeCount);
     const history = useHistory();
+    const productType = useSelector(state => state.selectedProduct.productType);
 
     console.log("Hit navbar...badgeCount is: ", badgeCount);
 
@@ -60,7 +62,7 @@ useEffect( () => {
             console.log("New badge count is:  ", bc);
         }
     })();
-}, [badgeCount]);
+}, [badgeCount, userId, dispatch]);
 
 
     const handleSignIn = (e) => {
@@ -75,8 +77,10 @@ useEffect( () => {
             dispatch(removeUserName());
             dispatch(removeUserEmail());
             dispatch(removeUserId());
+
             window.localStorage.removeItem(TOKEN_KEY);
             window.localStorage.removeItem("userId");
+
             history.push('/');
         }
     }
@@ -93,7 +97,9 @@ useEffect( () => {
 
     const handleHomeClick = (e) => {
         e.preventDefault();
-        console.log("Clicked home button...");
+        console.log("NavBar:  Clicked home button...resetting productType to null");
+
+        setSelectedProductType('');
         history.push('/');
     }
 

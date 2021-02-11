@@ -1,7 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
-import NavBar from './NavBar';
 import UserReview from './UserReview';
 import ProductReviewInput from './ProductReviewInput';
 import AddToCartForm from './AddToCartForm';
@@ -35,6 +33,7 @@ const ProductDetail = (props) => {
     const [userReviews, setUserReviews] = useState([]);
     const [productId, ] = useState(productDetail.id);
     const userId = useSelector(state => state.authentication.userId);
+
     const [userPosted, setUserPosted] = useState();
     console.log("***********ProductDetail***************");
 
@@ -117,7 +116,6 @@ const ProductDetail = (props) => {
 
     return (
         <div>
-            <NavBar></NavBar>
             <div style={{display:"flex", height: 'auto'}}>
                 <div className="productDetail" style={{width:"60%"}} >
                     {/* <h2 style={{color: "white"}}>{productDetail.name}</h2> */}

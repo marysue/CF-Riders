@@ -4,6 +4,7 @@ import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import SignUp from './SignUp';
 import LoginPanel from './LoginPanel';
 import AddToCartForm from './AddToCartForm';
+import NewAddToCartForm from './newAddToCartForm';
 import ProductDetail from './ProductDetail';
 import ProductsPage from './ProductsPage';
 import ProductsBrowser from './ProductsBrowser';
@@ -15,6 +16,10 @@ import useFetchProductLists from './store/useFetchProductLists';
 import LogInOrSignUp from './LogInOrSignUp';
 import OrderConfirmation from './OrderConfirmation';
 import OrderDetail from './OrderDetail';
+import NavBar from './NavBar';
+import BicycleProducts from './bicycleProducts';
+import BicycleDetail from './bicycleDetail';
+
 
 
 const PrivateRoute = ({component: Component, ...rest}) => {
@@ -66,6 +71,7 @@ const App = () => {
   //if (!accessoriesList && !bicyclesList && !clothingList) { return null }
   return (
     <BrowserRouter>
+      <NavBar></NavBar>
       <Switch>
         <Route
           path="/users/login"
@@ -103,6 +109,15 @@ const App = () => {
                 <ProductsPage {...props} />
               )}
               />
+              <Route
+                path="/bicycleProducts"
+                exact
+                component={BicycleProducts}
+                />
+                <Route
+                  path="/bicycleDetail/:id"
+                  component={BicycleDetail}
+                />
               <Route
                   path="/productDetail"
                   render={(props) => (

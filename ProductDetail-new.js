@@ -1,13 +1,12 @@
 import React, {useState, useEffect, useContext} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import NavBar from './NavBar';
 import UserReview from './UserReview';
 import ProductReviewInput from './ProductReviewInput';
 import OrderForm from './OrderForm';
 import ProductHeadline from './ProductHeadline';
 import ProductReviewSignup from './ProductReviewSignup';
 import { baseUrl } from './config';
-import { ProductInfoContext } from './context/ProductInfoContext';
+
 
 
 const ProductDetail = (props) => {
@@ -79,7 +78,6 @@ const ProductDetail = (props) => {
 
     return (
         <div>
-            <NavBar></NavBar>
             <div style={{borderColor: "2px solid red", display:"flex", height: 'auto'}}>
                 <div className="productDetail" style={{width:"60%"}} >
                     <img src={photoURL} style={{height: "400px"}} alt="product detail"></img>

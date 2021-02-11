@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
-import NavBar from './NavBar';
 import { baseUrl } from './config';
 import { TOKEN_KEY, setUserName, setAvatarURL, setToken, setUserId } from './store/authentication';
 import { Redirect } from 'react-router-dom';
@@ -66,7 +65,6 @@ const SignUp = (props) => {
 
     return (
         <div>
-            <NavBar></NavBar>
             <form className="signUpForm" onSubmit={handleSubmit}>
                 <div className="signUpInput">
 	                <div className="signUpLabel">

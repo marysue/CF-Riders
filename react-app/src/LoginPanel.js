@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import NavBar from './NavBar';
 import { baseUrl } from './config';
 import { TOKEN_KEY, setUserName, setAvatarURL, setToken, setUserId } from './store/authentication';
 
@@ -72,7 +71,6 @@ const LoginPanel = (props) => {
 
     return (
         <div>
-            <NavBar></NavBar>
             <form className="loginForm">
                 <div className="loginInput">
                     <div >

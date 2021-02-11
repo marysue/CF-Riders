@@ -1,11 +1,9 @@
 import React, { useState, useEffect} from 'react';
-import { useSelector} from 'react-redux';
-import NavBar from './NavBar';
+import { useSelector, useDispatch} from 'react-redux'
+import { useHistory } from 'react-router-dom';
 import ProductGrid from './ProductGrid';
 import Figure from 'react-bootstrap/Figure'
-import ProductsPage from './ProductsPage';
-
-
+import { setSelectedProductType } from './store/selectedProduct';
 
 const ProductsBrowser = () => {
 
@@ -17,7 +15,7 @@ const ProductsBrowser = () => {
     // const accessoriesLoaded = useSelector(state => state.accessories.accessoriesLoaded);
     // const bicyclesLoaded = useSelector(state=> state.bicycles.bicyclesLoaded);
     // const clothingLoaded = useSelector(state=> state.clothing.clothingLoaded);
-    const [productsSelected, setProductsSelected] = useState('');
+    //const [productsSelected, setProductsSelected] = useState('');
     const [featuredBicycleURL, setFeaturedBicycleURL] = useState();
     const [featuredClothingURL, setFeaturedClothingURL] = useState();
     const [featuredAccessoryURL, setFeaturedAccessoryURL] = useState();
@@ -25,8 +23,12 @@ const ProductsBrowser = () => {
     const accessoriesList = useSelector(state => state.accessories.accessoryList);
     const bicyclesList = useSelector(state => state.bicycles.bicycleList);
     const clothingList = useSelector(state => state.clothing.clothingList);
+    const productsSelected = useSelector(state => state.selectedProduct.productType);
+    //console.log("Products Browser:  ", accessoriesList);
+     console.log("ProductsBrowser:  productsSelected:  ", productsSelected);
+     const history = useHistory();
+     const dispatch = useDispatch();
 
-    // console.log("Products Browser:  ", accessoriesList);
     useEffect ( () => {
         if (bicyclesList) {
             setFeaturedBicycleURL(bicyclesList[0].photoURL);
@@ -38,21 +40,26 @@ const ProductsBrowser = () => {
             setFeaturedClothingURL(clothingList[0].photoURL);
         }
 
-    }, [bicyclesList, accessoriesList, clothingList]);
-
+    }, [bicyclesList, accessoriesList, clothingList, productsSelected]);
 
     const handleClick = (e) => {
-        setProductsSelected(e.target.id);
-    }
+        console.log("ProductsBrowser: handleClick:  Setting productsSelected:  ", e.target.id);
+        console.log("ProductsBrowser:  handleClick: settingSelectedProductType: ", e.target.id);
+        dispatch(setSelectedProductType(e.target.id));
+        const typesArr = ['Bicycles', 'Clothing', 'Accessories']
+        console.log("ProductsBrowser: handleClick:  selectedProduct:  ", e.target.id);
+        console.log("Is selected product in array?  ", typesArr.includes(e.target.id));
+        if (typesArr.includes(e.target.id)) {
+            console.log("ProductsBrowser: handleClick:  redirecting to /products for ", e.target.id);
+            history.push({
+                pathname: '/productsPage'
+            })
+        }
+     };
 
-    if (productsSelected) {
-        console.log("Products selected:  ", productsSelected);
-        return <ProductsPage productsSelected={productsSelected}></ProductsPage>
-    } else {
-         console.log("ProductsBrowser: ", bicyclesList);
-        return (
+
+  return (
             <>
-                <NavBar></NavBar>
                 <div className="productBanner">
                     <div className="photoSpread">
                         <div className="productPhoto" onClick={handleClick} >
@@ -79,6 +86,5 @@ const ProductsBrowser = () => {
 
 
     )};
-}
 
 export default ProductsBrowser;

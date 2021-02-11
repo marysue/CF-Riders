@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Figure from 'react-bootstrap/Figure';
-import NavBar from './NavBar';
 import { Redirect } from 'react-router-dom';
 import {
     getSelectedProductInfo,
@@ -103,7 +102,6 @@ const ProductsPage = (props) => {
         console.log("redrawing productGrid...");
     return (
         <>
-            <NavBar></NavBar>
             <div className="productGrid" onClick={handleClick}>
                 {listItemArr.map( (item, idx) => {
                     const id = item.id;

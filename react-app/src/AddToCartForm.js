@@ -14,7 +14,6 @@ const AddToCartForm = ({productDetail}) => {
     const [colors, setColors] = useState([]);
     const [frames, setFrames] = useState([]);
     // const [quantity, setQuantity] = useState(0);
-    const [, setType] = useState();
     const [productId, ] = useState(productDetail.id);
     const [inventory, setInventory] = useState([]);
     const [values, setValues] = useState( {
