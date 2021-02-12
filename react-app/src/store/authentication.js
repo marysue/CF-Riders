@@ -62,6 +62,24 @@ export const logout = () => async (dispatch) => {
 }
 
 // just a function
+export const getAvatarURL = async(userId) => {
+  console.log("getAvatarURL: calling fetch now...");
+  const response = await fetch(`${baseUrl}/users/avatarURL/${userId}`);
+  console.log("getAvatarURL:  response status:  ", response.status);
+  if (response.ok) {
+    const resp = await response.json();
+    return resp.avatarURL;
+  }
+}
+
+export const getUserName = async(userId) => {
+  const response = await fetch(`${baseUrl}/users/userName/${userId}`);
+  if (response.ok) {
+    const resp = await response.json();
+    return resp.userName;
+  }
+}
+
 export const getToken = async (emailAddress, password) => {
   console.log("getToken received email:  ", emailAddress, " and password: ", password);
     const response = await fetch(`${baseUrl}/users/token`, {
@@ -125,6 +143,7 @@ export default function reducer(state = {}, action) {
     case REMOVE_USER_NAME: {
       const newState = { ...state };
       delete newState.name;
+      console.log("Removing userName from Redux Store");
       return newState;
     }
 

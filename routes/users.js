@@ -162,6 +162,28 @@ router.post(
   })
 );
 
+router.get('/avatarURL/:userId', asyncHandler(async (req, res, next) => {
+  const user = await User.findByPk(req.params.userId);
+  res.status('200').res.json({ avatarURL: user.avatarURL });
+  })
+);
+
+router.get('/userName/:userId', asyncHandler(async (req, res, next) => {
+  const user = await User.findByPk(req.params.userId);
+  res.json({ userName: user.name });
+  })
+);
+// router.get('/userName/:userId', asyncHandler(async (req, res, next) => {
+//   console.log("****************************************************")
+//   console.log("userId: ", req.params.userId);
+//   const user = await User.findByPk(req.params.userId);
+//   console.log("userName:  ", user.name);
+//   const name = { userName: user.name }
+//   console.log(" returning name: ", name);
+//   console.log("****************************************************")
+//   res.status('200').res.json({ avatarURL: user.name });
+//   })
+// );
 
 router.post('/logout', (req, res) => {
   res.clearCookie('accessToken')

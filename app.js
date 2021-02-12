@@ -44,7 +44,7 @@ app.use('/order', orderRouter);
 if (process.env.NODE_ENV === "production") {
     app.use(express.static(__dirname+"/react-app/build"));
     app.get(/\/(?!api)*/, (req, res) => {
-        res.sendFile(path.resolve(__dirname, "react-app", "build", "index.html"));
+        res.sendFile(path.resolve(__dirname, "react-app", "build", "index.html", "favicon.ico"));
     });
 } else {
     app.use(express.static(path.join(__dirname, 'public')));

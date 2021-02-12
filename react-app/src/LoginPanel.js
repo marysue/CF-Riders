@@ -97,8 +97,8 @@ const LoginPanel = (props) => {
                 />
                </div>
 
-                <button onClick={handleSubmit}>Login</button>
-                <button style={{height: "60px"}} onClick={loginDemo}>Login Demo</button>
+                <button style={{width: "100px", backgroundColor: "white", color: "grey", borderColor:"black"}}onClick={handleSubmit}>Login</button>
+                <button style={{width: "100px", backgroundColor: "white", color: "grey", borderColor:"black"}} onClick={loginDemo}>Login Demo</button>
             </form>
         </div>
 
