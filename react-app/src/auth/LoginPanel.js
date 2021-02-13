@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { baseUrl } from './config';
-import { TOKEN_KEY, setUserName, setAvatarURL, setToken, setUserId } from './store/authentication';
+import { baseUrl } from '../config';
+import { TOKEN_KEY, setUserName, setAvatarURL, setToken, setUserId } from '../store/authentication';
 
 const LoginPanel = (props) => {
     const [email, setEmail] = useState('');

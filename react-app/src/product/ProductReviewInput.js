@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { baseUrl } from './config';
+import { baseUrl } from '../config';
 
 const ProductReviewInput = ({productDetail, productId}) => {
     const history = useHistory();

@@ -59,8 +59,6 @@ const ProductGrid = (props) => {
         return null
     }
     if (productDetail) {
-        // console.log("Calling ProductDetail with props:  ", productDetail);
-       // return <ProductDetail props={productDetail}></ProductDetail>
        return ( <Redirect
             to={{
                 pathname: "/productDetail",

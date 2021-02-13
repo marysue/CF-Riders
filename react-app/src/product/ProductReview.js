@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 
-const UserReview = ({review}) => {
+const ProductReview = ({review}) => {
     //const [productId, setProductId] = useState(prodId);
     const [stars, setStars] = useState([]);
     useEffect ( () => {
@@ -25,4 +25,4 @@ const UserReview = ({review}) => {
     )
     }
 
-export default UserReview;
+export default ProductReview;

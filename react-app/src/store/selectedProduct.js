@@ -120,16 +120,24 @@ export const getSelectedProductInfo = async (productId) => {
         let tmpFrames = [];
 
         for (let i = 0; i < productInfo.length; i++) {
-            const sz = { value: productInfo[i].size, label: productInfo[i].size, isdisabled: false };
-            const clr = { value: productInfo[i].color, label: productInfo[i].color, isdisabled: false };
-            const fr = { value: productInfo[i].frame, label: productInfo[i].frame, isdisabled: false };
-            const gdr = { value: productInfo[i].gender, label: productInfo[i].gender, isdisabled: false };
-            if (!objInArray(sz, tmpSizes))   {tmpSizes.push(sz)}
-            if (!objInArray(clr, tmpColors)) {tmpColors.push(clr) }
-            if (!objInArray(fr, tmpFrames)) { tmpFrames.push(fr) }
-            if (!objInArray(gdr, tmpGenders)) { tmpGenders.push(gdr) }
+            if (productInfo[i].size) {
+                const sz = { value: productInfo[i].size, label: productInfo[i].size, isdisabled: false };
+                if (!objInArray(sz, tmpSizes)) {tmpSizes.push(sz)}
+            }
+            if (productInfo[i].color) {
+                const clr = { value: productInfo[i].color, label: productInfo[i].color, isdisabled: false };
+                if (!objInArray(clr, tmpColors)) { tmpColors.push(clr) }
+            }
+            if (productInfo[i].frame) {
+             const fr = { value: productInfo[i].frame, label: productInfo[i].frame, isdisabled: false };
+             if (!objInArray(fr, tmpFrames)) { tmpFrames.push(fr)}
+            }
+            if (productInfo[i].gender) {
+                const gdr = { value: productInfo[i].gender, label: productInfo[i].gender, isdisabled: false };
+                if (!objInArray(gdr, tmpGenders)) { tmpGenders.push(gdr) }
+            }
         }
-        
+
         return { type: respArr.type, productId: productId, colorsAvail: tmpColors, sizesAvail: tmpSizes, framesAvail: tmpFrames, gendersAvail: tmpGenders,
                 productName: respArr.name, photoURL: respArr.photoURL, price: respArr.price, description: respArr.description, inventoryAvail: respArr.productInfo }
 //import { useDispatch } from 'react-redux';

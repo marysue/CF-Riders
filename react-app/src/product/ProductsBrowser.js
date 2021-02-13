@@ -3,19 +3,10 @@ import { useSelector, useDispatch} from 'react-redux'
 import { useHistory } from 'react-router-dom';
 import ProductGrid from './ProductGrid';
 import Figure from 'react-bootstrap/Figure'
-import { setSelectedProductType } from './store/selectedProduct';
+import { setSelectedProductType } from '../store/selectedProduct';
 
 const ProductsBrowser = () => {
 
-
-    //const {accessoriesList, clothingList, bicyclesList } = useContext(ProductListsContext);
-
-
-
-    // const accessoriesLoaded = useSelector(state => state.accessories.accessoriesLoaded);
-    // const bicyclesLoaded = useSelector(state=> state.bicycles.bicyclesLoaded);
-    // const clothingLoaded = useSelector(state=> state.clothing.clothingLoaded);
-    //const [productsSelected, setProductsSelected] = useState('');
     const [featuredBicycleURL, setFeaturedBicycleURL] = useState();
     const [featuredClothingURL, setFeaturedClothingURL] = useState();
     const [featuredAccessoryURL, setFeaturedAccessoryURL] = useState();
@@ -24,7 +15,6 @@ const ProductsBrowser = () => {
     const bicyclesList = useSelector(state => state.bicycles.bicycleList);
     const clothingList = useSelector(state => state.clothing.clothingList);
     const productsSelected = useSelector(state => state.selectedProduct.productType);
-    //console.log("Products Browser:  ", accessoriesList);
      const history = useHistory();
      const dispatch = useDispatch();
 
@@ -58,7 +48,7 @@ const ProductsBrowser = () => {
 
 
   return (
-      
+
             <>
                 <div className="productBanner">
                     <div className="photoSpread">

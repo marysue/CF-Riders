@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
-import SignUp from './SignUp';
-import LoginPanel from './LoginPanel';
-import AddToCartForm from './AddToCartForm';
-import ProductDetail from './ProductDetail';
-import ProductsPage from './ProductsPage';
-import ProductsBrowser from './ProductsBrowser';
+import SignUp from './auth/SignUp';
+import LoginPanel from './auth/LoginPanel';
+import AddToCartForm from './cart/AddToCartForm';
+import ProductDetail from './product/ProductDetail';
+import ProductsBrowser from './product/ProductsBrowser';
 import { loadToken } from './store/authentication';
 import { fetchAccessoriesList, setAccessoryList } from './store/accessories';
 import {fetchBicyclesList, setBicycleList} from './store/bicycles';
 import {fetchClothingList, setClothingList} from './store/clothing';
-import LogInOrSignUp from './LogInOrSignUp';
-import OrderConfirmation from './OrderConfirmation';
-import OrderDetail from './OrderDetail';
-import NavBar from './NavBar';
+import LogInOrSignUp from './auth/LogInOrSignUp';
+import OrderConfirmation from './order/OrderConfirmation';
+import OrderDetail from './order/OrderDetail';
+import NavBar from './navigation/NavBar';
 import BicycleProducts from './bicycles/bicycleProducts';
 import BicycleDetail from './bicycles/bicycleDetail';
 import ClothingProducts from './clothing/clothingProducts';
@@ -89,13 +88,6 @@ const App = () => {
                 <ProductsBrowser {...props}/>
               )}
             />
-
-            <Route
-              path="/productsPage"
-              render={(props) => (
-                <ProductsPage {...props} />
-              )}
-              />
               <Route
                 path="/bicycleProducts"
                 exact

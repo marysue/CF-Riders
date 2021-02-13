@@ -22,7 +22,7 @@ const ProductsPage = () => {
     const bicycleArr = useSelector(state => state.bicycles.bicycleList);
     const accessoryArr = useSelector(state => state.accessories.accessoryList);
     const clothingArr = useSelector(state => state.clothing.clothingList);
-    const [productDetail, setProductDetail] = useState(undefined);
+   // const [productDetail, setProductDetail] = useState(undefined);
     const productId = useSelector(state => state.selectedProduct.productId);
     const dispatch = useDispatch();
     let listItemArr = undefined;
@@ -102,7 +102,7 @@ const ProductsPage = () => {
         dispatch(setProductPrice(productInfo.price));
         dispatch(setProductDescription(productInfo.setProductDescription));
         dispatch(setInventoryAvail(productInfo.inventoryAvail));
-        setProductDetail(prodDetail);
+        //setProductDetail(prodDetail);
     }
 
 

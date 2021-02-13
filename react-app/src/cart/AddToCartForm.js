@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { baseUrl } from "./config";
-import { setBadgeCount } from "./store/authentication";
+import { baseUrl } from "../config";
+import { setBadgeCount } from "../store/authentication";
 import Button from 'react-bootstrap/Button'
 
 
-const NewAddToCartForm = ({ productDetail }) => {
+const AddToCartForm = ({ productDetail }) => {
   const [sizesAvail, setSizesAvail] = useState(undefined);
   const [colorsAvail, setColorsAvail] = useState(undefined);
   const [gendersAvail, setGendersAvail] = useState(undefined);
@@ -300,10 +300,6 @@ const NewAddToCartForm = ({ productDetail }) => {
   } else if (!productDetail.productId || !inventoryAvail) {
     return <h2>Loading...</h2>;
   } else {
-    console.log("NewAddToCartForm: inventoryAvail: ", inventoryAvail);
-    console.log("NewAddToCartForm: colorsAvail: ", colorsAvail);
-    console.log("NewAddToCartForm: sizesAvail: ", sizesAvail);
-    console.log("NewAddToCartForm: gendersAvail: ", gendersAvail);
     return (
       <>
         {errorMsg ? (
@@ -313,7 +309,7 @@ const NewAddToCartForm = ({ productDetail }) => {
         ) : null}
         <form onSubmit={handleSubmit} style={{ color: "black" }}>
           <div style={{ marginTop: "10px" }}>
-            {sizesAvail && sizesAvail.length > 0 ? (
+            {sizesAvail && sizesAvail.length > 1 ? (
               <>
                 <label style={{ marginRight: "10px" }}>Size:</label>
                 <Select
@@ -323,9 +319,18 @@ const NewAddToCartForm = ({ productDetail }) => {
                 ></Select>
               </>
             ) : null}
+             {sizesAvail && sizesAvail.length === 1 ? (
+              <>
+                <label style={{ marginRight: "10px" }}>Size:</label>
+                <label style={{ marginRight: "10px" }}>
+                  {" "}
+                  {sizesAvail[0].value}
+                </label>
+              </>
+            ) : null}
           </div>
           <div style={{ marginTop: "10px" }}>
-            {colorsAvail && colorsAvail.length > 0 ? (
+            {colorsAvail && colorsAvail.length > 1 ? (
               <>
                 <label style={{ marginRight: "10px" }}>Color:</label>
                 <Select
@@ -333,6 +338,15 @@ const NewAddToCartForm = ({ productDetail }) => {
                   onChange={handleChange("color")}
                   isSearchable={true}
                 ></Select>
+              </>
+            ) : null}
+              {colorsAvail && colorsAvail.length === 1 ? (
+              <>
+                <label style={{ marginRight: "10px" }}>Color:</label>
+                <label style={{ marginRight: "10px" }}>
+                  {" "}
+                  {colorsAvail[0].value}
+                </label>
               </>
             ) : null}
           </div>
@@ -358,7 +372,7 @@ const NewAddToCartForm = ({ productDetail }) => {
             ) : null}
           </div>
           <div style={{ marginTop: "10px" }}>
-            {gendersAvail && gendersAvail.length > 0 ? (
+            {gendersAvail && gendersAvail.length > 1 ? (
               <>
                 <label style={{ marginRight: "10px" }}>Gender:</label>
                 <Select
@@ -369,6 +383,15 @@ const NewAddToCartForm = ({ productDetail }) => {
                   // isClearable={true}
                   isSearchable={true}
                 ></Select>
+              </>
+            ) : null}
+            {gendersAvail && gendersAvail.length === 1 ? (
+              <>
+                <label style={{ marginRight: "10px" }}>Gender:</label>
+                <label style={{ marginRight: "10px" }}>
+                  {" "}
+                  {gendersAvail[0].value}
+                </label>
               </>
             ) : null}
           </div>
@@ -384,4 +407,4 @@ const NewAddToCartForm = ({ productDetail }) => {
   }
 };
 
-export default NewAddToCartForm;
+export default AddToCartForm;

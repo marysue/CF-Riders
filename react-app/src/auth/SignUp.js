@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
-import { baseUrl } from './config';
-import { TOKEN_KEY, setUserName, setAvatarURL, setToken, setUserId } from './store/authentication';
+import { baseUrl } from '../config';
+import { TOKEN_KEY, setUserName, setAvatarURL, setToken, setUserId } from '../store/authentication';
 import { Redirect } from 'react-router-dom';
 
 const SignUp = (props) => {

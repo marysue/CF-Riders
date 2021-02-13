@@ -25,8 +25,9 @@ export const removeUserEmail = () => ({type: REMOVE_USER_EMAIL});
 export const setUserEmail = emailAddress => ({ type: SET_USER_EMAIL, emailAddress});
 export const removeUserId = () => ({ type: REMOVE_USER_ID });
 export const setUserId = id => ({ type: SET_USER_ID, id});
-export const setBadgeCount = count => ({ type: SET_BADGE_COUNT, count})
-export const removeBadgeCount = ({ type: REMOVE_BADGE_COUNT});
+export const setBadgeCount = count => ({ type: SET_BADGE_COUNT, count});
+export const removeBadgeCount = () => ({ type: REMOVE_BADGE_COUNT});
+
 //thunks
 export const loadToken = () => async dispatch => {
   const token = window.localStorage.getItem(TOKEN_KEY);

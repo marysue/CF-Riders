@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import UserReview from './UserReview';
-import ProductReviewInput from './ProductReviewInput';
+import ProductReviewInput from '../ProductReviewInput';
 import AddToCartForm from './AddToCartForm';
-import ProductHeadline from './ProductHeadline';
-import ProductReviewSignup from './ProductReviewSignup';
+import ProductHeadline from './product/ProductHeadline';
+import ProductReviewSignup from '../ProductReviewSignup';
 import { setUserId } from './store/authentication';
 import {
     getSelectedProductInfo,

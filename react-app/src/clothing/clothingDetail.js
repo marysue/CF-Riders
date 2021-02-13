@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {  useSelector  } from 'react-redux';
 import { useLocation } from 'react-router-dom'
-import NewProductDetail from '../newProductDetail';
+import ProductDetail from '../product/ProductDetail';
 import { getSelectedProductInfo } from '../store/selectedProduct';
 import { baseUrl } from '../config';
 
@@ -81,7 +81,7 @@ const ClothingDetail = () => {
         // console.log(`Detail: ${detail} userPosted: ${userPosted} productRating: ${productRating} userReviews: ${userReviews}`);
         return ( <h2>Loading...</h2>)
     } else {
-    return ( <NewProductDetail detail={detail} userPosted={userPosted} productRating={productRating} userReviews={userReviews} /> )
+    return ( <ProductDetail detail={detail} userPosted={userPosted} productRating={productRating} userReviews={userReviews} /> )
     }
 }
 
