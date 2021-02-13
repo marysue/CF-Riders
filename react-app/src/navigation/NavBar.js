@@ -78,7 +78,6 @@ useEffect( () => {
 
     const handleSignIn = (e) => {
         if (!token) {
-            alert("Signing in");
             e.preventDefault();
             history.push('/users/logInOrSignUp');
         } else {
@@ -93,7 +92,6 @@ useEffect( () => {
             window.localStorage.removeItem(TOKEN_KEY);
             window.localStorage.removeItem("userId");
             window.localStorage.removeItem("/user/authentication/token");
-            alert("Signed out");
             history.push('/');
         }
     }
