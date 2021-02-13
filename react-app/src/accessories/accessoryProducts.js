@@ -3,24 +3,23 @@ import { useSelector } from 'react-redux';
 import Figure from 'react-bootstrap/Figure';
 import { Link } from 'react-router-dom';
 
-const BicycleProducts = () => {
-    console.log("Bicycle Products Page");
-    const bicycleArr = useSelector(state => state.bicycles.bicycleList);
-
-    if (bicycleArr) {
+const AccessoryProducts = () => {
+    console.log("Accessory Products Page");
+    const accessoryArr = useSelector(state => state.accessories.accessoryList);
+    if (accessoryArr) {
         return (
             <>
                 <div className="productGrid">
-                    {bicycleArr.map( (item, idx) => {
+                    {accessoryArr.map( (item) => {
                         const id = item.id;
                         const name = item.name;
                         const photoURL = item.photoURL;
                         const price = item.price.toFixed(2);
                         return (
 
-                            <Link style={{ textDecoration: 'none' }} className="productItem" to={`/bicycleDetail/${id}`} key={id}>
-                                <img id={item.id} key={id} src={photoURL} alt={"Bicycles"}></img>
-                                <Figure.Caption>{name}</Figure.Caption>
+                            <Link style={{ textDecoration: 'none' }} className="productItem" to={`/accessoryDetail/${id}`} key={id}>
+                                <img id={item.id} key={id} src={photoURL} alt={"Accessories"}></img>
+                                <Figure.Caption style={{marginTop:"-5px"}}>{name}</Figure.Caption>
                                 <span className="price">${price}</span>
                             </Link>
                         )
@@ -34,4 +33,4 @@ const BicycleProducts = () => {
         }
 }
 
-export default BicycleProducts;
+export default AccessoryProducts;

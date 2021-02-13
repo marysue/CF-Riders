@@ -62,6 +62,7 @@ const NewAddToCartForm = ({ productDetail }) => {
     }
 
     setInventoryAvail(productDetail.inventoryAvail);
+    console.log("InventoryAvail:  ", productDetail.inventoryAvail);
   }, [productDetail]);
 
   const setOptions = (inv) => {
@@ -72,16 +73,16 @@ const NewAddToCartForm = ({ productDetail }) => {
     let sz, clr, fr, gdr;
     for (let i = 0; i < inv.length; i++) {
       if (inv[i].size) {
-        sz = { value: inv[i].size, label: inv[i].size };
+        sz = { value: inv[i].size, label: inv[i].size, isdisabled: false };
       }
       if (inv[i].color) {
-        clr = { value: inv[i].color, label: inv[i].color };
+        clr = { value: inv[i].color, label: inv[i].color, isdisabled: false };
       }
       if (inv[i].frame) {
-        fr = { value: inv[i].frame, label: inv[i].frame };
+        fr = { value: inv[i].frame, label: inv[i].frame, isdisabled: false };
       }
       if (inv[i].gender) {
-        gdr = { value: inv[i].gender, label: inv[i].gender };
+        gdr = { value: inv[i].gender, label: inv[i].gender, isdisabled: false };
       }
       if (inv[i].size && !objInArray(sz, tmpSizes)) {
         tmpSizes.push(sz);
@@ -98,6 +99,7 @@ const NewAddToCartForm = ({ productDetail }) => {
     }
     if (tmpSizes.length > 0) {
       setSizesAvail(tmpSizes);
+
     } else {
       setSizesAvail([]);
     }
@@ -118,33 +120,34 @@ const NewAddToCartForm = ({ productDetail }) => {
     }
   };
 
+
   const setNewInventory = (inv) => {
     let newInventory = [];
 
-    for (let i = 0; i < inv.length; i++) {
-      if (inv[i].color && colorSelected) {
-        if (inv[i].color !== colorSelected) {
+    for (let i = 0; i < inventoryAvail.length; i++) {
+      if (inventoryAvail[i].color && colorSelected) {
+        if (inventoryAvail[i].color !== colorSelected) {
           continue;
         } //don't add this one -- it doesn't match)
       }
-      if (inv[i].size && sizeSelected) {
-        if (inv[i].size !== sizeSelected) {
+      if (inventoryAvail[i].size && sizeSelected) {
+        if (inventoryAvail[i].size !== sizeSelected) {
           continue;
         } //don't add this one -- it doesn't match)
       }
-      if (inv[i].gender && genderSelected) {
-        if (inv[i].gender !== genderSelected) {
+      if (inventoryAvail[i].gender && genderSelected) {
+        if (inventoryAvail[i].gender !== genderSelected) {
           continue;
         } //don't add this one -- it doesn't match)
       }
-      if (inv[i].frames && frameSelected) {
-        if (inv[i].frames !== frameSelected) {
+      if (inventoryAvail[i].frames && frameSelected) {
+        if (inventoryAvail[i].frames !== frameSelected) {
           continue;
         } //don't add this one - it doesn't match);
       }
       //if we made it this far, it matches on everything we wanted it to match on. So add it to
-      //our new inventory
-      newInventory.push(inv[i]);
+      //our new inventoryAvailentory
+      newInventory.push(inventoryAvail[i]);
     }
     return newInventory;
   };
@@ -157,10 +160,12 @@ const NewAddToCartForm = ({ productDetail }) => {
     return false;
   };
 
+
+
   const handleChange = (prop) => (newValue) => {
     switch (prop) {
       case "color": {
-        setColorSelected(newValue.value);
+          setColorSelected(newValue.value);
         break;
       }
       case "size": {
@@ -179,6 +184,7 @@ const NewAddToCartForm = ({ productDetail }) => {
         break;
       }
     }
+
 
     const newInventory = setNewInventory(inventoryAvail);
     setInventoryAvail(newInventory);
@@ -294,7 +300,10 @@ const NewAddToCartForm = ({ productDetail }) => {
   } else if (!productDetail.productId || !inventoryAvail) {
     return <h2>Loading...</h2>;
   } else {
-    // console.log("NewAddToCartForm: inventoryAvail: ", inventoryAvail);
+    console.log("NewAddToCartForm: inventoryAvail: ", inventoryAvail);
+    console.log("NewAddToCartForm: colorsAvail: ", colorsAvail);
+    console.log("NewAddToCartForm: sizesAvail: ", sizesAvail);
+    console.log("NewAddToCartForm: gendersAvail: ", gendersAvail);
     return (
       <>
         {errorMsg ? (
@@ -304,7 +313,7 @@ const NewAddToCartForm = ({ productDetail }) => {
         ) : null}
         <form onSubmit={handleSubmit} style={{ color: "black" }}>
           <div style={{ marginTop: "10px" }}>
-            {sizesAvail.length > 0 ? (
+            {sizesAvail && sizesAvail.length > 0 ? (
               <>
                 <label style={{ marginRight: "10px" }}>Size:</label>
                 <Select
@@ -316,7 +325,7 @@ const NewAddToCartForm = ({ productDetail }) => {
             ) : null}
           </div>
           <div style={{ marginTop: "10px" }}>
-            {colorsAvail.length > 0 ? (
+            {colorsAvail && colorsAvail.length > 0 ? (
               <>
                 <label style={{ marginRight: "10px" }}>Color:</label>
                 <Select
@@ -329,7 +338,7 @@ const NewAddToCartForm = ({ productDetail }) => {
           </div>
 
           <div style={{ marginTop: "10px" }}>
-            {framesAvail.length > 1 ? (
+            {framesAvail && framesAvail.length > 1 ? (
               <>
                 <label style={{ marginRight: "10px" }}>Frame:</label>
                 <Select
@@ -338,7 +347,7 @@ const NewAddToCartForm = ({ productDetail }) => {
                 ></Select>
               </>
             ) : null}
-            {framesAvail.length === 1 ? (
+            {framesAvail && framesAvail.length === 1 ? (
               <>
                 <label style={{ marginRight: "10px" }}>Frame:</label>
                 <label style={{ marginRight: "10px" }}>
@@ -349,7 +358,7 @@ const NewAddToCartForm = ({ productDetail }) => {
             ) : null}
           </div>
           <div style={{ marginTop: "10px" }}>
-            {gendersAvail.length > 0 ? (
+            {gendersAvail && gendersAvail.length > 0 ? (
               <>
                 <label style={{ marginRight: "10px" }}>Gender:</label>
                 <Select

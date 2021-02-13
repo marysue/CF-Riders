@@ -15,9 +15,12 @@ import LogInOrSignUp from './LogInOrSignUp';
 import OrderConfirmation from './OrderConfirmation';
 import OrderDetail from './OrderDetail';
 import NavBar from './NavBar';
-import BicycleProducts from './bicycleProducts';
-import BicycleDetail from './bicycleDetail';
-
+import BicycleProducts from './bicycles/bicycleProducts';
+import BicycleDetail from './bicycles/bicycleDetail';
+import ClothingProducts from './clothing/clothingProducts';
+import ClothingDetail from './clothing/clothingDetail';
+import AccessoryProducts from './accessories/accessoryProducts';
+import AccessoryDetail from './accessories/accessoryDetail';
 
 
 const PrivateRoute = ({component: Component, ...rest}) => {
@@ -101,6 +104,24 @@ const App = () => {
                 <Route
                   path="/bicycleDetail/:id"
                   component={BicycleDetail}
+                />
+                <Route
+                path="/clothingProducts"
+                exact
+                component={ClothingProducts}
+                />
+                <Route
+                  path="/clothingDetail/:id"
+                  component={ClothingDetail}
+                />
+                 <Route
+                path="/accessoryProducts"
+                exact
+                component={AccessoryProducts}
+                />
+                <Route
+                  path="/accessoryDetail/:id"
+                  component={AccessoryDetail}
                 />
               <Route
                   path="/productDetail"

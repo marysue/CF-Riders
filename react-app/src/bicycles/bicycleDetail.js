@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import {  useSelector  } from 'react-redux';
 import { useLocation } from 'react-router-dom'
-import NewProductDetail from './newProductDetail';
-import { getSelectedProductInfo } from './store/selectedProduct';
-import { baseUrl } from './config';
+import NewProductDetail from '../newProductDetail';
+import { getSelectedProductInfo } from '../store/selectedProduct';
+import { baseUrl } from '../config';
 
 const BicycleDetail = () => {
     const location = useLocation()
@@ -15,20 +15,22 @@ const BicycleDetail = () => {
     const [userPosted, setUserPosted] = useState(undefined);
     const [productRating, setProductRating] = useState(undefined);
     const [userReviews, setUserReviews] = useState(undefined);
-    // console.log("BicycleDetail: UserId: ", userId);
+    console.log("BicycleDetail: UserId: ", userId);
 
     useEffect(() => {
         // console.log("BicycleDetail: useEffect: productId: ", productId);
         if (!productId) return;
 
-
+        //Get selected product information
         (async() => {
             // console.log("BicycleDetail: useEffect: sending getSelectedProductInfo with productId: ", productId)
             const productInfo = await getSelectedProductInfo(productId)
             // console.log("BicycleDetail: useEffect: fetch bicycleDetail: ",  productInfo);
             setDetail(productInfo);
+            console.log("BicycleDetail: ProductInfo:  ", productInfo);
         })();
 
+        //get product rating
         (async() => {
             // console.log(`BicycleDetail: Sending get reviewsRatings/ratings/${productId}`);
             const response = await fetch(`${baseUrl}/reviewsRatings/rating/${productId}`);
@@ -41,8 +43,9 @@ const BicycleDetail = () => {
             }
         })();
 
+        //get product review
         (async() => {
-            // console.log(`BicycleDetail: Sending request : /reviewsRatings/reviews/${productId}`);
+            console.log(`BicycleDetail: Sending request : /reviewsRatings/reviews/${productId}`);
             const response = await fetch(`${baseUrl}/reviewsRatings/reviews/${productId}`);
 
             if (response.ok) {
@@ -74,11 +77,12 @@ const BicycleDetail = () => {
         })();
     }, [productId, userId])
 
-    if (!detail  || !productRating || !userReviews) {
+    if (!detail ) {
         // console.log(`Detail: ${detail} userPosted: ${userPosted} productRating: ${productRating} userReviews: ${userReviews}`);
         return ( <h2>Loading...</h2>)
-    }
+    } else {
     return ( <NewProductDetail detail={detail} userPosted={userPosted} productRating={productRating} userReviews={userReviews} /> )
+    }
 }
 
 export default BicycleDetail;

@@ -17,9 +17,10 @@ const ProductHeadline = ({productDetail, productRating, productPrice}) => {
         // console.log("Contents of stars:  ", stars);
         // console.log("productjRating:  ", productRating);
     }, [productRating])
+    console.log("ProductDetail :  ", productDetail);
     return (
         <div >
-            <h2 style={{color: "white"}}>{productDetail.name}</h2>
+            <h2 style={{color: "white"}}>{productDetail.productName}</h2>
             <p>{stars}</p>
             <p>{productDetail.description}</p>
             <p>Price:  ${productDetail.price}</p>

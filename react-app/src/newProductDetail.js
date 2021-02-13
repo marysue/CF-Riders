@@ -16,7 +16,8 @@ const NewProductDetail = ({detail, userPosted, userReviews, productRating }) => 
                 <div className="productDetail" style={{width:"60%"}} >
                     <img src={detail.photoURL} style={{height: "400px"}} alt="product detail"></img>
                     <h2>Product Reviews:  </h2>
-                    { userReviews.map( (review, idx) => <UserReview key={idx} productId={detail.id} review={review}></UserReview>) }
+                    { userReviews && userReviews.length > 0 ?
+                      userReviews.map( (review, idx) => <UserReview key={idx} productId={detail.id} review={review}></UserReview>)  : <h2>Be the first to write a review!</h2>}
 
                 </div>
                 <div className="productOrder" style={{ display:"inline-block", width:"30%"}}>
