@@ -20,7 +20,7 @@ import ClothingProducts from './clothing/clothingProducts';
 import ClothingDetail from './clothing/clothingDetail';
 import AccessoryProducts from './accessories/accessoryProducts';
 import AccessoryDetail from './accessories/accessoryDetail';
-
+import CartForm from './cart/CartForm';
 
 const PrivateRoute = ({component: Component, ...rest}) => {
   return (<Route render={(props) => {
@@ -126,6 +126,12 @@ const App = () => {
                     exact={true}
                     needLogin={needLogin}
                     component={AddToCartForm}
+                  />
+                <PrivateRoute
+                  path='/cartForm'
+                  exact={true}
+                  needLogin={needLogin}
+                  component={CartForm}
                   />
               <PrivateRoute
                 path="/order"
