@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 //import { useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 //import { Button } from 'react-bootstrap';
 import { baseUrl } from '../config';
 import CartItem from './CartItem';
+import { setCartList } from '../store/cart';
 
 const CartForm = () => {
 
 const userId = useSelector(state => state.authentication.userId);
-const [cartList, setCartList] = useState([]);
+const cartList = useSelector(state => state.cart.cartList);
+const dispatch = useDispatch();
 
 useEffect( () => {
     if (userId) {
@@ -16,12 +18,11 @@ useEffect( () => {
             const response = await fetch(`${baseUrl}/carts/${userId}`);
             if (response.ok) {
                 const cl = await response.json();
-                setCartList(cl.cartList);
+                dispatch(setCartList(cl.cartList));
                 console.log("CartList: set cl to:  ", cl.cartList);
             } else {
                 console.log("CartList:  Failed fetch cart items");
             }
-
             })();
     } else {
         console.log("CartList:  Cannot fetch cart - No userId!");
@@ -30,6 +31,8 @@ useEffect( () => {
 if (!userId) {
     console.log("No userId!")
     return ( <h2>Loading...</h2>)
+} else if (!cartList) {
+    return (<h2>No items in your cart ...</h2>)
 } else {
     console.log("cartList.length:  ", cartList.length);
     return (

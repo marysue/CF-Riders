@@ -1,7 +1,7 @@
 import { baseUrl } from '../config'
 
 //constants
-export const SET_CART_LIST = 'cart/cartList';
+export const SET_CART_LIST = 'cart/setCartList';
 export const REMOVE_CART_LIST = 'cart/removeCartList';
 
 //actions
