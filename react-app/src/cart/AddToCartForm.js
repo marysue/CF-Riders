@@ -250,11 +250,11 @@ const AddToCartForm = ({ productDetail }) => {
           }
 
       } else {
-        console.log("AddToCartForm: Failed fetch.  InventoryId: ",
-          inventoryId,
-          " UserId: ",
-          userId
-        );
+        // console.log("AddToCartForm: Failed fetch.  InventoryId: ",
+        //   inventoryId,
+        //   " UserId: ",
+        //   userId
+        // );
       }
     } else {
       setTimeout(() => {

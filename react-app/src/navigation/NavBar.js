@@ -46,7 +46,7 @@ useEffect( () => {
         }
     })();
 } else {
-    console.log("NavBar:  Error:  No userId!");
+    // console.log("NavBar:  Error:  No userId!");
 }
 
 }, [userId, avatarURL, dispatch]);
@@ -60,7 +60,7 @@ useEffect( () => {
         }
     })();
 } else {
-    console.log("NavBar:  Error:  No userId!");
+    // console.log("NavBar:  Error:  No userId!");
 }
 
 }, [userId, name, dispatch]);

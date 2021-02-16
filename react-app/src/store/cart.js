@@ -53,7 +53,7 @@ export const fetchCartList = async(userId) => {
             throw response.status;
         }
     } catch (e) {
-        console.log("CartList fetch error: ", e);
+        // console.log("CartList fetch error: ", e);
     }
 }
 
@@ -71,10 +71,10 @@ export const addCartItem = async(userId, inventoryId, quantity) => {
                 const retVal = response.json();
                 return retVal;
             } else {
-                console.log("cart fetch:  failed to add new cart item.")
+                // console.log("cart fetch:  failed to add new cart item.")
             }
         } catch (e) {
-            console.log("cart fetch: failed to create new cart item.  ", e);
+            // console.log("cart fetch: failed to create new cart item.  ", e);
         }
     }
 export const orderCartItems = async(userId) => {
@@ -83,10 +83,10 @@ export const orderCartItems = async(userId) => {
         method: "post",
         headers: { "Content-Type": "application/json"}});
         if (!response.ok) {
-            console.log("Failed to place order from cart!")
+            // console.log("Failed to place order from cart!")
         }
     } catch (e) {
-        console.log("Failed to place order.  ", e);
+        // console.log("Failed to place order.  ", e);
     }
 }
 
@@ -106,7 +106,7 @@ export const removeCartItem = async(userId, cartId, inventoryId) => {
                 const updatedCart = await response.json();
                 return updatedCart;
             } else {
-                console.log("Failed to delete cartItem.  Response: ", response.status);
+                // console.log("Failed to delete cartItem.  Response: ", response.status);
             }
     } catch (e) {
 

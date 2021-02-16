@@ -21,14 +21,14 @@ async function start() {
 
     nodemon
         .on("log", async (log) => {
-            console.log(`[${log.type}] ${log.colour}`);
+            //console.log(`[${log.type}] ${log.colour}`);
         })
         .on("start", async () => {
-            console.log("Nodemon started ./bin/www");
+            //console.log("Nodemon started ./bin/www");
             await fs.writeFile("nodemon.pid", `${process.pid}`);
         })
         .on("quit", async () => {
-            console.log("Nodemon shutting down");
+            //console.log("Nodemon shutting down");
             await fs.unlink("nodemon.pid");
             process.exit();
         });

@@ -142,7 +142,7 @@ export const getSelectedProductInfo = async (productId) => {
                 productName: respArr.name, photoURL: respArr.photoURL, price: respArr.price, description: respArr.description, inventoryAvail: respArr.productInfo }
 
      } else {
-         console.log("Error retrieving selected product info.");
+        //  console.log("Error retrieving selected product info.");
         return response.status;
      }
 }

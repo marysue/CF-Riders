@@ -54,6 +54,6 @@ export const fetchAccessoriesList = async() => {
             throw response.status;
         }
     } catch (e) {
-        console.log("AccessoriesList fetch error: ", e);
+        // console.log("AccessoriesList fetch error: ", e);
     }
 }

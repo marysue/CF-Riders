@@ -30,7 +30,7 @@ const AccessoryDetail = () => {
                 const resp = await response.json();
                 setProductRating(resp.averageRating);
             } else {
-                console.log("AccessoryDetail: : Errors fetching avgRating");
+                // console.log("AccessoryDetail: : Errors fetching avgRating");
             }
         })();
 
@@ -50,7 +50,7 @@ const AccessoryDetail = () => {
                 const reviews = resp.reviews;
                 setUserReviews(reviews);
             } else {
-                console.log("AccessoryDetail: :  Errors fetching user reviews...");
+                // console.log("AccessoryDetail: :  Errors fetching user reviews...");
             }
         })();
     }, [productId])

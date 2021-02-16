@@ -30,7 +30,7 @@ const ClothingDetail = () => {
                 const resp = await response.json();
                 setProductRating(resp.averageRating);
             } else {
-                 console.log("ClothingDetail: : Errors fetching avgRating");
+                //  console.log("ClothingDetail: : Errors fetching avgRating");
             }
         })();
 
@@ -50,7 +50,7 @@ const ClothingDetail = () => {
 
                  setUserReviews(reviews);
             } else {
-                 console.log("ClothingDetail: :  Errors fetching user reviews...");
+                //  console.log("ClothingDetail: :  Errors fetching user reviews...");
             }
         })();
     }, [productId])

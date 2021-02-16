@@ -54,7 +54,7 @@ export const fetchClothingList = async() => {
                 throw response.status;
             }
         } catch (e) {
-            console.log("clothingList fetch error: ", e);
+            // console.log("clothingList fetch error: ", e);
         }
 
 }

@@ -31,11 +31,11 @@ useEffect( () => {
                 }
                 dispatch(setCartListTotal((Number(parseFloat(tcl).toFixed(2)).toLocaleString('en', {minimumFractionDigits : 2}))));
             } else {
-                console.log("CartList:  Failed fetch cart items");
+                // console.log("CartList:  Failed fetch cart items");
             }
             })();
     } else {
-        console.log("CartList:  Cannot fetch cart - No userId!");
+        // console.log("CartList:  Cannot fetch cart - No userId!");
     }
 }, [userId, dispatch, totalCartList])
 

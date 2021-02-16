@@ -179,7 +179,7 @@ export const getBadgeCount = async(userId) => {
         const cartItems = await response.json();
         return cartItems.cartItems;
     } else {
-        console.log("Failed to get badgeCount.");
+        // console.log("Failed to get badgeCount.");
         return 0;
     }
 }

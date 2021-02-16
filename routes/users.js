@@ -94,7 +94,7 @@ router.post (
     });
 
     if (!user.validatePassword(password)) {
-      console.log("Error: could not validate user password!  ", password)
+      // console.log("Error: could not validate user password!  ", password)
     }
 
     if (!user || !user.validatePassword(password)) {

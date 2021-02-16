@@ -30,7 +30,7 @@ const BicycleDetail = () => {
                 const resp = await response.json();
                 setProductRating(resp.averageRating);
             } else {
-                console.log("BicycleDetail: : Errors fetching avgRating");
+                // console.log("BicycleDetail: : Errors fetching avgRating");
             }
         })();
 
@@ -51,7 +51,7 @@ const BicycleDetail = () => {
 
                 setUserReviews(reviews);
             } else {
-                console.log("BicycleDetail: :  Errors fetching user reviews...");
+                // console.log("BicycleDetail: :  Errors fetching user reviews...");
             }
         })();
     }, [productId])

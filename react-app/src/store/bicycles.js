@@ -49,6 +49,6 @@ export const fetchBicyclesList = async() => {
                 throw response.status;
             }
         } catch (e) {
-            console.log("BicyclesList fetch error: ", e);
+            // console.log("BicyclesList fetch error: ", e);
         }
 }
