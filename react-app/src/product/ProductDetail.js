@@ -9,7 +9,7 @@ import ProductReviewSignup from './ProductReviewSignup';
 
 const ProductDetail = ({detail, userPosted, userReviews, productRating }) => {
     const userId = useSelector(state => state.authentication.userId)
-    // console.log("NewProductDetail: userId: ", userId);
+
     return (
         <div>
             <div style={{display:"flex", height: 'auto'}}>

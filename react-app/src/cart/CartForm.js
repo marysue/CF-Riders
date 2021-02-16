@@ -16,26 +16,18 @@ const totalCartList = useSelector(state => state.cart.cartListTotal);
 const dispatch = useDispatch();
 const [orderPlaced, setOrderPlaced] = useState(false);
 
-// console.log("cartList: ", cartList);
-
 useEffect( () => {
-    console.log("Inside useEffect!");
     if (userId) {
-        console.log("UserId: ", userId);
 
         (async() => {
             const response = await fetch(`${baseUrl}/carts/${userId}`);
             if (response.ok) {
                 const cl = await response.json();
                 dispatch(setCartList(cl.cartList));
-                console.log("CartList: set cl to:  ", cl.cartList);
                 let tcl = 0
-                console.log("cl.length:  ", cl.cartList.length);
                 for (let i = 0; i < cl.cartList.length; i++) {
                     tcl += cl.cartList[i].price;
-                    console.log("cl.cartList[", i, "].price: ", cl.cartList[i].price);
                 }
-                console.log("Total cart:  ", tcl);
                 dispatch(setCartListTotal((Number(parseFloat(tcl).toFixed(2)).toLocaleString('en', {minimumFractionDigits : 2}))));
             } else {
                 console.log("CartList:  Failed fetch cart items");
@@ -55,7 +47,6 @@ const buttonClickHandler = (e) => {
 
 
 if (!userId) {
-    console.log("No userId!")
     return ( <h2>Loading...</h2>)
 } else if (orderPlaced) {
     return<h2>Your order has been placed!</h2>
@@ -63,7 +54,6 @@ if (!userId) {
 else if (!cartList) {
     return (<h2>No items in your cart ...</h2>)
 } else {
-    console.log("cartList.length:  ", cartList.length);
     return (
 
         <div style={{display: "inline-block"}}>

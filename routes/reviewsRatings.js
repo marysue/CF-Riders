@@ -10,10 +10,8 @@ router.get(
     "/reviews/:userId/:productId",
     asyncHandler
     (async (req, res) => {
-        console.log("***********************REVIEWS***********************");
         const productId_FK = req.params.productId;
         const userId_FK = req.params.userId;
-        console.log("Checking for productId_FK: ", productId_FK, " userId_FK: ", userId_FK);
         const found = await ReviewRating.findAll(
             { where: {
                 productId_FK: {
@@ -24,7 +22,6 @@ router.get(
 
             }
             }});
-        console.log("Found:  ", found);
         if (found.length === 0) {
             res.status(201).json({status: 'ok'});
         } else {
@@ -36,28 +33,21 @@ router.get(
     asyncHandler
     (async (req, res) => {
         const id = parseInt(req.params.id);
-        console.log(req.params)
         const ratings = await ReviewRating.findAll(
             { where: {
                 productId_FK: {
                     [Op.eq]: req.params.id,
                 }
             }})
-        console.log("Number of ratings: ", ratings.length)
         const nbrRatings = ratings.length;
         let totalRatings = 0;
         let avgRatings = 0;
-        console.log("Ratings:  ", ratings);
         for (let i = 0; i < nbrRatings; i++) {
-            console.log("ratings[", i, "]:  ", ratings[i].rating);
             totalRatings += ratings[i].rating;
         }
         if (totalRatings > 0) {
             avgRatings = totalRatings/nbrRatings;
         }
-        console.log("Total ratings: ", totalRatings);
-        console.log("Number ratings:  ", nbrRatings);
-        console.log("Average: ", avgRatings);
         res.status(201).json({
             averageRating: Math.round(avgRatings)
           });
@@ -98,7 +88,6 @@ router.get(
             "/reviews/:productId",
             asyncHandler
             (async (req, res) => {
-                console.log("Received:  ", req.params.productId, " and req: ", req.body);
                 const productId_FK = parseInt(req.params.productId);
                 const userId_FK = req.body.userId;
                 const review = req.body.review;
@@ -113,7 +102,6 @@ router.get(
 
                     }
                     }});
-                    console.log("found:  ", found);
                 if (!userId_FK || !productId_FK || !rating || !review) {
                     let msg = '';
                     !userId_FK ? msg += ' -userId missing ' : null;
@@ -123,7 +111,6 @@ router.get(
 
                     res.status(400).json(msg);
                 } else if (found.length === 0) {
-                    // console.log("InventoryId: ", inventoryId_FK, " UserId: ", userId_FK, " Quantity: ", quantity);
                     const reviewObj = await ReviewRating.create({ userId_FK, productId_FK, review, rating });
                     res.status(201).json({status: 'ok'});
                 } else {

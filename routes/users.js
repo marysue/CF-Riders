@@ -65,17 +65,7 @@ router.post(
   // handleValidationErrors,
   asyncHandler
   (async (req, res) => {
-    console.log("Made it to this route!!!", req.body);
     const { name, emailAddress, password, avatarURL, confirmPassword } = req.body;
-    console.log("*******************************************");
-    console.log("name: ", name);
-    console.log("emailAddress: ", emailAddress);
-    console.log("password: ", password);
-    console.log("confirmPassword: ", confirmPassword);
-    console.log("avatarURL:  ", avatarURL);
-    console.log("*******************************************");
-    console.log("req.body:  ");
-    console.log(req.body);
     const passwordHash = await bcrypt.hash(password, 10);
     const user = await User.create({ name, emailAddress, passwordHash, avatarURL });
     const token = getUserToken(user);
@@ -97,18 +87,14 @@ router.post (
   "/login",
   asyncHandler(async (req, res, next) => {
     const { emailAddress, password } = req.body;
-    console.log("Backend /login route:  ", emailAddress, " : ", password);
     const user = await User.findOne({
       where: {
         emailAddress,
       },
     });
-    if (user) {
-      console.log("     found user:  ", user);
-    }
 
     if (!user.validatePassword(password)) {
-      console.log("     could not validate the password!  ", password)
+      console.log("Error: could not validate user password!  ", password)
     }
 
     if (!user || !user.validatePassword(password)) {
@@ -138,9 +124,7 @@ router.post(
   asyncHandler(async (req, res, next) => {
     const { email: emailAddress, password } = req.body;
 
-    console.log("*****Backend /users/token route received:  ", emailAddress, " and password: ", password);
-    console.log("*********Req.body: ", req.body);
-    const user = await User.findOne({
+   const user = await User.findOne({
       where: {
         emailAddress,
       },
@@ -173,17 +157,6 @@ router.get('/userName/:userId', asyncHandler(async (req, res, next) => {
   res.json({ userName: user.name });
   })
 );
-// router.get('/userName/:userId', asyncHandler(async (req, res, next) => {
-//   console.log("****************************************************")
-//   console.log("userId: ", req.params.userId);
-//   const user = await User.findByPk(req.params.userId);
-//   console.log("userName:  ", user.name);
-//   const name = { userName: user.name }
-//   console.log(" returning name: ", name);
-//   console.log("****************************************************")
-//   res.status('200').res.json({ avatarURL: user.name });
-//   })
-// );
 
 router.post('/logout', (req, res) => {
   res.clearCookie('accessToken')

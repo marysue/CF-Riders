@@ -5,13 +5,7 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';  //set font-size
 import Badge from '@material-ui/core/Badge';
 import HomeIcon from '@material-ui/icons/Home';
 import { setSelectedProductType } from '../store/selectedProduct';
-
-// import { createMuiTheme } from '@material-ui/core/styles';
-// import { ThemeProvider } from '@material-ui/styles';
-// import { purple } from '@material-ui/core/colors';
-// import imgSrc from './images/girl1.png';
 import { TOKEN_KEY, removeToken, setUserId, getAvatarURL, setAvatarURL, removeAvatarURL, getUserName, setUserName, removeUserName, removeUserId, removeUserEmail, removeBadgeCount, setBadgeCount, getBadgeCount } from '../store/authentication';
-
 
 const NavBar = () => {
     const dispatch = useDispatch();
@@ -23,12 +17,11 @@ const NavBar = () => {
     const name = useSelector(state => state.authentication.name);
     const badgeCount = useSelector(state => state.authentication.badgeCount);
     const history = useHistory();
-    console.log("Hit navbar...badgeCount is: ", badgeCount);
+
 
     useEffect( () => {
         if (!userId) {
             const uid = window.localStorage.getItem("userId");
-            console.log("NavBar:  no userID.  Getting it from local storage:  ", uid);
             dispatch(setUserId(uid));
         }
         //eslint-disable-next-line react-hooks/exhaustive-deps
@@ -40,7 +33,6 @@ useEffect( () => {
         if (userId) {
             let bc = await getBadgeCount(userId);
             dispatch(setBadgeCount(bc));
-            console.log("New badge count is:  ", bc);
         }
     })();
 }, [badgeCount, dispatch, userId]);
@@ -51,27 +43,24 @@ useEffect( () => {
         if (userId) {
             let url = await getAvatarURL(userId);
             dispatch(setAvatarURL(url));
-            console.log("NavBar:  recalling avatarURL and setting in redux store:  ", url);
         }
     })();
 } else {
-    console.log("NavBar:  No userId!");
+    console.log("NavBar:  Error:  No userId!");
 }
 
 }, [userId, avatarURL, dispatch]);
 
 useEffect( () => {
-    console.log("NavBar: useEffect:  Getting username!");
     if (userId) {
     (async() => {
         if (userId) {
             let name = await getUserName(userId);
             dispatch(setUserName(name));
-            console.log("NavBar:  recalling userName and setting in redux store:  ", name);
         }
     })();
 } else {
-    console.log("NavBar:  No userId!");
+    console.log("NavBar:  Error:  No userId!");
 }
 
 }, [userId, name, dispatch]);
@@ -96,7 +85,6 @@ useEffect( () => {
         }
     }
 
-
     const handleHomeClick = (e) => {
         e.preventDefault();
         setSelectedProductType('');
@@ -110,9 +98,7 @@ useEffect( () => {
 
     return (
         <div style={{display:"inline-flex", justifyContent:"space-between", width:"100%", borderBottom:"2px solid white"}}>
-            {/* <Container style={{display:"flex", flexDirection: "row", justifyContent:"space-between"}}> */}
-
-                    <div className="homeShoppingCartIcon" >
+             <div className="homeShoppingCartIcon" >
                         <HomeIcon className="homeIcon"  onClick={handleHomeClick}style={{margin:"10px", color: "white", fontSize:"40px"}}></HomeIcon>
                         <Badge className={"shoppingCartIcon"} onClick={handleCartClick} badgeContent={badgeCount} color="secondary" >
                             <ShoppingCartIcon style={{ color: "white", fontSize:"40px"}}></ShoppingCartIcon>
@@ -125,7 +111,6 @@ useEffect( () => {
                          <button className="signInButton"  onClick={handleSignIn}>{token ? "SignOut" : "SignIn"}</button>
                         { avatarURL ?
                             <img src={avatarURL} className="main-profile-img avatar" alt="avatar"/> :  <img src={"https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"} className="main-profile-img avatar" alt="avatar"/> }
-                            {/* <i className="fa"></i>{name} */}
                         <div style={{display:"block"}}>
                         { name ? <h4 style={{marginBottom: "0"}}>Welcome</h4> : null }
                         { name ? <h4 style={{marginTop: "0"}}>{name}!</h4> : null }

@@ -5,8 +5,6 @@ import App from './App';
 
 const AppWithContext = (props) => {
     const [token, setToken] = useState('');
-    console.log("Inside AppWithContext");
-
     useEffect(() => {
       (async() => {
         const localToken = window.localStorage.getItem("token");

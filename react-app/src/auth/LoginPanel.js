@@ -22,10 +22,7 @@ const LoginPanel = (props) => {
             body: JSON.stringify({ emailAddress: "demouser@demouser.com", password: "password" }),
           });
 
-        //   console.log("Sent login request with user:  demouser@demouser.com, and password:  password");
-        //   console.log("response is:  ", response);
-
-          if (response.ok) {
+        if (response.ok) {
                 const { token, user } = await response.json();
                 window.localStorage.setItem(TOKEN_KEY, token);
                 window.localStorage.setItem("userId", user.id);
@@ -44,8 +41,6 @@ const LoginPanel = (props) => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ emailAddress: email, password }),
           });
-          console.log("Sent login request with user: ", email, " and password: ", password);
-          console.log("response is:  ", response);
           if (response.ok) {
             const { token, user } = await response.json();
             window.localStorage.setItem(TOKEN_KEY, token);

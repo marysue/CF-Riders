@@ -22,10 +22,8 @@ router.get(
     asyncHandler
     (async (req, res) => {
         const type = req.params.type;
-        console.log("Type is:  ", type);
         const id = req.params.id;
         let detail = [];
-        console.log("type:  ", type);
         if (type === 'Bicycles') {
             const bd = await BicycleDetail.findAll(
                 { where: {
@@ -39,7 +37,6 @@ router.get(
                 detail.push(bd[i].size + " cm")
             }
 
-            console.log("Type = Bicycles, detail: ", detail);
         } else if (type === 'Clothing') {
                 const cd = await ClothingDetail.findAll(
                     { where: {
@@ -51,8 +48,6 @@ router.get(
             for (let i=0; i < cd.length; i++) {
                 detail.push(cd[i].size);
             }
-            //grab sex and size and return
-            console.log("type = clothing, detail: ", detail);
         }
 
         res.status(201).json(detail);

@@ -4,7 +4,6 @@ import Figure from "react-bootstrap/Figure";
 import { Link } from "react-router-dom";
 
 const ClothingProducts = () => {
-  console.log("Clothing Products Page");
   const clothingArr = useSelector((state) => state.clothing.clothingList);
   if (clothingArr) {
     return (

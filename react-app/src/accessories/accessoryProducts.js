@@ -4,7 +4,6 @@ import Figure from 'react-bootstrap/Figure';
 import { Link } from 'react-router-dom';
 
 const AccessoryProducts = () => {
-    console.log("Accessory Products Page");
     const accessoryArr = useSelector(state => state.accessories.accessoryList);
     if (accessoryArr) {
         return (

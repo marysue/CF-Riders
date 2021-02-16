@@ -26,19 +26,14 @@ const formatCartList = async (cartList) => {
   fcl = [];
 
   for (let i = 0; i < cartList.length; i++) {
-    // console.log("Inventory.color_FK: ", cartList[i].Inventory.color_FK)
-    // console.log("colorsObj: ", colorsObj);
-    // console.log("colorsObj[", cartList[i].Inventory.color_FK, "]: ", colorsObj[cartList[i].Inventory.color_FK]);
     const obj = {
       quantity: cartList[i].quantity,
       userId: cartList[i].userId_FK,
       inventoryId: cartList[i].inventoryId_FK,
       cartId: cartList[i].id,
     };
-    console.log("fcl: ", fcl);
     fcl.push(obj);
   }
-  //console.log("fcl:  ", fcl);
   return fcl;
 };
 
@@ -61,15 +56,11 @@ router.post(
     const quantity = 1;
     for (let i = 0; i < cl.length; i++) {
       const productId_FK = cl[i].Inventory.productId_FK;
-      console.log("userId_FK:  ", userId_FK, "cl[", i, "].Inventory.productId_FK:  ", cl[i].Inventory.productId_FK, " quantity: ", quantity);
       const order = await Order.create({ userId_FK, quantity });
-      console.log("Order: ", order);
       const orderId_FK = order.id;
-      console.log("orderId_FK:  ", orderId_FK);
       const orderProduct = await OrderProduct.create({orderId_FK, productId_FK});
       cartListIds.push(cl[i].id);
     }
-    console.log("cartListIds: ", cartListIds);
     await Cart.destroy({
         where: {
             id: cartListIds
@@ -92,7 +83,6 @@ router.get(
     });
 
     const formattedCartList = await formatCartList(cartList);
-    //console.log("formattedCartList: ", formattedCartList);
     res.status(201).json({
       formattedCartList,
     });
@@ -122,16 +112,7 @@ router.post(
     const inventoryId_FK = req.body.inventoryId;
     const userId_FK = req.body.userId;
     const quantity = req.body.quantity;
-    console.log("quantity:  ", quantity);
-    console.log(
-      "InventoryId: ",
-      inventoryId_FK,
-      " UserId: ",
-      userId_FK,
-      " Quantity: ",
-      quantity
-    );
-
+    
     const inventory = await Inventory.findByPk(inventoryId_FK);
     const oldQty = inventory.quantity;
     const newQty = oldQty - quantity;

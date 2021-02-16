@@ -18,10 +18,6 @@ const ProductReviewInput = ({productDetail, productId}) => {
 
     const handleSubmitReview = (e) => {
         e.preventDefault();
-        console.log("Handle updateProductReview ...");
-        console.log("The next state may be problematic. Not sure about the next line passing state...");
-        console.log("Entered:  ", review);
-        console.log("productId:  ", productId);
         (async() => {
             const response = await fetch(`${baseUrl}/reviewsRatings/reviews/${productId}`, {
               method: 'post',
@@ -29,7 +25,6 @@ const ProductReviewInput = ({productDetail, productId}) => {
               body: JSON.stringify({ userId, rating, review }),
             });
             if (response.ok) {
-                console.log("successfully posted review.")
                 setErrors('');
                 setReview('');
                 setRating(0);
@@ -45,13 +40,6 @@ const ProductReviewInput = ({productDetail, productId}) => {
                   console.log("ProductReviewInput: Failed to post review ...");
               }
           })();
-        //   return ( <Redirect
-        //     to={{
-        //         pathname: "/productDetail",
-        //        state: { props: productDetail}
-        //     }}
-        //     />)
-
     }
 
     const updateReview = (e) => {
@@ -59,12 +47,7 @@ const ProductReviewInput = ({productDetail, productId}) => {
     };
 
 
-    // const updateReview = (e) => {
-    //     setReview(e.target.value);
-    // };
-
 const handleStarClick = (e) => {
-      // console.log("Clicked on star: ", e.target.id);
       let rating = 0;
       switch (e.target.id) {
           case "star1": {

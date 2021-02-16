@@ -62,7 +62,6 @@ const AddToCartForm = ({ productDetail }) => {
     }
 
     setInventoryAvail(productDetail.inventoryAvail);
-    console.log("InventoryAvail:  ", productDetail.inventoryAvail);
   }, [productDetail]);
 
   const setOptions = (inv) => {
@@ -118,12 +117,6 @@ const AddToCartForm = ({ productDetail }) => {
     } else {
       setFramesAvail([]);
     }
-
-    console.log("Options:  ...");
-    console.log("Frames available:  ", tmpFrames);
-    console.log("Colors Avail: ", colorsAvail);
-    console.log("Genders avail: ", gendersAvail);
-    console.log("Sizes avail: ", sizesAvail);
   };
 
 
@@ -192,45 +185,27 @@ const AddToCartForm = ({ productDetail }) => {
 
     }
 
-    console.log("colorSelected: ", colorSelected, " sizeSelected: ", sizeSelected, " genderSelected: ", genderSelected, " frameSelected: ", frameSelected);
     const newInventory = setNewInventory(inventoryAvail);
-    console.log(" New inventory:  ", newInventory);
     setInventoryAvail(newInventory);
-    console.log("Setting options from new inventory...");
     setOptions(newInventory);
   };
   const findInventoryId = () => {
-    console.log(`AddToCartForm: findInventoryId: Values set: size: ${sizeSelected}, color: ${colorSelected}, frame: ${frameSelected}, gender: ${genderSelected}`);
-    console.log(
-      `colorSelected: ${colorSelected}, sizeSelected: ${sizeSelected}, genderSelected: ${genderSelected}, frameSelected: ${frameSelected}`
-    );
+
     for (let i = 0; i < inventoryAvail.length; i++) {
-      console.log(
-        `${i}:  ${inventoryAvail[i].size}, ${inventoryAvail[i].color}, ${inventoryAvail[i].frame}, ${inventoryAvail[i].gender}`
-      );
+
       if (sizeSelected && inventoryAvail[i].size !== sizeSelected) {
-        console.log(`${i}:  size: ${inventoryAvail[i].size} no match`);
         continue;
       }
       if (colorSelected && inventoryAvail[i].color !== colorSelected) {
-        console.log(`${i}:  color: ${inventoryAvail[i].color} no match`);
         continue;
       }
 
       if (frameSelected && inventoryAvail[i].frame !== frameSelected) {
-        console.log(
-          `${i}:  frame: ${inventoryAvail[i].frame} no match with selected: ${frameSelected}`
-        );
         continue;
       }
       if (genderSelected && inventoryAvail[i].gender !== genderSelected) {
-        console.log(`${i}:  gender: ${inventoryAvail[i].gender} no match`);
         continue;
       }
-      console.log(
-        "Returning inventoryAvail[i].inventoryId",
-        inventoryAvail[i].inventoryId
-      );
       //if we make it this far, we've found the appropriate inventory item.
       return inventoryAvail[i].inventoryId;
     }
@@ -239,26 +214,21 @@ const AddToCartForm = ({ productDetail }) => {
 
   const submitCheck = () => {
     if (colorsAvail && colorsAvail.length > 1 && !colorSelected) {
-      console.log("Setting colorSelected error");
       setErrorMsg((errorMsg) => (errorMsg += "No color specified.  "));
     }
     if (sizesAvail && sizesAvail.length > 1 && !sizeSelected) {
-      console.log("Setting sizeSelected error.");
       setErrorMsg((errorMsg) => (errorMsg += "No size selected.  "));
     }
     if (gendersAvail && gendersAvail.length > 1 && !genderSelected) {
-      console.log("Setting genderSelected error.");
       setErrorMsg((errorMsg) => (errorMsg += "Select M/F. "));
     }
     if (framesAvail && framesAvail.length > 1 && !frameSelected) {
-      console.log("Setting frameSelected error.");
       setErrorMsg((errorMsg) => (errorMsg += "No frame selected. "));
     }
   };
   const handleSubmit = async(event) => {
     event.preventDefault();
     submitCheck();
-    console.log("ErrorMsg:  ", errorMsg);
 
     if (errorMsg === "") {
       const inventoryId = findInventoryId();
@@ -280,8 +250,7 @@ const AddToCartForm = ({ productDetail }) => {
           }
 
       } else {
-        console.log(
-          "AddToCartForm: Failed fetch.  InventoryId: ",
+        console.log("AddToCartForm: Failed fetch.  InventoryId: ",
           inventoryId,
           " UserId: ",
           userId
@@ -316,101 +285,100 @@ const AddToCartForm = ({ productDetail }) => {
             {errorMsg}
           </div>
         ) : null}
-        <form onSubmit={handleSubmit} style={{ color: "black" }}>
-          <div style={{ marginTop: "10px" }}>
-            {sizesAvail && sizesAvail.length > 1 ? (
-              <>
-                <label style={{ marginRight: "10px" }}>Size:</label>
-                <Select
-                  options={sizesAvail}
-                  onChange={handleChange("size")}
-                  isSearchable={true}
-                ></Select>
-              </>
-            ) : null}
-             {sizesAvail && sizesAvail.length === 1 ? (
-              <>
-                <label style={{ marginRight: "10px" }}>Size:</label>
-                <label style={{ marginRight: "10px" }}>
-                  {" "}
-                  {sizesAvail[0].value}
-                </label>
-              </>
-            ) : null}
-          </div>
-          <div style={{ marginTop: "10px" }}>
-            {colorsAvail && colorsAvail.length > 1 ? (
-              <>
-                <label style={{ marginRight: "10px" }}>Color:</label>
-                <Select
-                  options={colorsAvail}
-                  onChange={handleChange("color")}
-                  isSearchable={true}
-                ></Select>
-              </>
-            ) : null}
-              {colorsAvail && colorsAvail.length === 1 ? (
-              <>
-                <label style={{ marginRight: "10px" }}>Color:</label>
-                <label style={{ marginRight: "10px" }}>
-                  {" "}
-                  {colorsAvail[0].value}
-                </label>
-              </>
-            ) : null}
-          </div>
+        { inventoryAvail && inventoryAvail.length > 0 ?
+          <form onSubmit={handleSubmit} >
+            <div style={{ marginTop: "10px" }}>
+              {sizesAvail && sizesAvail.length > 1 ? (
+                <>
+                  <label style={{ marginRight: "10px" }}>Size:</label>
+                  <Select
+                    options={sizesAvail}
+                    onChange={handleChange("size")}
+                    isSearchable={true}
+                  ></Select>
+                </>
+              ) : null}
+              {sizesAvail && sizesAvail.length === 1 ? (
+                <>
+                  <label style={{ marginRight: "10px" }}>Size:</label>
+                  <label style={{ marginRight: "10px" }}>
+                    {" "}
+                    {sizesAvail[0].value}
+                  </label>
+                </>
+              ) : null}
+            </div>
+            <div style={{ marginTop: "10px" }}>
+              {colorsAvail && colorsAvail.length > 1 ? (
+                <>
+                  <label style={{ marginRight: "10px" }}>Color:</label>
+                  <Select
+                    options={colorsAvail}
+                    onChange={handleChange("color")}
+                    isSearchable={true}
+                  ></Select>
+                </>
+              ) : null}
+                {colorsAvail && colorsAvail.length === 1 ? (
+                <>
+                  <label style={{ marginRight: "10px" }}>Color:</label>
+                  <label style={{ marginRight: "10px" }}>
+                    {" "}
+                    {colorsAvail[0].value}
+                  </label>
+                </>
+              ) : null}
+            </div>
 
-          <div style={{ marginTop: "10px" }}>
-            {framesAvail && framesAvail.length > 1 ? (
-              <>
-                <label style={{ marginRight: "10px" }}>Frame:</label>
-                <Select
-                  options={framesAvail}
-                  onChange={handleChange("frame")}
-                ></Select>
-              </>
-            ) : null}
-            {framesAvail && framesAvail.length === 1 ? (
-              <>
-                <label style={{ marginRight: "10px" }}>Frame:</label>
-                <label style={{ marginRight: "10px" }}>
-                  {" "}
-                  {framesAvail[0].value}
-                </label>
-              </>
-            ) : null}
-          </div>
-          <div style={{ marginTop: "10px" }}>
-            {gendersAvail && gendersAvail.length > 1 ? (
-              <>
-                <label style={{ marginRight: "10px" }}>Gender:</label>
-                <Select
-                  options={gendersAvail}
-                  // value={ values.gender }
-                  // defaultValue={values.gender}
-                  onChange={handleChange("gender")}
-                  // isClearable={true}
-                  isSearchable={true}
-                ></Select>
-              </>
-            ) : null}
-            {gendersAvail && gendersAvail.length === 1 ? (
-              <>
-                <label style={{ marginRight: "10px" }}>Gender:</label>
-                <label style={{ marginRight: "10px" }}>
-                  {" "}
-                  {gendersAvail[0].value}
-                </label>
-              </>
-            ) : null}
-          </div>
+            <div style={{ marginTop: "10px" }}>
+              {framesAvail && framesAvail.length > 1 ? (
+                <>
+                  <label style={{ marginRight: "10px" }}>Frame:</label>
+                  <Select
+                    options={framesAvail}
+                    onChange={handleChange("frame")}
+                  ></Select>
+                </>
+              ) : null}
+              {framesAvail && framesAvail.length === 1 ? (
+                <>
+                  <label style={{ marginRight: "10px" }}>Frame:</label>
+                  <label style={{ marginRight: "10px" }}>
+                    {" "}
+                    {framesAvail[0].value}
+                  </label>
+                </>
+              ) : null}
+            </div>
+            <div style={{ marginTop: "10px" }}>
+              {gendersAvail && gendersAvail.length > 1 ? (
+                <>
+                  <label style={{ marginRight: "10px" }}>Gender:</label>
+                  <Select
+                    options={gendersAvail}
+                    onChange={handleChange("gender")}
+                    isSearchable={true}
+                  ></Select>
+                </>
+              ) : null}
+              {gendersAvail && gendersAvail.length === 1 ? (
+                <>
+                  <label style={{ marginRight: "10px" }}>Gender:</label>
+                  <label style={{ marginRight: "10px" }}>
+                    {" "}
+                    {gendersAvail[0].value}
+                  </label>
+                </>
+              ) : null}
+            </div>
 
-          <input
-            style={{ display: "block", marginTop: "15px" }}
-            type="submit"
-            value="Add To Cart"
-          />
-        </form>
+            <input
+              style={{ display: "block", marginTop: "15px" }}
+              type="submit"
+              value="Add To Cart"
+            />
+          </form>
+   : <h4>Temporarily out of stock</h4> }
       </>
     );
   }

@@ -13,15 +13,12 @@ const ProductDetail = (props) => {
 
 
 
-    const pid = props.location.state.props.id;
 
    const [userReviews, setUserReviews] = useState([]);
    const productDetail = props.location.state.props;
    const userId = useSelector(state => state.authentication.userId);
-   const productPrice = useSelector(state => state.selectedProduct.price);
-   const [, setProductDescription] = useState();
+
    const [productRating, setProductRating] = useState();
-   const dispatch = useDispatch();
 
     useEffect(() => {
 

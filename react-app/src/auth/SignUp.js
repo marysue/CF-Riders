@@ -22,12 +22,10 @@ const SignUp = (props) => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, emailAddress, password, confirmPassword, avatarURL }),
           });
-        //   console.log("Sent signup request with user: ", emailAddress, " and password: ", password);
           if (response.ok) {
             const { token, user } = await response.json();
             window.localStorage.setItem(TOKEN_KEY, token);
             dispatch(setToken(token));
-            // console.log("User name:  ", user.name);
             dispatch(setUserName(user.name.split(" ")[0]));
             dispatch(setUserId(user.id));
             if (avatarURL === '') {

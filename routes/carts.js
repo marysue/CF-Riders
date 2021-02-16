@@ -49,10 +49,8 @@ const setFrames = async () => {
   const frames = await Frame.findAll();
   let obj = {};
   for (let i = 0; i < frames.length; i++) {
-    //console.log("FRAMES[I]:  ", frames[i]);
     obj = { ...obj, [i]: frames[i].type };
   }
-  //console.log("FRAME Object: ", obj)
   return obj;
 };
 
@@ -77,9 +75,6 @@ const formatCartList = async (cartList) => {
 
   for (let i = 0; i < cartList.length; i++) {
     const product = await Product.findByPk(cartList[i].Inventory.productId_FK);
-    // console.log("Inventory.color_FK: ", cartList[i].Inventory.color_FK)
-    // console.log("colorsObj: ", colorsObj);
-    // console.log("colorsObj[", cartList[i].Inventory.color_FK, "]: ", colorsObj[cartList[i].Inventory.color_FK]);
     const obj = {
       quantity: cartList[i].quantity,
       userName: cartList[i].User.name,
@@ -100,7 +95,6 @@ const formatCartList = async (cartList) => {
 
     fcl.push(obj);
   }
-  //console.log("fcl:  ", fcl);
   return fcl;
 };
 
@@ -111,12 +105,9 @@ router.post(
     const inventoryId_FK = req.body.inventoryId;
     const userId_FK = req.body.userId;
     const quantity = req.body.quantity;
-    //console.log("InventoryId: ", inventoryId_FK, " UserId: ", userId_FK, " Quantity: ", quantity);
     const cart = await Cart.create({ userId_FK, inventoryId_FK, quantity });
-    //console.log("cart created: ", cart);
 
     const inventory = await Inventory.findByPk(inventoryId_FK);
-    //console.log("Inventory.quantity:  ", inventory.quantity);
     inventory.quantity -= cart.quantity;
     await inventory.save({ fields: ["quantity"] });
     const inv = await Inventory.findByPk(inventoryId_FK);
@@ -139,20 +130,16 @@ router.post(
 router.post(
   "/removeCartItem/:cartId",
   asyncHandler(async (req, res) => {
-    console.log("Hit removeItem/:cartId");
-      const userId = req.body.userId;
-      const cartId = req.params.cartId;
-      console.log("UserId:  ", userId, " cartId: ", cartId);
-        const deleteItem = await Cart.findByPk(cartId,
+    const userId = req.body.userId;
+    const cartId = req.params.cartId;
+    const deleteItem = await Cart.findByPk(cartId,
             {
               include: Inventory
             });
         if (deleteItem) {
-            console.log("Inventory original quantity: ", deleteItem.Inventory.quantity);
             deleteItem.Inventory.quantity += deleteItem.quantity;
             await deleteItem.Inventory.save({ fields: ["quantity"] });
             const inv = await Inventory.findByPk(deleteItem.inventoryId_FK);
-            console.log("updated inventory quantity: ", inv.quantity);
             await deleteItem.destroy();
 
             //Now return the refreshed cart list:
@@ -176,7 +163,6 @@ router.get(
   "/:userId",
   asyncHandler(async (req, res) => {
     const userId = parseInt(req.params.userId);
-    console.log("User id ", userId, " is type:  ", typeof(userId));
     const cl = await Cart.findAll({
       where: {
         userId_FK: {
@@ -187,7 +173,6 @@ router.get(
     });
 
     const cartList = await formatCartList(cl);
-    //console.log("formattedCartList: ", formattedCartList);
     res.status(201).json({
       cartList,
     });

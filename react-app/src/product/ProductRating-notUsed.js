@@ -9,7 +9,6 @@ const ProductRating = (props) => {
     const [star5Active, setStar5Active] = useState(false);
 
     const handleClick = (e) => {
-        // console.log("Clicked on star: ", e.target.id);
         let rating = 0;
         switch (e.target.id) {
             case "star1": {
@@ -62,9 +61,6 @@ const ProductRating = (props) => {
                 }
             default :
             }
-            console.log("Rating:  ", rating);
-            (async() => {
-            })();
 
     };
 

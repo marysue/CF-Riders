@@ -5,13 +5,11 @@ const LogInOrSignUp = ({props}) => {
     const history = useHistory();
     const handleLogin = (e) => {
         e.preventDefault();
-        // console.log("Handle login ...");
         history.push({pathname: '/users/login'});
     }
 
     const handleSignUp = (e) => {
         e.preventDefault();
-        // console.log("Handle signIn...");
         history.push({pathname: '/users/signup'});
 
     }

@@ -140,19 +140,7 @@ export const getSelectedProductInfo = async (productId) => {
 
         return { type: respArr.type, productId: productId, colorsAvail: tmpColors, sizesAvail: tmpSizes, framesAvail: tmpFrames, gendersAvail: tmpGenders,
                 productName: respArr.name, photoURL: respArr.photoURL, price: respArr.price, description: respArr.description, inventoryAvail: respArr.productInfo }
-//import { useDispatch } from 'react-redux';
-                //    const dispatch = useDispatch();
-        // dispatch(setSelectedProductType(respArr.type));
-        // dispatch(setSelectedProductId(productId));
-        // dispatch(setColorsAvail(tmpColors));
-        // dispatch(setSizesAvail(tmpSizes));
-        // dispatch(setFramesAvail(tmpFrames));
-        // dispatch(setGendersAvail(tmpGendeers));
-        // dispatch(setProductName(respArr.name));
-        // dispatch(setProductPhotoURL(respArr.photoURL));
-        // dispatch(setProductPrice(respArr.price));
-        // dispatch(setProductDescription(respArr.description));
-        // dispatch(setInventoryAvail(respArr.productInfo));
+
      } else {
          console.log("Error retrieving selected product info.");
         return response.status;

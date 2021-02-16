@@ -37,8 +37,7 @@ export const loadToken = () => async dispatch => {
 };
 
 export const getUserInfo = (emailAddress) => async dispatch => {
-  // console.log("getUserInfo received email:  ", emailAddress);
-    const response = await fetch(`${baseUrl}/users/avatarInfo`, {
+  const response = await fetch(`${baseUrl}/users/avatarInfo`, {
        method: 'post',
        headers: { 'Content-Type': 'application/json' },
        body: JSON.stringify({emailAddress}),
@@ -64,9 +63,7 @@ export const logout = () => async (dispatch) => {
 
 // just a function
 export const getAvatarURL = async(userId) => {
-  console.log("getAvatarURL: calling fetch now...");
   const response = await fetch(`${baseUrl}/users/avatarURL/${userId}`);
-  console.log("getAvatarURL:  response status:  ", response.status);
   if (response.ok) {
     const resp = await response.json();
     return resp.avatarURL;
@@ -82,8 +79,7 @@ export const getUserName = async(userId) => {
 }
 
 export const getToken = async (emailAddress, password) => {
-  console.log("getToken received email:  ", emailAddress, " and password: ", password);
-    const response = await fetch(`${baseUrl}/users/token`, {
+   const response = await fetch(`${baseUrl}/users/token`, {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({emailAddress, password}),
@@ -130,7 +126,6 @@ export default function reducer(state = {}, action) {
 
     case REMOVE_AVATAR_URL: {
       const newState = { ...state};
-      console.log("Store: authentication: REMOVING AVATAR URL!!!");
       delete newState.avatarURL;
       return newState;
     }
@@ -144,7 +139,6 @@ export default function reducer(state = {}, action) {
     case REMOVE_USER_NAME: {
       const newState = { ...state };
       delete newState.name;
-      console.log("Removing userName from Redux Store");
       return newState;
     }
 
@@ -183,7 +177,6 @@ export const getBadgeCount = async(userId) => {
     });
     if (response.ok) {
         const cartItems = await response.json();
-        console.log("Received ", cartItems.cartItems, " cart items");
         return cartItems.cartItems;
     } else {
         console.log("Failed to get badgeCount.");

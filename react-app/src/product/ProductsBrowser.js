@@ -32,7 +32,6 @@ const ProductsBrowser = () => {
     }, [bicyclesList, accessoriesList, clothingList, productsSelected]);
 
     const handleClick = (e) => {
-        console.log("clicked...");
         dispatch(setSelectedProductType(e.target.id));
         switch (e.target.id) {
             case 'Bicycles':

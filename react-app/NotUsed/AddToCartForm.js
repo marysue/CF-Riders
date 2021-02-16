@@ -46,49 +46,29 @@ const AddToCartForm = ({productDetail}) => {
                         let tmpGenders = [];
                         let tmpFrames = [];
                         let tmpInventory = [];
-                        console.log("ProductInfo.length:  ", productInfo.length);
 
                         if (productInfo.length > 0 ) {
                             let sz, clr, fr, gdr;
                             for (let i = 0; i < productInfo.length; i++) {
-                                console.log("ProductInfo[", i, "]: ", productInfo[i]);
                                 if (productInfo[i].size) { sz = { value: productInfo[i].size, label: productInfo[i].size }};
                                 if (productInfo[i].color) { clr = { value: productInfo[i].color, label: productInfo[i].color }};
                                 if (productInfo[i].frame) { fr = { value: productInfo[i].frame, label: productInfo[i].frame }};
                                 if (productInfo[i].gender) { gdr = { value: productInfo[i].gender, label: productInfo[i].gender }};
-                                console.log("sz: ", sz, " clr: ", clr, " fr: ", fr, " gdr: ", gdr);
                                 if  ((productInfo[i].size) && (!objInArray(sz, tmpSizes))){tmpSizes.push(sz)}
                                 if  ((productInfo[i].color) && (!objInArray(clr, tmpColors))) {tmpColors.push(clr) }
                                 if  ((productInfo[i].frame) && (!objInArray(fr, tmpFrames))) { tmpFrames.push(fr) }
                                 if  ((productInfo[i].gender) && (!objInArray(gdr, tmpGenders))) { tmpGenders.push(gdr) }
                             }
                         }
-                        // } else if (productInfo.length > 0 && productInfo[0].gender) {
-                        //     //we have clothing
-                        //     for (let i = 0; i < productInfo.length; i++) {
-                        //         const gdr = { value: productInfo[i].gender, label: productInfo[i].gender }
-                        //         const sz = { value: productInfo[i].size, label: productInfo[i].size }
-                        //         if (!objInArray(gdr,tmpGenders)) { tmpGenders.push(gdr) }
-                        //         if (!objInArray(sz,tmpSizes)) { tmpSizes.push(sz) }
-                        //     }
-                        // }
-                        //set inventory to match with chosen values
-                        for (let i = 0; i < productInfo.length; i++) {
+                       for (let i = 0; i < productInfo.length; i++) {
                             tmpInventory.push(productInfo[i]);
                         }
                         setInventory(tmpInventory);
-                        console.log("inventory length:  ", tmpInventory.length);
-                        console.log("product Detail Id:  ", productDetail.id);
                         if (tmpSizes.length > 0) {setSizes(tmpSizes)} else {setSizes([])};
                         if (tmpGenders.length > 0) {setGenders(tmpGenders)} else {setGenders([])};
                         if (tmpColors.length > 0) {setColors(tmpColors)} else {setColors([])};
                         if (tmpFrames.length > 0) {setFrames(tmpFrames)} else {setFrames([])};
-                        //setValues({...values, gender: genders[0].value, size:sizes[0].value, color:colors[0].value, frame:frames[0].value });
-                        console.log("sizes:  ", tmpSizes.length);
-                        console.log("genders: ", tmpGenders.length);
-                        console.log("colors: ", tmpColors.length);
-                        console.log("frames: ", tmpFrames.length);
-                    } else {
+                        } else {
                         throw response.status;
                     }
                 } catch (e) {
@@ -162,14 +142,10 @@ const AddToCartForm = ({productDetail}) => {
        setOptions(newInventory);
     }
     const findInventoryId = () => {
-        console.log(`Values set: size: ${values.size}, color: ${values.color}, frame: ${values.frame}, gender: ${values.gender}`);
-
         if (!inventory.size && !inventory.color && !inventory.frame && !inventory.gender) {
-            console.log("Inventory.id: ", inventory[0]);
             return inventory[0].inventoryId;
         }
         for (let i=0; i < inventory.length; i++) {
-            console.log(`Inventory: size: ${inventory.size}, color: ${inventory.color}, frame: ${inventory.frame}, gender: ${inventory.gender}`);
             if (values.size && inventory.size !== values.size) { continue; }
             if (values.color && inventory.color !== values.color) { continue; }
             if (values.frame && inventory.frame !== values.frame) { continue; }
@@ -183,11 +159,7 @@ const AddToCartForm = ({productDetail}) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-
-        //console.log("Inventory:  ", inventory);
         const inventoryId = findInventoryId();
-        //console.log("Inventory id:  ", inventoryId);
-        //console.log("UserId: ", userId);
         if (inventoryId && userId) {
             (async () => {
                 const response = await fetch(`${baseUrl}/carts`, {
@@ -200,7 +172,6 @@ const AddToCartForm = ({productDetail}) => {
                 });
                 if (response.ok) {
                     const cartItemCount = await response.json();
-                    console.log("AddToCartForm: Setting badgeCount to:  ", cartItemCount.cartItmes);
                     dispatch(setBadgeCount(cartItemCount.cartItems));
                 }
             })();

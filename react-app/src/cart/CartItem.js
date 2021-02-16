@@ -1,12 +1,11 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setCartList, removeCartItem, setCartListTotal } from '../store/cart';
 
 const CartItem = ({item, index}) => {
     const dispatch = useDispatch();
 
     const removeItem = async(e) => {
-        console.log("Item:  ", item);
         const newCartList = await removeCartItem(item.userId, item.cartId, item.inventoryId);
         let ncl = 0;
         for (let i = 0; i < newCartList.length; i++) {

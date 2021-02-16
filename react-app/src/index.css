@@ -229,7 +229,8 @@ html, body {
    font-size: 30px;
    text-align: center;
    width: 200px;
-   height: 200px;
+   height: 250px;
+   text-decoration: none;
   }
 
   img.productItem {
@@ -268,6 +269,13 @@ html, body {
   }
 
   .productItem > figcaption {
+    color: black;
+    text-align: center;
+    font-size: 15px;
+    margin-top: -5px;
+  }
+
+  .bicycleItem > figcaption {
     color: black;
     text-align: center;
     font-size: 15px;
@@ -346,7 +354,16 @@ html, body {
   margin-top: 0px;
 }
 
+.productDetail img {
+  margin-top:40px;
+}
+
 .productOrder {
   margin-top: 40px;
   margin-left: 20px;
 }
+
+.productOrder h2 {
+  color: black;
+}
+
