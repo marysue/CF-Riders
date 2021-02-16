@@ -191,6 +191,10 @@ html, body {
     color: white;
   }
 
+  .shoppingCartIcon:hover {
+    cursor: pointer;
+  }
+
   .homeIcon:hover {
     cursor: pointer;
   }

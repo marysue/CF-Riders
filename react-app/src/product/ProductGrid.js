@@ -1,6 +1,6 @@
 import React, { useState} from 'react';
 import { useSelector } from 'react-redux';
-import { Redirect} from 'react-router-dom';
+import { Redirect, Link} from 'react-router-dom';
 import Figure from 'react-bootstrap/Figure'
 
 
@@ -59,40 +59,50 @@ const ProductGrid = (props) => {
         return null
     }
     if (productDetail) {
-       return ( <Redirect
-            to={{
-                pathname: "/productDetail",
-               state: { props: productDetail}
-            }}
-            />)
+        console.log("Productdetail: ", productDetail);
+        switch(listItemType) {
+            case 'Bicycles' : {
+                return (<Redirect to={{pathname: "/bicycleDetail/productDetail.id"}}></Redirect>)
+
+            }
+            case 'Clothing': {
+                return (<Redirect to={{pathname: "/clothingDetail/productDetail.id"}}></Redirect>)
+
+            }
+            case 'Accessories': {
+                return (<Redirect to={{pathname: "/accessoryDetail/productDetail.id"}}></Redirect>)
+            }
+            default:
+        }
 
     } else {
+        console.log("listItemArr[0]:  ", listItemArr[0]);
     return (
         <>
             <div>
 
                 <div className="productGrid" onClick={handleClick}>
-                    <div className="productItem">
-                        <img id={`${listItemType}-0`} src={listItemArr[0].photoURL} alt={props.category}></img>
-                        <Figure.Caption>{listItemArr[0].name}</Figure.Caption>
-                    </div>
-                    <div className="productItem">
+                     <Link className="productItem" style={{ textDecoration: 'none' }} className="productItem" to={`/bicycleDetail/${listItemArr[0].id}`} key={listItemArr[0].id}>
+                            <img id={`${listItemType}-0`} src={listItemArr[0].photoURL} alt={props.category}></img>
+                            <Figure.Caption>{listItemArr[0].name}</Figure.Caption>
+                    </Link>
+                    <Link className="productItem" style={{ textDecoration: 'none' }} className="productItem" to={`/bicycleDetail/${listItemArr[1].id}`} key={listItemArr[1].id}>
                         <img id={`${listItemType}-1`} src={listItemArr[1].photoURL} alt={props.category}></img>
                         <Figure.Caption>{listItemArr[1].name}</Figure.Caption>
-                    </div>
-                    <div className="productItem">
+                    </Link>
+                      <Link className="productItem" style={{ textDecoration: 'none' }} className="productItem" to={`/bicycleDetail/${listItemArr[2].id}`} key={listItemArr[2].id}>
                         <img id={`${listItemType}-2`} src={listItemArr[2].photoURL} alt={props.category}></img>
                         <Figure.Caption>{listItemArr[2].name}</Figure.Caption>
-                    </div>
-                    <div className="productItem">
+                    </Link>
+                      <Link className="productItem" style={{ textDecoration: 'none' }} className="productItem" to={`/bicycleDetail/${listItemArr[3].id}`} key={listItemArr[3].id}>
                         <img id={`${listItemType}-3`} src={listItemArr[3].photoURL} alt={props.category}></img>
                         <Figure.Caption>{listItemArr[3].name}</Figure.Caption>
 
-                    </div>
-                    <div className="productItem">
+                    </Link>
+                      <Link className="productItem" style={{ textDecoration: 'none' }} className="productItem" to={`/bicycleDetail/${listItemArr[4].id}`} key={listItemArr[4].id}>
                         <img id={`${listItemType}-4`} src={listItemArr[4].photoURL} alt={props.category}></img>
                         <Figure.Caption>{listItemArr[4].name}</Figure.Caption>
-                    </div>
+                    </Link>
                 </div>
 
             </div>

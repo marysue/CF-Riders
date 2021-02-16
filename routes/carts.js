@@ -175,10 +175,12 @@ router.post(
 router.get(
   "/:userId",
   asyncHandler(async (req, res) => {
+    const userId = parseInt(req.params.userId);
+    console.log("User id ", userId, " is type:  ", typeof(userId));
     const cl = await Cart.findAll({
       where: {
         userId_FK: {
-          [Op.eq]: req.params.userId,
+          [Op.eq]: userId,
         },
       },
       include: ["Inventory", "User"],
@@ -195,10 +197,11 @@ router.get(
 router.get(
   "/cartItemCount/:userId",
   asyncHandler(async (req, res) => {
+    const userId = req.params.userId;
     const cartList = await Cart.findAll({
       where: {
         userId_FK: {
-          [Op.eq]: req.params.userId,
+          [Op.eq]: userId,
         },
       },
     });

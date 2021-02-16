@@ -32,17 +32,26 @@ const ProductsBrowser = () => {
     }, [bicyclesList, accessoriesList, clothingList, productsSelected]);
 
     const handleClick = (e) => {
-        console.log("ProductsBrowser: handleClick:  Setting productsSelected:  ", e.target.id);
-        console.log("ProductsBrowser:  handleClick: settingSelectedProductType: ", e.target.id);
+        console.log("clicked...");
         dispatch(setSelectedProductType(e.target.id));
-        const typesArr = ['Bicycles', 'Clothing', 'Accessories']
-        console.log("ProductsBrowser: handleClick:  selectedProduct:  ", e.target.id);
-        console.log("Is selected product in array?  ", typesArr.includes(e.target.id));
-        if (typesArr.includes(e.target.id)) {
-            console.log("ProductsBrowser: handleClick:  redirecting to /products for ", e.target.id);
-            history.push({
-                pathname: '/productsPage'
-            })
+        switch (e.target.id) {
+            case 'Bicycles':
+                history.push({
+                    pathname: '/bicycleProducts'
+                })
+                break;
+            case 'Clothing':
+                history.push({
+                    pathname: '/clothingProducts'
+                })
+                break;
+            case 'Accessories':
+                history.push({
+                    pathname: '/accessoryProducts'
+                })
+                break;
+            default:
+                break;
         }
      };
 

@@ -118,6 +118,12 @@ const AddToCartForm = ({ productDetail }) => {
     } else {
       setFramesAvail([]);
     }
+
+    console.log("Options:  ...");
+    console.log("Frames available:  ", tmpFrames);
+    console.log("Colors Avail: ", colorsAvail);
+    console.log("Genders avail: ", gendersAvail);
+    console.log("Sizes avail: ", sizesAvail);
   };
 
 
@@ -183,15 +189,18 @@ const AddToCartForm = ({ productDetail }) => {
       default: {
         break;
       }
+
     }
 
-
+    console.log("colorSelected: ", colorSelected, " sizeSelected: ", sizeSelected, " genderSelected: ", genderSelected, " frameSelected: ", frameSelected);
     const newInventory = setNewInventory(inventoryAvail);
+    console.log(" New inventory:  ", newInventory);
     setInventoryAvail(newInventory);
+    console.log("Setting options from new inventory...");
     setOptions(newInventory);
   };
   const findInventoryId = () => {
-    //console.log(`newAddToCartForm: findInventoryId: Values set: size: ${sizeSelected}, color: ${colorSelected}, frame: ${frameSelected}, gender: ${genderSelected}`);
+    console.log(`AddToCartForm: findInventoryId: Values set: size: ${sizeSelected}, color: ${colorSelected}, frame: ${frameSelected}, gender: ${genderSelected}`);
     console.log(
       `colorSelected: ${colorSelected}, sizeSelected: ${sizeSelected}, genderSelected: ${genderSelected}, frameSelected: ${frameSelected}`
     );
@@ -272,7 +281,7 @@ const AddToCartForm = ({ productDetail }) => {
 
       } else {
         console.log(
-          "NewAddToCartForm: Failed fetch.  InventoryId: ",
+          "AddToCartForm: Failed fetch.  InventoryId: ",
           inventoryId,
           " UserId: ",
           userId
@@ -285,12 +294,12 @@ const AddToCartForm = ({ productDetail }) => {
     }
   };
 
-  const returnToProducts = () => { history.push('/bicycleProducts');}
-  const goToShoppingCart = () => { history.push('/bicycleProducts');}
+  const returnToProducts = () => { history.push('/products');}
+  const goToShoppingCart = () => { history.push('/cartForm');}
 
   if (cartDone) {
     return (<>
-                <h2>Your order has been placed!</h2>
+                <h2>This item has been added to your cart!</h2>
                 <div style={{display:"flex"}}>
                 <Button size="lg" style={{marginTop:"0px", height:"45px", width: "100px",marginRight:"30px"}} variant="outline-success" onClick={returnToProducts}>Continue Shopping</Button>
                 <Button size="lg" style={{marginTop:"0px",height:"45px", width: "100px",}} variant="outline-success" onClick={goToShoppingCart}>Go to My Cart</Button>

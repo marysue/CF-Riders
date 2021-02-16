@@ -103,6 +103,10 @@ useEffect( () => {
         history.push('/');
     }
 
+    const handleCartClick = (e) => {
+        e.preventDefault();
+        history.push('/cartForm');
+    }
 
     return (
         <div style={{display:"inline-flex", justifyContent:"space-between", width:"100%", borderBottom:"2px solid white"}}>
@@ -110,7 +114,7 @@ useEffect( () => {
 
                     <div className="homeShoppingCartIcon" >
                         <HomeIcon className="homeIcon"  onClick={handleHomeClick}style={{margin:"10px", color: "white", fontSize:"40px"}}></HomeIcon>
-                        <Badge badgeContent={badgeCount} color="secondary" >
+                        <Badge className={"shoppingCartIcon"} onClick={handleCartClick} badgeContent={badgeCount} color="secondary" >
                             <ShoppingCartIcon style={{ color: "white", fontSize:"40px"}}></ShoppingCartIcon>
                         </Badge>
                     </div>

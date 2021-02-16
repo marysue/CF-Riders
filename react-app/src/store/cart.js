@@ -3,10 +3,14 @@ import { baseUrl } from '../config'
 //constants
 export const SET_CART_LIST = 'cart/setCartList';
 export const REMOVE_CART_LIST = 'cart/removeCartList';
+export const SET_CART_LIST_TOTAL = 'cart/setCartListTotal';
+export const REMOVE_CART_LIST_TOTAL = 'cart/removeCartListTotal';
 
 //actions
 export const setCartList = cartList => ({ type: SET_CART_LIST, cartList });
 export const removeCartList = () => ({ type: REMOVE_CART_LIST });
+export const setCartListTotal = total => ({ type: SET_CART_LIST_TOTAL, total });
+export const removeCartListTotal = () => ({ type: REMOVE_CART_LIST_TOTAL });
 
 //reducer
 export default function reducer(state = {}, action) {
@@ -21,6 +25,16 @@ export default function reducer(state = {}, action) {
           delete newState.cartList;
           return newState;
       };
+      case SET_CART_LIST_TOTAL: {
+          const newState = { ...state};
+          newState.cartListTotal = action.total;
+          return newState;
+      }
+      case REMOVE_CART_LIST_TOTAL: {
+          const newState = { ...state};
+          delete newState.cartListTotal;
+          return newState;
+      }
       default:
           return state;
     }
@@ -63,6 +77,19 @@ export const addCartItem = async(userId, inventoryId, quantity) => {
             console.log("cart fetch: failed to create new cart item.  ", e);
         }
     }
+export const orderCartItems = async(userId) => {
+    try {
+        const response = await fetch(`${baseUrl}/order/orderCart/${userId}`, {
+        method: "post",
+        headers: { "Content-Type": "application/json"}});
+        if (!response.ok) {
+            console.log("Failed to place order from cart!")
+        }
+    } catch (e) {
+        console.log("Failed to place order.  ", e);
+    }
+}
+
 
 
 export const removeCartItem = async(userId, cartId, inventoryId) => {
