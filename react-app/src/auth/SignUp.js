@@ -114,7 +114,7 @@ const SignUp = (props) => {
                 </div>
                 <div className="signUpInput">
 	                <div className="signUpLabel">
-		                <label>Confirm Password:</label>
+		                <label>Password:</label>
 	                </div>
                     <input
                         className="inputBox"
@@ -124,7 +124,7 @@ const SignUp = (props) => {
                         onChange={updateConfirmPassword}
                     />
                 </div>
-                <button type="submit">Sign Up</button>
+                <button style={{border: "2px solid black"}} type="submit">Sign Up</button>
                 </form>
             </div>
 
