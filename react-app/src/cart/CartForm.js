@@ -5,6 +5,7 @@ import { Button } from 'react-bootstrap';
 import { baseUrl } from '../config';
 import CartItem from './CartItem';
 import { setCartList, setCartListTotal, orderCartItems, removeCartList, removeCartListTotal } from '../store/cart';
+import { setBadgeCount } from '../store/authentication';
 
 
 const CartForm = () => {
@@ -43,6 +44,7 @@ const buttonClickHandler = (e) => {
     dispatch(removeCartList());
     dispatch(removeCartListTotal());
     setOrderPlaced(true);
+    dispatch(setBadgeCount(0));
 }
 
 
